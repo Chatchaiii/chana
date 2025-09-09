@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>chana</title>
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/public/manifest.json" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>chana</title>
 
-    <!-- Theme & Background -->
-    <meta name="theme-color" content="#000000" />
-    <meta name="background-color" content="#000000" />
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/public/manifest.json" />
 
-    <!-- iOS Safari Support -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Chana" />
+  <!-- Theme & Background -->
+  <meta name="theme-color" content="#000000" />
+  <meta name="background-color" content="#000000" />
 
-    <!-- Icons -->
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/src/assets/images/flight/flight.png" />
+  <!-- iOS Safari Support -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Chana" />
 
-    <!-- Optional: Prevent phone numbers auto-linking -->
-    <meta name="format-detection" content="telephone=no" />
-  </head>
+  <!-- Icons -->
+  <link rel="icon" href="src/assets/images/homepage/kiss1x1.ico" />
+  <link rel="apple-touch-icon" href="src/assets/images/homepage/kiss1x1.jpg" />
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <!-- Optional: Prevent phone numbers auto-linking -->
+  <meta name="format-detection" content="telephone=no" />
+</head>
 
-    <!-- Optional: Scroll to hide URL bar on mobile Chrome -->
-    <script>
-      window.addEventListener("load", () => {
-        setTimeout(() => {
-          window.scrollTo(0, 1);
-        }, 0);
-      });
-    </script>
-  </body>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+
+  <!-- Optional: Scroll to hide URL bar on mobile Chrome -->
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        window.scrollTo(0, 1);
+      }, 0);
+    });
+  </script>
+</body>
+
 </html>
