@@ -83,8 +83,13 @@ export function LoveMap({ onBack }: LoveMapProps) {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center space-x-4">
-        <Button onClick={onBack} variant="ghost" size="sm">
-          <ArrowLeft className="w-5 h-5" />
+        <Button
+          onClick={onBack}
+          variant=""
+          size="sm"
+          className="rounded-full bg-grey-800 hover:bg-gray-700"
+        >
+          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
         <h1 className="text-2xl text-teal-600">Love Map</h1>
       </div>
@@ -94,7 +99,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
         <div className="flex items-start space-x-3">
           <MapPin className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
           <p className="text-teal-800 text-sm">
-            Explore the special places in our love story! Each location marks a meaningful moment we've shared together. 
+            Explore the special places in our love story! Each location marks a meaningful moment we've shared together.
             Tap any location to revisit that memory! 💕
           </p>
         </div>
@@ -109,7 +114,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
             <div className="absolute top-16 left-0 w-full h-1 bg-gray-300 opacity-50"></div>
             <div className="absolute top-0 left-20 w-1 h-full bg-gray-300 opacity-50"></div>
             <div className="absolute bottom-20 left-0 w-full h-1 bg-gray-300 opacity-50"></div>
-            
+
             {/* Decorative elements */}
             <div className="absolute top-10 right-10 w-8 h-8 bg-green-400 rounded-full opacity-30"></div>
             <div className="absolute bottom-10 left-10 w-6 h-6 bg-blue-400 rounded-full opacity-30"></div>
@@ -137,7 +142,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
       <div className="space-y-3">
         <h2 className="text-gray-700">Our Love Journey Locations</h2>
         {loveLocations.map((location) => (
-          <Card 
+          <Card
             key={location.id}
             className="p-4 cursor-pointer hover:shadow-md transition-shadow"
             onClick={() => setSelectedLocation(location.id)}
@@ -164,7 +169,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
 
       {/* Memory Modal */}
       {selectedLocation && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedLocation(null)}
         >
@@ -196,7 +201,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
               </div>
 
               {/* Close Button */}
-              <Button 
+              <Button
                 onClick={() => setSelectedLocation(null)}
                 className="w-full bg-teal-500 hover:bg-teal-600"
               >

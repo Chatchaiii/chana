@@ -10,8 +10,8 @@ import T_flight from "../assets/text/flight.md?raw";
 // jpeg
 import P_the_start from "../assets/images/timeline/the_start.jpeg";
 import P_the_lake from "../assets/images/timeline/the_lake_1.jpeg";
-import P_theatre from "../assets/images/timeline/theatre_1.jpeg";
-import P_wannsee from "../assets/images/timeline/wannsee_1.jpeg";
+import P_theatre from "../assets/images/timeline/theatre_2.jpeg";
+import P_wannsee from "../assets/images/timeline/wannsee_2.jpeg";
 import P_photo_booth from "../assets/images/timeline/photo_booth.jpeg";
 import P_reflections from "../assets/images/timeline/reflections_1.jpeg";
 import P_flight from "../assets/images/timeline/flight.jpeg";

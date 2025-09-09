@@ -22,7 +22,7 @@ export function MiniGame({ onBack }: MiniGameProps) {
   const [matchScore, setMatchScore] = useState(0);
 
   const loveEmojis = ['💕', '💖', '💝', '💗', '💓', '💘', '🥰', '😍'];
-  
+
   const matchQuestions = [
     {
       question: "What do I love most about you?",
@@ -82,7 +82,7 @@ export function MiniGame({ onBack }: MiniGameProps) {
     if (flippedCards.length === 2) {
       setMoves(moves + 1);
       const [first, second] = flippedCards;
-      
+
       if (cards[first].emoji === cards[second].emoji) {
         // Match found
         setTimeout(() => {
@@ -92,7 +92,7 @@ export function MiniGame({ onBack }: MiniGameProps) {
               : card
           ));
           setFlippedCards([]);
-          
+
           // Check if game is won
           const newCards = cards.map(card =>
             card.id === first || card.id === second
@@ -123,7 +123,7 @@ export function MiniGame({ onBack }: MiniGameProps) {
     if (answerIndex === matchQuestions[currentQuestion].correct) {
       setMatchScore(matchScore + 1);
     }
-    
+
     if (currentQuestion < matchQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
@@ -144,8 +144,13 @@ export function MiniGame({ onBack }: MiniGameProps) {
       <div className="p-6 space-y-6">
         {/* Header */}
         <div className="flex items-center space-x-4">
-          <Button onClick={onBack} variant="ghost" size="sm">
-            <ArrowLeft className="w-5 h-5" />
+          <Button
+            onClick={onBack}
+            variant=""
+            size="sm"
+            className="rounded-full bg-grey-800 hover:bg-gray-700"
+          >
+            <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
           </Button>
           <h1 className="text-2xl text-indigo-600">Mini-Games</h1>
         </div>
@@ -153,7 +158,7 @@ export function MiniGame({ onBack }: MiniGameProps) {
         {/* Game Selection */}
         <div className="space-y-4">
           <h2 className="text-gray-700 text-center">Choose a Love Game!</h2>
-          
+
           <Card className="p-6 cursor-pointer hover:shadow-lg transition-shadow" onClick={initializeMemoryGame}>
             <div className="text-center space-y-3">
               <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto">
@@ -188,7 +193,7 @@ export function MiniGame({ onBack }: MiniGameProps) {
           <div className="text-center space-y-2">
             <Heart className="w-6 h-6 text-indigo-600 mx-auto" />
             <p className="text-indigo-800 text-sm">
-              Playing games together is just another way to have fun and create memories! 
+              Playing games together is just another way to have fun and create memories!
               Even in games, everything is better with you! 🎮💕
             </p>
           </div>
@@ -225,10 +230,9 @@ export function MiniGame({ onBack }: MiniGameProps) {
           {cards.map((card) => (
             <Card
               key={card.id}
-              className={`aspect-square flex items-center justify-center cursor-pointer transition-all ${
-                card.isMatched ? 'bg-green-100 border-green-300' :
-                card.isFlipped ? 'bg-pink-100 border-pink-300' : 'bg-gray-100 hover:bg-gray-200'
-              }`}
+              className={`aspect-square flex items-center justify-center cursor-pointer transition-all ${card.isMatched ? 'bg-green-100 border-green-300' :
+                  card.isFlipped ? 'bg-pink-100 border-pink-300' : 'bg-gray-100 hover:bg-gray-200'
+                }`}
               onClick={() => handleCardFlip(card.id)}
             >
               <span className="text-2xl">

@@ -15,35 +15,35 @@ export function LoveNote({ onBack }: LoveNoteProps) {
     {
       id: 1,
       title: "Why I Love Your Smile",
-      hint: "What lights up my world? ☀️",
+      hint: "What lights up my world?",
       password: "smile",
       content: "Your smile is the first thing I fell in love with. It lights up every room you enter and makes my heart skip a beat every single time. When you smile at me, I feel like the luckiest person in the world. Your smile tells me that everything will be okay, and it's the most beautiful sight I could ever hope to see. Keep smiling, my love, because your happiness is my happiness. 😊💕"
     },
     {
       id: 2,
       title: "Our First Kiss",
-      hint: "What made time stop? ⏰",
+      hint: "What made time stop?",
       password: "kiss",
       content: "I still remember every detail of our first kiss. The way time seemed to stop, how my heart raced, and how perfectly we fit together. It was magical, sweet, and everything I had dreamed it would be. In that moment, I knew that you were someone special, someone I wanted to keep kissing for the rest of my life. That kiss sealed our love and started our beautiful journey together. 💋❤️"
     },
     {
       id: 3,
       title: "Future Dreams",
-      hint: "What do we build together? 🏠",
+      hint: "What do we build together?",
       password: "future",
       content: "I love dreaming about our future together. I see us traveling the world, creating a beautiful home, maybe getting a cute pet, and building a life filled with love and laughter. I dream of lazy Sunday mornings, cooking together, and growing old with you by my side. Every dream I have includes you, because you're not just my present happiness - you're my forever. Let's make all these dreams come true together! 🌟💕"
     },
     {
       id: 4,
       title: "What Makes You Special",
-      hint: "What makes you unique? ✨",
+      hint: "What makes you unique?",
       password: "special",
       content: "You are special in so many ways that sometimes I wonder how I got so lucky. Your kindness, your sense of humor, the way you listen to me, your passion for life, and your beautiful heart make you absolutely incredible. You see the world in such a unique way, and you make me want to be a better person every day. You're not just special to me - you're extraordinary in every sense of the word. 🌟💖"
     },
     {
       id: 5,
       title: "Three Months and Forever",
-      hint: "What's our promise? 💍",
+      hint: "What's our promise?",
       password: "forever",
       content: "Three months ago, you walked into my life and changed everything. These have been the most wonderful three months of my life, filled with love, laughter, and countless beautiful memories. But this is just the beginning of our story. I promise to love you not just for three months, but for three years, three decades, and beyond. You have my heart forever, and I can't wait to see what the rest of our love story holds. Here's to forever with you! 💕♾️"
     }
@@ -72,20 +72,25 @@ export function LoveNote({ onBack }: LoveNoteProps) {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center space-x-4">
-        <Button onClick={onBack} variant="ghost" size="sm">
-          <ArrowLeft className="w-5 h-5" />
+        <Button
+          onClick={onBack}
+          variant=""
+          size="sm"
+          className="rounded-full bg-grey-800 hover:bg-gray-700"
+        >
+          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
-        <h1 className="text-2xl text-yellow-600">Hidden Love Notes</h1>
+        <h1 className="text-2xl text-gray-300">Hidden Love Notes</h1>
       </div>
 
       {/* Instructions */}
-      <Card className="p-4 bg-yellow-50 border-yellow-200">
+      <Card className="p-4 bg-gray-800">
         <div className="flex items-start space-x-3">
-          <Heart className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+          <Heart className="w-5 h-5 text-gray-300 flex-shrink-0 mt-0.5" />
           <div className="space-y-1">
-            <p className="text-yellow-800 text-sm">
-              I've hidden special love notes for you! Use the hints to guess the passwords and unlock each note. 
-              Each one contains a piece of my heart. 💕
+            <p className="text-gray-300 text-sm">
+              I've hidden special love notes for you! Use the hints to guess the passwords and unlock each note.
+              Each one contains a piece of my heart.
             </p>
           </div>
         </div>
@@ -97,7 +102,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
           <Card key={note.id} className="p-4">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-gray-800">{note.title}</h3>
+                <h3 className="text-gray-300 font-bold">{note.title}</h3>
                 {isUnlocked(note.id) ? (
                   <Unlock className="w-5 h-5 text-green-500" />
                 ) : (
@@ -108,7 +113,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
               {!isUnlocked(note.id) && (
                 <div className="space-y-3">
                   <p className="text-sm text-gray-600 italic">{note.hint}</p>
-                  
+
                   {attemptingUnlock === note.id ? (
                     <div className="space-y-3">
                       <input
@@ -116,23 +121,22 @@ export function LoveNote({ onBack }: LoveNoteProps) {
                         value={passwordInput}
                         onChange={(e) => setPasswordInput(e.target.value)}
                         placeholder="Enter password..."
-                        className={`w-full p-3 border rounded-lg ${
-                          wrongPassword ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                        }`}
+                        className={`w-full p-3 border rounded-lg ${wrongPassword ? 'border-red-300 bg-red-50' : 'border-gray-700'
+                          }`}
                         onKeyPress={(e) => e.key === 'Enter' && handleUnlockAttempt(note.id)}
                       />
                       {wrongPassword && (
-                        <p className="text-red-500 text-sm">Wrong password! Try again. 💔</p>
+                        <p className="text-red-500 text-sm">Wrong password! Try again.</p>
                       )}
                       <div className="flex space-x-2">
-                        <Button 
+                        <Button
                           onClick={() => handleUnlockAttempt(note.id)}
                           size="sm"
-                          className="bg-yellow-500 hover:bg-yellow-600"
+                          className="bg-gray-300 hover:bg-gray-700"
                         >
                           Unlock
                         </Button>
-                        <Button 
+                        <Button
                           onClick={() => {
                             setAttemptingUnlock(null);
                             setPasswordInput('');
@@ -146,7 +150,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
                       </div>
                     </div>
                   ) : (
-                    <Button 
+                    <Button
                       onClick={() => setAttemptingUnlock(note.id)}
                       size="sm"
                       variant="outline"
@@ -176,20 +180,20 @@ export function LoveNote({ onBack }: LoveNoteProps) {
       </div>
 
       {/* Progress */}
-      <Card className="p-4 bg-gradient-to-r from-pink-50 to-purple-50">
+      <Card className="p-4 bg-gray-300">
         <div className="text-center space-y-2">
-          <p className="text-gray-700">
+          <p className="text-gray-800 font-bold">
             Notes Unlocked: {unlockedNotes.length}/{loveNotes.length}
           </p>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
-              className="bg-pink-500 h-2 rounded-full transition-all duration-300"
+          <div className="w-full bg-gray-300 rounded-full h-2">
+            <div
+              className="bg-gray-800 h-2 rounded-full transition-all duration-300"
               style={{ width: `${(unlockedNotes.length / loveNotes.length) * 100}%` }}
             ></div>
           </div>
           {unlockedNotes.length === loveNotes.length && (
-            <p className="text-pink-600 text-sm mt-2">
-              You've found all my love notes! 💕
+            <p className="text-gray-800 text-sm font-bold mt-2">
+              You've found all my love notes!
             </p>
           )}
         </div>
@@ -197,7 +201,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
 
       {/* Love Note Modal */}
       {selectedNote && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedNote(null)}
         >
@@ -214,7 +218,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
                   {loveNotes.find(n => n.id === selectedNote)?.content}
                 </p>
               </div>
-              <Button 
+              <Button
                 onClick={() => setSelectedNote(null)}
                 className="w-full bg-pink-500 hover:bg-pink-600"
               >

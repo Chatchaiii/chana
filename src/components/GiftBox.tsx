@@ -75,8 +75,13 @@ export function GiftBox({ onBack }: GiftBoxProps) {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center space-x-4">
-        <Button onClick={onBack} variant="ghost" size="sm">
-          <ArrowLeft className="w-5 h-5" />
+        <Button
+          onClick={onBack}
+          variant=""
+          size="sm"
+          className="rounded-full bg-grey-800 hover:bg-gray-700"
+        >
+          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
         <h1 className="text-2xl text-orange-600">Virtual Gift Box</h1>
       </div>
@@ -87,7 +92,7 @@ export function GiftBox({ onBack }: GiftBoxProps) {
           <Gift className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-orange-800 text-sm">
-              I've prepared special virtual gifts just for you! Each one is wrapped with love and contains something meaningful. 
+              I've prepared special virtual gifts just for you! Each one is wrapped with love and contains something meaningful.
               Tap any gift to unwrap it! 🎁💕
             </p>
           </div>
@@ -97,11 +102,10 @@ export function GiftBox({ onBack }: GiftBoxProps) {
       {/* Gift Grid */}
       <div className="grid grid-cols-2 gap-4">
         {gifts.map((gift) => (
-          <Card 
+          <Card
             key={gift.id}
-            className={`p-4 cursor-pointer transition-all hover:shadow-lg ${
-              isOpened(gift.id) ? 'ring-2 ring-orange-500' : ''
-            }`}
+            className={`p-4 cursor-pointer transition-all hover:shadow-lg ${isOpened(gift.id) ? 'ring-2 ring-orange-500' : ''
+              }`}
             onClick={() => handleOpenGift(gift.id)}
           >
             <div className="text-center space-y-3">
@@ -141,7 +145,7 @@ export function GiftBox({ onBack }: GiftBoxProps) {
             </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
+            <div
               className="bg-orange-500 h-2 rounded-full transition-all duration-500"
               style={{ width: `${(openedGifts.length / gifts.length) * 100}%` }}
             ></div>
@@ -159,7 +163,7 @@ export function GiftBox({ onBack }: GiftBoxProps) {
 
       {/* Gift Message Modal */}
       {selectedGift && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedGift(null)}
         >
@@ -185,7 +189,7 @@ export function GiftBox({ onBack }: GiftBoxProps) {
               </div>
 
               {/* Close Button */}
-              <Button 
+              <Button
                 onClick={() => setSelectedGift(null)}
                 className="w-full bg-orange-500 hover:bg-orange-600"
               >
@@ -202,7 +206,7 @@ export function GiftBox({ onBack }: GiftBoxProps) {
         <div className="text-center space-y-2">
           <Heart className="w-6 h-6 text-pink-600 mx-auto" />
           <p className="text-pink-800 text-sm">
-            Every gift is a piece of my heart, wrapped with love and delivered with a smile. 
+            Every gift is a piece of my heart, wrapped with love and delivered with a smile.
             You deserve all the love in the world! 💕
           </p>
         </div>

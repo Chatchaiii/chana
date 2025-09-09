@@ -83,14 +83,14 @@ export function Homepage({ onNavigate }: HomepageProps) {
     <div className="p-4 space-y-6">
       {/* Header */}
       <div className="text-left space-y-6">
-        <div className="relative w10 h-10 mx-auto rounded-2xl overflow-hidden shadow-md">
+        <div className="relative w10 h-10 mx-auto rounded-2xl overflow-hidden">
           <ImageWithFallback
             src={Whiteheart}
             alt="white heart"
             className="w-10 h-10 object-cover"
           />
         </div>
-        <div className="relative w90 h-60 mx-auto rounded-2xl overflow-hidden shadow-md">
+        <div className="relative w90 h-60 mx-auto rounded-2xl overflow-hidden">
           <ImageWithFallback
             src={Kiss}
             alt="kiss"

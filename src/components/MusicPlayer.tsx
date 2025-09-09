@@ -71,8 +71,13 @@ export function MusicPlayer({ onBack }: MusicPlayerProps) {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center space-x-4">
-        <Button onClick={onBack} variant="ghost" size="sm">
-          <ArrowLeft className="w-5 h-5" />
+        <Button
+          onClick={onBack}
+          variant=""
+          size="sm"
+          className="rounded-full bg-grey-800 hover:bg-gray-700"
+        >
+          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
         <h1 className="text-2xl text-green-600">Background Music</h1>
       </div>
@@ -114,7 +119,7 @@ export function MusicPlayer({ onBack }: MusicPlayerProps) {
           <Button onClick={handlePrevious} variant="ghost" size="sm">
             <SkipBack className="w-6 h-6" />
           </Button>
-          <Button 
+          <Button
             onClick={handlePlayPause}
             className="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600"
           >
@@ -151,11 +156,10 @@ export function MusicPlayer({ onBack }: MusicPlayerProps) {
         <h2 className="text-gray-700">Our Love Playlist</h2>
         <div className="space-y-2">
           {playlist.map((song, index) => (
-            <Card 
-              key={index} 
-              className={`p-4 cursor-pointer transition-all ${
-                index === currentSong ? 'ring-2 ring-green-500 bg-green-50' : 'hover:shadow-md'
-              }`}
+            <Card
+              key={index}
+              className={`p-4 cursor-pointer transition-all ${index === currentSong ? 'ring-2 ring-green-500 bg-green-50' : 'hover:shadow-md'
+                }`}
               onClick={() => handleSongSelect(index)}
             >
               <div className="flex items-center space-x-4">

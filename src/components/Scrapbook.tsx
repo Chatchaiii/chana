@@ -44,8 +44,13 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center space-x-4">
-        <Button onClick={onBack} variant="ghost" size="sm">
-          <ArrowLeft className="w-5 h-5" />
+        <Button
+          onClick={onBack}
+          variant=""
+          size="sm"
+          className="rounded-full bg-grey-800 hover:bg-gray-700"
+        >
+          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
         <h1 className="text-2xl text-gray-300">Digital Scrapbook</h1>
       </div>
@@ -62,8 +67,8 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
 
         <div className="grid grid-cols-2 gap-3">
           {photos.map((photo) => (
-            <Card 
-              key={photo.id} 
+            <Card
+              key={photo.id}
               className="p-2 cursor-pointer hover:shadow-lg transition-shadow"
               onClick={() => setSelectedPhoto(photo.id)}
             >
@@ -82,7 +87,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
               </div>
             </Card>
           ))}
-          
+
           {/* Add Photo Placeholder */}
           <Card className="p-2 border-dashed border-2 border-gray-600 hover:border-gray-500 cursor-pointer transition-colors">
             <div className="aspect-square flex flex-col items-center justify-center space-y-2 text-gray-500">
@@ -110,7 +115,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
 
       {/* Photo Modal */}
       {selectedPhoto && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedPhoto(null)}
         >
