@@ -1,8 +1,9 @@
-import the_start from '../assets/text/the_start/the_start.txt?raw';
+import the_start from '../assets/text/the_start/the_start.md?raw';
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowLeft, Heart, Star, Calendar, Waves, VenetianMask, Droplets, Camera } from 'lucide-react';
+import { TheStart } from './components/timeline/the_start';
 
 interface TimelineProps {
   onBack: () => void;
@@ -75,7 +76,7 @@ export function Timeline({ onBack }: TimelineProps) {
   function Modal({ milestone, onClose }: { milestone: typeof milestones[0], onClose: () => void }) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-        <div className="bg-gray-800 rounded-lg p-6 max-w-sm w-full relative">
+        <div className="bg-gray-800 rounded-lg p-6 max-w-sm w-full relative max-h-[90vh] overflow-y-auto">
           <button
             className="absolute top-0 right-1 text-gray-400 hover:text-gray-200"
             onClick={onClose}
@@ -89,7 +90,7 @@ export function Timeline({ onBack }: TimelineProps) {
               alt="error"
               className="relative w60 h-60 mx-auto rounded-2xl overflow-hidden shadow-md text-gray-300"
             />
-            <p className="text-gray-300 text-left">
+            <p className="text-gray-300 text-left whitespace-pre-line">
               <b>{milestone.title}</b>.<br />
               {milestone.text}
             </p>
