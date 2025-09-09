@@ -1,4 +1,5 @@
-import whiteheart from "../assets/images/homepage/white-heart.svg";
+import Whiteheart from "../assets/images/homepage/white-heart.svg";
+import Kiss from "../assets/images/homepage/kiss.jpg";
 import React from "react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
@@ -82,52 +83,39 @@ export function Homepage({ onNavigate }: HomepageProps) {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="text-left space-y-6">
-        {/* <div>
-          <h1 className="text-3xl text-gray-300 mb-6">chana</h1>
-        </div> */}
-
         <div className="relative w10 h-10 mx-auto rounded-2xl overflow-hidden shadow-md">
           <ImageWithFallback
-            src={whiteheart}
+            src={Whiteheart}
             alt="white heart"
             className="w-10 h-10 object-cover"
           />
         </div>
-
-        {/* <div className="relative w90 h-60 mx-auto rounded-2xl overflow-hidden shadow-md">
+        <div className="relative w90 h-60 mx-auto rounded-2xl overflow-hidden shadow-md">
           <ImageWithFallback
-            src={image_42923102f2346903b4aa7d3bc56934f2c31f318c}
-            alt="Love celebration"
+            src={Kiss}
+            alt="kiss"
             className="w-full h-full object-cover"
           />
-        </div> */}
-
-        {/* <p className="text-gray-400 leading-relaxed">
-          Happy anniversary doret begardam &lt;3
-        </p> */}
+        </div>
       </div>
       {/* Text Body */}
-      <p className="text-center text-[11pt] font-bold italic text-gray-300 my-6">
+      <p className="text-center text-[11pt] font-bold italic text-gray-300 my-6 p-4">
         "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
       </p>
 
       {/* Features Grid */}
-      <div className="space-y-3">
+      <div className="space-y-2 space-x-2 grid grid-cols-2 gap-0">
         {features.map((feature) => (
           <Card
             key={feature.id}
-            className="p-3 hover:shadow-lg transition-shadow"
+            className="hover:bg-gray-950 transition-shadow p-0"
           >
             <Button
               onClick={() => onNavigate(feature.id)}
-              className="w-full flex items-center justify-start space-x-3 bg-transparent hover:bg-gray-900 text-gray-300 p-3"
+              className="w-full flex items-left justify-start space-x-3 bg-transparent text-gray-300 p-6"
               variant="ghost"
             >
-              <div
-                className={`p-1 rounded-lg ${feature.color} text-white`}
-              >
-                <feature.icon className="w-6 h-6" />
-              </div>
+              <feature.icon className="w-6 h-6 text-gray-300" />
               <span className="flex-1 text-left">
                 {feature.name}
               </span>
@@ -135,11 +123,10 @@ export function Homepage({ onNavigate }: HomepageProps) {
           </Card>
         ))}
       </div>
-
-      {/* Footer
-      <div className="text-center text-sm text-gray-400 mt-8">
-        dooset daram eshgham
-      </div> */}
+      {/* Footer */}
+      <div className="min-h-screen flex flex-col text-center text-sm text-gray-700 my-8">
+        kheyli dooset daram eshgham
+      </div>
     </div>
   );
 }
