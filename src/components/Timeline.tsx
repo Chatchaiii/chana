@@ -1,9 +1,33 @@
-import the_start from '../assets/text/the_start.md?raw';
-import sushi from '../assets/images/timeline/sushi.jpg';
-import React, { useState } from 'react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
-import { ArrowLeft, Star, Waves, VenetianMask, Camera, Plane } from 'lucide-react';
+// md
+import T_the_start from "../assets/text/the_start.md?raw";
+import T_the_lake from "../assets/text/the_lake.md?raw";
+import T_theatre from "../assets/text/theatre.md?raw";
+import T_wannsee from "../assets/text/wannsee.md?raw";
+import T_photo_booth from "../assets/text/photo_booth.md?raw";
+import T_reflections from "../assets/text/reflections.md?raw";
+import T_flight from "../assets/text/flight.md?raw";
+
+// jpeg
+import P_the_start from "../assets/images/timeline/the_start.jpeg";
+import P_the_lake from "../assets/images/timeline/the_lake_1.jpeg";
+import P_theatre from "../assets/images/timeline/theatre_1.jpeg";
+import P_wannsee from "../assets/images/timeline/wannsee_1.jpeg";
+import P_photo_booth from "../assets/images/timeline/photo_booth.jpeg";
+import P_reflections from "../assets/images/timeline/reflections_1.jpeg";
+import P_flight from "../assets/images/timeline/flight.jpeg";
+// config
+import React, { useState } from "react";
+import { Card } from "./ui/card";
+import { Button } from "./ui/button";
+import {
+  ArrowLeft,
+  Star,
+  Waves,
+  VenetianMask,
+  Camera,
+  Plane,
+  Sparkle,
+} from "lucide-react";
 
 interface TimelineProps {
   onBack: () => void;
@@ -21,48 +45,61 @@ const blogPosts: BlogPostBlockProps[] = [
   {
     title: "The Start",
     date: "06.06.2025",
-    text: the_start,
-    imageUrl: sushi,
+    text: T_the_start,
+    imageUrl: P_the_start,
     icon: Star,
   },
   {
     title: "The Lake",
     date: "09.06.2025",
-    text: "One of my core memories of us would be this day.\nWe laughed, we swam, and the world felt still.",
-    imageUrl: "https://placekitten.com/601/350",
+    text: T_the_lake,
+    imageUrl: P_the_lake,
     icon: Waves,
   },
   {
     title: "Theatre",
     date: "18.06.2025",
-    text: "God, was I nervous to see your theatre. But you shined on stage.",
-    imageUrl: "https://placekitten.com/602/350",
+    text: T_theatre,
+    imageUrl: P_theatre,
     icon: VenetianMask,
   },
   {
     title: "Wannsee",
     date: "26.06.2025",
-    text: "The weather first had different plans for us. It was rainy, it was windy, it was cloudy - like a storm.",
-    imageUrl: "https://placekitten.com/603/350",
+    text: T_wannsee,
+    imageUrl: P_wannsee,
     icon: Waves,
   },
   {
     title: "Photo-booth",
     date: "05.07.2025",
-    text: "I may acted like it was a normal day, but I was excited as fuck.",
-    imageUrl: "https://placekitten.com/604/350",
+    text: T_photo_booth,
+    imageUrl: P_photo_booth,
     icon: Camera,
   },
   {
+    title: "Reflecions",
+    date: "13.07.2025",
+    text: T_reflections,
+    imageUrl: P_reflections,
+    icon: Sparkle,
+  },
+  {
     title: "Flight",
-    date: "Today",
-    text: "Celebrating our beautiful journey and looking forward to more.",
-    imageUrl: "https://placekitten.com/605/350",
+    date: "15.07.2025",
+    text: T_flight,
+    imageUrl: P_flight,
     icon: Plane,
   },
 ];
 
-function BlogPostBlock({ title, date, text, imageUrl, icon: Icon }: BlogPostBlockProps) {
+function BlogPostBlock({
+  title,
+  date,
+  text,
+  imageUrl,
+  icon: Icon,
+}: BlogPostBlockProps) {
   return (
     <Card className="space-y-2 bg-gray-800 rounded-xl shadow-lg p-6 max-w-2xl mx-auto my-8">
       <div className="flex items-center mb-4 space-x-3">
@@ -87,7 +124,12 @@ export function Timeline({ onBack }: TimelineProps) {
     <div className="space-y-6 min-h-screen flex flex-col p-6 bg-gray-900">
       {/* Header */}
       <div className="flex items-center space-x-4 mb-8 bg-gray-900">
-        <Button onClick={onBack} variant="" size="sm" className="rounded-full bg-grey-800 hover:bg-gray-700">
+        <Button
+          onClick={onBack}
+          variant=""
+          size="sm"
+          className="rounded-full bg-grey-800 hover:bg-gray-700"
+        >
           <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
         <h1 className="text-2xl text-gray-300">Timeline</h1>
@@ -112,7 +154,6 @@ export function Timeline({ onBack }: TimelineProps) {
     </div>
   );
 }
-
 
 // ########################################
 
@@ -272,3 +313,4 @@ export function Timeline({ onBack }: TimelineProps) {
 //     </div>
 //   );
 // }
+
