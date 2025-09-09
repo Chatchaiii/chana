@@ -1,9 +1,8 @@
-import image_42923102f2346903b4aa7d3bc56934f2c31f318c from "figma:asset/42923102f2346903b4aa7d3bc56934f2c31f318c.png";
-import whiteheart from "../assets/white-heart.svg";
+import whiteheart from "../assets/images/homepage/white-heart.svg";
 import React from "react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { ImageWithFallback } from "./figma/ImageWithFallback";S
 import {
   Heart,
   Clock,
