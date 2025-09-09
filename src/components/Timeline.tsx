@@ -1,3 +1,4 @@
+import the_start from '../assets/text/the_start/the_start.txt?raw';
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
@@ -13,6 +14,7 @@ export function Timeline({ onBack }: TimelineProps) {
       date: "06.06.2025",
       title: "The Start",
       description: "Starting with June 6th, I've never expected us to come so far when looking back.",
+      text: the_start,
       icon: Star,
       color: "bg-gray-600"
     },
@@ -20,6 +22,7 @@ export function Timeline({ onBack }: TimelineProps) {
       date: "09.06.2025",
       title: "The Lake",
       description: "One of my core memories of us would be this day.",
+      text:"dsdsds",
       icon: Waves,
       color: "bg-gray-600"
     },
@@ -27,6 +30,7 @@ export function Timeline({ onBack }: TimelineProps) {
       date: "18.06.2025",
       title: "Theatre",
       description: "God, was I nervous to see your theatre.",
+      text:"dsdsds",
       icon: VenetianMask,
       color: "bg-gray-600"
     },
@@ -34,6 +38,7 @@ export function Timeline({ onBack }: TimelineProps) {
       date: "22.06.2025",
       title: "The day",
       description: "Nervous to speak, nervous to breathe, nervous to look at you.",
+      text:"dsdsds",
       icon: Droplets,
       color: "bg-gray-600"
     },
@@ -41,6 +46,7 @@ export function Timeline({ onBack }: TimelineProps) {
       date: "26.06.2025",
       title: "Wannsee",
       description: "The weather first had different plans for us. It was rainy, it was windy, it was cloudy - like a storm.",
+      text:"dsdsds",
       icon: Waves,
       color: "bg-gray-600"
     },
@@ -48,13 +54,15 @@ export function Timeline({ onBack }: TimelineProps) {
       date: "05.07.2025",
       title: "Photo-booth",
       description: "I may acted like it was a normal day, but I was excited as fuck.",
+      text:"dsdsds",
       icon: Camera,
       color: "bg-gray-600"
     },
     {
       date: "Today",
-      title: "3 Months Strong!",
+      title: "Flight",
       description: "Celebrating our beautiful journey and looking forward to more",
+      text:"dsdsds",
       icon: Calendar,
       color: "bg-gray-600"
     }
@@ -69,25 +77,21 @@ export function Timeline({ onBack }: TimelineProps) {
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
         <div className="bg-gray-800 rounded-lg p-6 max-w-sm w-full relative">
           <button
-            className="absolute top-2 right-2 text-gray-400 hover:text-gray-200"
+            className="absolute top-0 right-1 text-gray-400 hover:text-gray-200"
             onClick={onClose}
             aria-label="Close"
           >
             ×
           </button>
           <div className="flex flex-col items-center space-y-4">
-            <div className={`p-3 rounded-full ${milestone.color} text-white`}>
-              <milestone.icon className="w-8 h-8" />
-            </div>
-            <h2 className="text-xl text-gray-100">{milestone.title}</h2>
             <img
-              src="https://placekitten.com/300/200"
-              alt="Example"
-              className="rounded shadow"
+              src={milestone.title}
+              alt="error"
+              className="relative w60 h-60 mx-auto rounded-2xl overflow-hidden shadow-md text-gray-300"
             />
-            <p className="text-gray-300 text-center">
-              Example text for <b>{milestone.title}</b>.<br />
-              {milestone.description}
+            <p className="text-gray-300 text-left">
+              <b>{milestone.title}</b>.<br />
+              {milestone.text}
             </p>
           </div>
         </div>
