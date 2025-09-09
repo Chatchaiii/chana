@@ -124,7 +124,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
         ))}
       </div>
       {/* Footer */}
-      <div className="min-h-screen flex flex-col text-center text-sm text-gray-700 my-8">
+      <div className="text-center text-sm text-gray-700 my-8">
         kheyli dooset daram eshgham
       </div>
     </div>

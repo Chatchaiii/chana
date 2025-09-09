@@ -43,7 +43,7 @@ export default function App() {
   };
 
   return (
-    <div className="dark min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
+    <div className="dark min-h-screen bg-black">
       <div className="max-w-md mx-auto min-h-screen bg-background shadow-xl">
         {renderFeature()}
       </div>
