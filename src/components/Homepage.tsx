@@ -80,7 +80,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
   ];
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 space-y-6">
       {/* Header */}
       <div className="text-left space-y-6">
         <div className="relative w10 h-10 mx-auto rounded-2xl overflow-hidden shadow-md">
@@ -104,7 +104,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
       </p>
 
       {/* Features Grid */}
-      <div className="space-y-2 space-x-2 grid grid-cols-2 gap-0">
+      <div className="space-y-0 space-x-0 grid grid-cols-2 gap-3">
         {features.map((feature) => (
           <Card
             key={feature.id}
