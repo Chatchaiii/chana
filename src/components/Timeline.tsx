@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowLeft, Heart, Star, Calendar, Waves, VenetianMask, Droplets, Camera } from 'lucide-react';
-import Flight from "../assets/images/flight/flight.png";
 
 interface TimelineProps {
   onBack: () => void;

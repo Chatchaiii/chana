@@ -2,9 +2,9 @@ import whiteheart from "../assets/images/homepage/white-heart.svg";
 import React from "react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import { ImageWithFallback } from "./figma/ImageWithFallback";S
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
-  Heart,
+  Heart,  
   Clock,
   Camera,
   Brain,
