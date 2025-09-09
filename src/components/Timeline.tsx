@@ -1,9 +1,9 @@
-import the_start from '../assets/text/the_start/the_start.md?raw';
-import sushi from '../assets/images/the_start/sushi.jpg';
+import the_start from '../assets/text/the_start.md?raw';
+import sushi from '../assets/images/timeline/sushi.jpg';
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { ArrowLeft, Heart, Star, Calendar, Waves, VenetianMask, Camera } from 'lucide-react';
+import { ArrowLeft, Star, Waves, VenetianMask, Camera, Plane } from 'lucide-react';
 
 interface TimelineProps {
   onBack: () => void;
@@ -58,7 +58,7 @@ const blogPosts: BlogPostBlockProps[] = [
     date: "Today",
     text: "Celebrating our beautiful journey and looking forward to more.",
     imageUrl: "https://placekitten.com/605/350",
-    icon: Calendar,
+    icon: Plane,
   },
 ];
 
@@ -66,9 +66,9 @@ function BlogPostBlock({ title, date, text, imageUrl, icon: Icon }: BlogPostBloc
   return (
     <Card className="space-y-2 bg-gray-800 rounded-xl shadow-lg p-6 max-w-2xl mx-auto my-8">
       <div className="flex items-center mb-4 space-x-3">
-        {/* <div className="p-2 rounded-full bg-gray-600 text-white">
+        <div className="p-2 rounded-full bg-gray-600 text-white">
           <Icon className="w-6 h-4" />
-        </div> */}
+        </div>
         <h2 className="text-2xl font-bold text-gray-100">{title}</h2>
         <span className="ml-auto text-sm text-gray-400">{date}</span>
       </div>
