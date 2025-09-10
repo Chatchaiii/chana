@@ -120,7 +120,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
     {
       id: 12,
       src: V_photo_booth,
-      caption: "Photo-booth Video",
+      caption: "I Wanna Be Yours",
       date: "05.07.2025",
       type: "video"
     },

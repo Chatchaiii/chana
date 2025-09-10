@@ -78,10 +78,10 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
 
   const getScoreMessage = () => {
     const percentage = (score / questions.length) * 100;
-    if (percentage === 100) return "Perfect! You know me so well! 💕";
-    if (percentage >= 80) return "Amazing! We're so connected! 💖";
-    if (percentage >= 60) return "Pretty good! We're learning about each other! 💗";
-    return "We have so much more to discover about each other! 💘";
+    if (percentage === 100) return "Perfect! You know me so well!";
+    if (percentage >= 80) return "Amazing! We're so connected!";
+    if (percentage >= 60) return "Pretty good! We're learning about each other!";
+    return "We have so much more to discover about each other!";
   };
 
   if (showResult) {
