@@ -1,44 +1,161 @@
+// jpeg
+import P_the_start from "../assets/images/timeline/the_start.jpeg";
+import P_the_lake1 from "../assets/images/timeline/the_lake_1.jpeg";
+import P_the_lake2 from "../assets/images/timeline/the_lake_2.jpeg";
+import P_the_lake3 from "../assets/images/timeline/the_lake_3.jpeg";
+import P_the_lake4 from "../assets/images/timeline/the_lake_4.jpeg";
+import P_the_lake5 from "../assets/images/timeline/the_lake_5.jpeg";
+import P_theatre1 from "../assets/images/timeline/theatre_2.jpeg";
+import P_theatre2 from "../assets/images/timeline/theatre_3.jpeg";
+import P_wannsee1 from "../assets/images/timeline/wannsee_1.jpeg";
+import P_wannsee2 from "../assets/images/timeline/wannsee_2.jpeg";
+import P_photo_booth from "../assets/images/timeline/photo_booth.jpeg";
+import P_reflections1 from "../assets/images/timeline/reflections_1.jpeg";
+import P_reflections2 from "../assets/images/timeline/reflections_2.jpeg";
+import P_flight from "../assets/images/timeline/flight.jpeg";
+
+// video
+import V_photo_booth from "../assets/video/photo_booth.mov";
+
+// config
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { ArrowLeft, Plus, Heart, Camera, Upload } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface ScrapbookProps {
   onBack: () => void;
 }
 
-export function Scrapbook({ onBack }: ScrapbookProps) {
-  const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
+type PhotoOrVideo = {
+  id: number;
+  src: string;
+  caption: string;
+  date: string;
+  type?: "image" | "video";
+};
 
-  const photos = [
+export function Scrapbook({ onBack }: ScrapbookProps) {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const items: PhotoOrVideo[] = [
     {
       id: 1,
-      src: "https://images.unsplash.com/photo-1605462747736-58ddb84a87f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNsb3ZlJTIwbGV0dGVycyUyMHZpbnRhZ2UlMjByb21hbnRpY3xlbnwxfHx8fDE3NTc0MDUzMDZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      caption: "Our first coffee date ☕️",
-      date: "Month 1"
+      src: P_the_start,
+      caption: "Sushi",
+      date: "06.06.2025",
+      type: "image"
     },
     {
       id: 2,
-      src: "https://images.unsplash.com/photo-1643123928085-b93ff675ec79?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb21hbnRpYyUyMGNvdXBsZSUyMGhlYXJ0JTIwbG92ZXxlbnwxfHx8fDE3NTc0MDUzMDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      caption: "Perfect sunset together 🌅",
-      date: "Month 2"
+      src: P_the_lake1,
+      caption: "Bridge",
+      date: "09.06.2025",
+      type: "image"
     },
     {
       id: 3,
-      src: "https://images.unsplash.com/photo-1605462747736-58ddb84a87f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNsb3ZlJTIwbGV0dGVycyUyMHZpbnRhZ2UlMjByb21hbnRpY3xlbnwxfHx8fDE3NTc0MDUzMDZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      caption: "Adventures together 🚗",
-      date: "Month 3"
-    }
+      src: P_the_lake2,
+      caption: "Bridge 2",
+      date: "09.06.2025",
+      type: "image"
+    },
+    {
+      id: 4,
+      src: P_the_lake3,
+      caption: "Feet",
+      date: "09.06.2025",
+      type: "image"
+    },
+    {
+      id: 5,
+      src: P_the_lake4,
+      caption: "Ali & Mehmet",
+      date: "09.06.2025",
+      type: "image"
+    },
+    {
+      id: 6,
+      src: P_the_lake5,
+      caption: "First Selfie",
+      date: "09.06.2025",
+      type: "image"
+    },
+    {
+      id: 7,
+      src: P_theatre1,
+      caption: "Hot Persian",
+      date: "18.06.2025",
+      type: "image"
+    },
+    {
+      id: 8,
+      src: P_theatre2,
+      caption: "Hot Persian (in Bed)",
+      date: "18.06.2025",
+      type: "image"
+    },
+    {
+      id: 9,
+      src: P_wannsee1,
+      caption: "Happiness",
+      date: "26.06.2025",
+      type: "image"
+    },
+    {
+      id: 10,
+      src: P_wannsee2,
+      caption: "Sunset",
+      date: "26.06.2025",
+      type: "image"
+    },
+    {
+      id: 11,
+      src: P_photo_booth,
+      caption: "Photo-booth",
+      date: "05.07.2025",
+      type: "image"
+    },
+    {
+      id: 12,
+      src: V_photo_booth,
+      caption: "Photo-booth Video",
+      date: "05.07.2025",
+      type: "video"
+    },
+    {
+      id: 13,
+      src: P_reflections1,
+      caption: "Mirror",
+      date: "13.07.2025",
+      type: "image"
+    },
+    {
+      id: 14,
+      src: P_reflections2,
+      caption: "My flower",
+      date: "13.07.2025",
+      type: "image"
+    },
+    {
+      id: 15,
+      src: P_flight,
+      caption: "Flight",
+      date: "15.07.2025",
+      type: "image"
+    },
   ];
 
-  const memories = [
-    "First 'I love you' 💕",
-    "Inside jokes that make us laugh 😄",
-    "Favorite songs we discovered together 🎵",
-    "Places we want to visit 🗺️",
-    "Dreams we're building together ✨"
-  ];
+  // Group items by date
+  const groupedItems = items.reduce<Record<string, PhotoOrVideo[]>>((acc, item) => {
+    if (!acc[item.date]) acc[item.date] = [];
+    acc[item.date].push(item);
+    return acc;
+  }, {});
+
+  // Find selected item
+  const selectedItem = items.find(item => item.id === selectedId);
 
   return (
     <div className="p-6 space-y-6">
@@ -52,85 +169,77 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
         >
           <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
-        <h1 className="text-2xl text-gray-300">Digital Scrapbook</h1>
+        <h1 className="text-2xl text-gray-300">Scrapbook</h1>
       </div>
 
-      {/* Photo Grid */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-gray-300">Our Memories</h2>
-          <Button size="sm" className="bg-gray-600 hover:bg-gray-700">
-            <Plus className="w-4 h-4 mr-2" />
-            Add Photo
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          {photos.map((photo) => (
-            <Card
-              key={photo.id}
-              className="p-2 cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => setSelectedPhoto(photo.id)}
-            >
-              <div className="space-y-2">
-                <div className="aspect-square rounded-lg overflow-hidden">
-                  <ImageWithFallback
-                    src={photo.src}
-                    alt={photo.caption}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="text-center">
-                  <p className="text-sm text-gray-300">{photo.caption}</p>
-                  <p className="text-xs text-gray-400">{photo.date}</p>
-                </div>
-              </div>
-            </Card>
-          ))}
-
-          {/* Add Photo Placeholder */}
-          <Card className="p-2 border-dashed border-2 border-gray-600 hover:border-gray-500 cursor-pointer transition-colors">
-            <div className="aspect-square flex flex-col items-center justify-center space-y-2 text-gray-500">
-              <Upload className="w-8 h-8" />
-              <p className="text-sm">Add Photo</p>
+      {/* Grouped Sections */}
+      <div className="space-y-6">
+        {Object.entries(groupedItems).map(([date, itemsForDate]) => (
+          <div key={date}>
+            <h2 className="text-lg font-bold font-mono text-gray-300 mb-2">{date}</h2>
+            <div className="grid grid-cols-2 gap-3">
+              {itemsForDate.map((item) => (
+                <Card
+                  key={item.id}
+                  className="p-2 cursor-pointer hover:shadow-lg transition-shadow"
+                  onClick={() => setSelectedId(item.id)}
+                >
+                  <div className="space-y-2">
+                    <div className="aspect-square rounded-lg overflow-hidden">
+                      {item.type === "video" ? (
+                        <video
+                          src={item.src}
+                          className="w-full h-full object-cover"
+                          controls
+                          preload="metadata"
+                          poster=""
+                        />
+                      ) : (
+                        <ImageWithFallback
+                          src={item.src}
+                          alt={item.caption}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                    </div>
+                    <div className="text-center">
+                      <p className="font-bold text-sm text-gray-400">{item.caption}</p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
-          </Card>
-        </div>
+          </div>
+        ))}
       </div>
 
-      {/* Memory Notes */}
-      <div className="space-y-4">
-        <h2 className="text-gray-300">Special Memories</h2>
-        <div className="space-y-3">
-          {memories.map((memory, index) => (
-            <Card key={index} className="p-4 bg-gradient-to-r from-gray-800 to-gray-700">
-              <div className="flex items-center space-x-3">
-                <Heart className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                <p className="text-gray-300">{memory}</p>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      {/* Photo Modal */}
-      {selectedPhoto && (
+      {/* Modal */}
+      {selectedItem && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedPhoto(null)}
+          onClick={() => setSelectedId(null)}
         >
-          <Card className="max-w-sm w-full p-4">
+          <Card className="max-w-sm w-full p-4" onClick={e => e.stopPropagation()}>
             <div className="space-y-4">
-              <div className="aspect-square rounded-lg overflow-hidden">
-                <ImageWithFallback
-                  src={photos.find(p => p.id === selectedPhoto)?.src || ''}
-                  alt={photos.find(p => p.id === selectedPhoto)?.caption || ''}
-                  className="w-full h-full object-cover"
-                />
+              <div className="rounded-lg overflow-hidden">
+                {selectedItem.type === "video" ? (
+                  <video
+                    src={selectedItem.src}
+                    className="w-full h-full"
+                    controls
+                    autoPlay
+                  />
+                ) : (
+                  <ImageWithFallback
+                    src={selectedItem.src}
+                    alt={selectedItem.caption}
+                    className="w-full h-full"
+                  />
+                )}
               </div>
               <div className="text-center">
-                <p className="text-gray-300">{photos.find(p => p.id === selectedPhoto)?.caption}</p>
-                <p className="text-sm text-gray-400">{photos.find(p => p.id === selectedPhoto)?.date}</p>
+                <p className="text-gray-300">{selectedItem.caption}</p>
+                <p className="text-sm text-gray-400">{selectedItem.date}</p>
               </div>
             </div>
           </Card>

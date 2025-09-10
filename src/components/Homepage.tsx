@@ -53,30 +53,30 @@ export function Homepage({ onNavigate }: HomepageProps) {
       icon: Mail,
       color: "bg-gray-000",
     },
-    // {
-    //   id: "music" as FeatureType,
-    //   name: "Music",
-    //   icon: Music,
-    //   color: "bg-gray-000",
-    // },
-    {
-      id: "gifts" as FeatureType,
-      name: "Gift Box",
-      icon: Gift,
-      color: "bg-gray-000",
-    },
     {
       id: "map" as FeatureType,
       name: "Map",
       icon: Map,
       color: "bg-gray-000",
     },
-    {
-      id: "game" as FeatureType,
-      name: "Mini-Game",
-      icon: Gamepad2,
-      color: "bg-gray-000",
-    },
+    // {
+    //   id: "music" as FeatureType,
+    //   name: "Music",
+    //   icon: Music,
+    //   color: "bg-gray-000",
+    // },
+    // {
+    //   id: "gifts" as FeatureType,
+    //   name: "Gift Box",
+    //   icon: Gift,
+    //   color: "bg-gray-000",
+    // },
+    // {
+    //   id: "game" as FeatureType,
+    //   name: "Mini-Game",
+    //   icon: Gamepad2,
+    //   color: "bg-gray-000",
+    // },
   ];
 
   return (
