@@ -1,11 +1,11 @@
 // md
-import T_the_start from "../assets/text/the_start.md?raw";
-import T_the_lake from "../assets/text/the_lake.md?raw";
-import T_theatre from "../assets/text/theatre.md?raw";
-import T_wannsee from "../assets/text/wannsee.md?raw";
-import T_photo_booth from "../assets/text/photo_booth.md?raw";
-import T_reflections from "../assets/text/reflections.md?raw";
-import T_flight from "../assets/text/flight.md?raw";
+import T_the_start from "../assets/text/timeline/the_start.md?raw";
+import T_the_lake from "../assets/text/timeline/the_lake.md?raw";
+import T_theatre from "../assets/text/timeline/theatre.md?raw";
+import T_wannsee from "../assets/text/timeline/wannsee.md?raw";
+import T_photo_booth from "../assets/text/timeline/photo_booth.md?raw";
+import T_reflections from "../assets/text/timeline/reflections.md?raw";
+import T_flight from "../assets/text/timeline/flight.md?raw";
 
 // jpeg
 import P_the_start from "../assets/images/timeline/the_start.jpeg";
@@ -17,6 +17,7 @@ import P_reflections from "../assets/images/timeline/reflections_1.jpeg";
 import P_flight from "../assets/images/timeline/flight.jpeg";
 // config
 import React, { useState } from "react";
+import ReactMarkdown from 'react-markdown';
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import {
@@ -114,7 +115,11 @@ function BlogPostBlock({
         alt={title}
         className="w-full h-64 object-cover rounded-lg mb-4"
       />
-      <p className="text-gray-300 whitespace-pre-line">{text}</p>
+      <div className="prose prose-invert text-gray-300">
+        <ReactMarkdown>
+          {text}
+        </ReactMarkdown>
+      </div>
     </Card>
   );
 }

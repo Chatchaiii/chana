@@ -1,4 +1,19 @@
+// text
+import guelues from '../assets/text/notes/guelues.md?raw';
+import el from '../assets/text/notes/milyarca/el.md?raw';
+import goez from '../assets/text/notes/milyarca/goez.md?raw';
+import gueluemseme from '../assets/text/notes/milyarca/gueluemseme.md?raw';
+import hayat from '../assets/text/notes/milyarca/hayat.md?raw';
+import kahkaha from '../assets/text/notes/milyarca/kahkaha.md?raw';
+import kalp from '../assets/text/notes/milyarca/kalp.md?raw';
+import ask from '../assets/text/notes/ask.md?raw';
+import her_zaman from '../assets/text/notes/her_zaman.md?raw';
+import kal_boeyle from '../assets/text/notes/kal_boeyle.md?raw';
+import oezel from '../assets/text/notes/oezel.md?raw';
+
+// general
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowLeft, Heart, Lock, Unlock, Eye } from 'lucide-react';
@@ -14,38 +29,45 @@ export function LoveNote({ onBack }: LoveNoteProps) {
   const loveNotes = [
     {
       id: 1,
-      title: "Why I Love Your Smile",
-      hint: "What lights up my world?",
+      title: "Gülüş",
+      hint: "Your ... lights up my world?",
       password: "smile",
-      content: "Your smile is the first thing I fell in love with. It lights up every room you enter and makes my heart skip a beat every single time. When you smile at me, I feel like the luckiest person in the world. Your smile tells me that everything will be okay, and it's the most beautiful sight I could ever hope to see. Keep smiling, my love, because your happiness is my happiness. 😊💕"
+      content: guelues,
     },
     {
       id: 2,
-      title: "Our First Kiss",
-      hint: "What made time stop?",
-      password: "kiss",
-      content: "I still remember every detail of our first kiss. The way time seemed to stop, how my heart raced, and how perfectly we fit together. It was magical, sweet, and everything I had dreamed it would be. In that moment, I knew that you were someone special, someone I wanted to keep kissing for the rest of my life. That kiss sealed our love and started our beautiful journey together. 💋❤️"
+      title: "Milyarca",
+      hint: "",
+      password: "million",
+      content: el + goez + gueluemseme + hayat + kahkaha + kalp
     },
     {
       id: 3,
-      title: "Future Dreams",
-      hint: "What do we build together?",
-      password: "future",
-      content: "I love dreaming about our future together. I see us traveling the world, creating a beautiful home, maybe getting a cute pet, and building a life filled with love and laughter. I dream of lazy Sunday mornings, cooking together, and growing old with you by my side. Every dream I have includes you, because you're not just my present happiness - you're my forever. Let's make all these dreams come true together! 🌟💕"
+      title: "Aşk",
+      hint: "I ... you",
+      password: "love",
+      content: ask
     },
     {
       id: 4,
-      title: "What Makes You Special",
-      hint: "What makes you unique?",
-      password: "special",
-      content: "You are special in so many ways that sometimes I wonder how I got so lucky. Your kindness, your sense of humor, the way you listen to me, your passion for life, and your beautiful heart make you absolutely incredible. You see the world in such a unique way, and you make me want to be a better person every day. You're not just special to me - you're extraordinary in every sense of the word. 🌟💖"
+      title: "Her Zaman",
+      hint: "You are my ...",
+      password: "always",
+      content: her_zaman
     },
     {
       id: 5,
-      title: "Three Months and Forever",
-      hint: "What's our promise?",
-      password: "forever",
-      content: "Three months ago, you walked into my life and changed everything. These have been the most wonderful three months of my life, filled with love, laughter, and countless beautiful memories. But this is just the beginning of our story. I promise to love you not just for three months, but for three years, three decades, and beyond. You have my heart forever, and I can't wait to see what the rest of our love story holds. Here's to forever with you! 💕♾️"
+      title: "Kal Böyle",
+      hint: "Please ... with me.",
+      password: "stay",
+      content: kal_boeyle
+    },
+    {
+      id: 6,
+      title: "Özel",
+      hint: "You are ... to me.",
+      password: "special",
+      content: oezel
     }
   ];
 
@@ -213,10 +235,10 @@ export function LoveNote({ onBack }: LoveNoteProps) {
                   {loveNotes.find(n => n.id === selectedNote)?.title}
                 </h3>
               </div>
-              <div className="prose prose-sm">
-                <p className="text-gray-400 leading-relaxed">
-                  {loveNotes.find(n => n.id === selectedNote)?.content}
-                </p>
+              <div className="prose prose-sm text-gray-400 leading-relaxed">
+                <ReactMarkdown>
+                  {loveNotes.find(n => n.id === selectedNote)?.content || ""}
+                </ReactMarkdown>
               </div>
               <Button
                 onClick={() => setSelectedNote(null)}
