@@ -80,7 +80,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
         >
           <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
-        <h1 className="text-2xl text-gray-300">Hidden Love Notes</h1>
+        <h1 className="text-2xl text-gray-300">Hidden Notes</h1>
       </div>
 
       {/* Instructions */}
@@ -104,7 +104,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
               <div className="flex items-center justify-between">
                 <h3 className="text-gray-300 font-bold">{note.title}</h3>
                 {isUnlocked(note.id) ? (
-                  <Unlock className="w-5 h-5 text-green-500" />
+                  <Unlock className="w-5 h-5 text-pink-500" />
                 ) : (
                   <Lock className="w-5 h-5 text-gray-400" />
                 )}
@@ -112,7 +112,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
 
               {!isUnlocked(note.id) && (
                 <div className="space-y-3">
-                  <p className="text-sm text-gray-600 italic">{note.hint}</p>
+                  <p className="text-sm text-gray-500 italic">{note.hint}</p>
 
                   {attemptingUnlock === note.id ? (
                     <div className="space-y-3">
@@ -121,12 +121,12 @@ export function LoveNote({ onBack }: LoveNoteProps) {
                         value={passwordInput}
                         onChange={(e) => setPasswordInput(e.target.value)}
                         placeholder="Enter password..."
-                        className={`w-full p-3 border rounded-lg ${wrongPassword ? 'border-red-300 bg-red-50' : 'border-gray-700'
+                        className={`w-full p-3 border rounded-lg ${wrongPassword ? 'border-red-300 bg-gray-800' : 'border-gray-700'
                           }`}
                         onKeyPress={(e) => e.key === 'Enter' && handleUnlockAttempt(note.id)}
                       />
                       {wrongPassword && (
-                        <p className="text-red-500 text-sm">Wrong password! Try again.</p>
+                        <p className="text-red-500 text-sm">Wrong password :p Try again.</p>
                       )}
                       <div className="flex space-x-2">
                         <Button
@@ -167,10 +167,10 @@ export function LoveNote({ onBack }: LoveNoteProps) {
                 <div className="space-y-3">
                   <Button
                     onClick={() => setSelectedNote(note.id)}
-                    className="w-full bg-green-500 hover:bg-green-600"
+                    className="w-full bg-pink-500 hover:bg-pink-600"
                   >
                     <Eye className="w-4 h-4 mr-2" />
-                    Read Love Note
+                    Read Note
                   </Button>
                 </div>
               )}
@@ -209,12 +209,12 @@ export function LoveNote({ onBack }: LoveNoteProps) {
             <div className="space-y-4">
               <div className="text-center">
                 <Heart className="w-8 h-8 text-pink-500 mx-auto mb-2" />
-                <h3 className="text-xl text-gray-800">
+                <h3 className="text-xl text-gray-300 font-bold">
                   {loveNotes.find(n => n.id === selectedNote)?.title}
                 </h3>
               </div>
               <div className="prose prose-sm">
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-400 leading-relaxed">
                   {loveNotes.find(n => n.id === selectedNote)?.content}
                 </p>
               </div>

@@ -87,38 +87,38 @@ export function LoveMap({ onBack }: LoveMapProps) {
           onClick={onBack}
           variant=""
           size="sm"
-          className="rounded-full bg-grey-800 hover:bg-gray-700"
+          className="rounded-full bg-grey-300 hover:bg-gray-700"
         >
           <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
-        <h1 className="text-2xl text-teal-600">Love Map</h1>
+        <h1 className="text-2xl text-gray-300">Love Map</h1>
       </div>
 
       {/* Instructions */}
-      <Card className="p-4 bg-teal-50 border-teal-200">
+      <Card className="p-4 bg-gray-800">
         <div className="flex items-start space-x-3">
-          <MapPin className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
-          <p className="text-teal-800 text-sm">
-            Explore the special places in our love story! Each location marks a meaningful moment we've shared together.
-            Tap any location to revisit that memory! 💕
+          <MapPin className="w-5 h-5 text-gray-300 flex-shrink-0 mt-0.5" />
+          <p className="text-gray-300 text-sm">
+            Special places in our love. Each location marks a meaningful moment we've shared together.
+            Tap any location to revisit that memory.
           </p>
         </div>
       </Card>
 
       {/* Interactive Map */}
       <Card className="p-6">
-        <div className="relative bg-gradient-to-br from-blue-100 via-green-50 to-yellow-50 rounded-lg h-80 overflow-hidden">
+        <div className="relative bg-gray-800 rounded-lg h-80 overflow-hidden">
           {/* Map Background Elements */}
           <div className="absolute inset-0">
             {/* Simple roads/paths */}
-            <div className="absolute top-16 left-0 w-full h-1 bg-gray-300 opacity-50"></div>
-            <div className="absolute top-0 left-20 w-1 h-full bg-gray-300 opacity-50"></div>
+            <div className="absolute top-16 left-0 w-full h-1 bg-gray-300"></div>
+            <div className="absolute top-0 left-20 w-1 h-full bg-gray-300"></div>
             <div className="absolute bottom-20 left-0 w-full h-1 bg-gray-300 opacity-50"></div>
 
             {/* Decorative elements */}
-            <div className="absolute top-10 right-10 w-8 h-8 bg-green-400 rounded-full opacity-30"></div>
-            <div className="absolute bottom-10 left-10 w-6 h-6 bg-blue-400 rounded-full opacity-30"></div>
-            <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-yellow-400 rounded-full opacity-30"></div>
+            <div className="absolute top-10 right-10 w-8 h-8 bg-gray-400 rounded-full opacity-30"></div>
+            <div className="absolute bottom-10 left-10 w-6 h-6 bg-gray-400 rounded-full opacity-30"></div>
+            <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-gray-400 rounded-full opacity-30"></div>
           </div>
 
           {/* Location Pins */}
@@ -140,7 +140,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
 
       {/* Location List */}
       <div className="space-y-3">
-        <h2 className="text-gray-700">Our Love Journey Locations</h2>
+        <h2 className="text-gray-300 font-bold">Our Love Journey Locations</h2>
         {loveLocations.map((location) => (
           <Card
             key={location.id}
@@ -153,12 +153,12 @@ export function LoveMap({ onBack }: LoveMapProps) {
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-gray-800">{location.name}</h3>
-                  <span className="text-xs text-gray-500">{location.date}</span>
+                  <h3 className="text-gray-300 font-bold">{location.name}</h3>
+                  <span className="text-xs text-gray-400">{location.date}</span>
                 </div>
                 <div className="flex items-center space-x-2 mt-1">
-                  <span className="text-sm text-gray-600">{location.type}</span>
-                  <span className="text-xs text-gray-400">•</span>
+                  <span className="text-sm text-gray-400">{location.type}</span>
+                  <span className="text-xs text-gray-400"></span>
                   <span className="text-xs text-gray-500">{location.description}</span>
                 </div>
               </div>
@@ -184,18 +184,18 @@ export function LoveMap({ onBack }: LoveMapProps) {
                   )}
                 </div>
                 <div>
-                  <h3 className="text-xl text-gray-800">
+                  <h3 className="text-xl text-gray-300 font-bold">
                     {loveLocations.find(l => l.id === selectedLocation)?.name}
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-400">
                     {loveLocations.find(l => l.id === selectedLocation)?.type} • {loveLocations.find(l => l.id === selectedLocation)?.date}
                   </p>
                 </div>
               </div>
 
               {/* Memory */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-gray-700 text-sm leading-relaxed">
+              <div className="bg-gray-800 rounded-lg p-4">
+                <p className="text-gray-300 text-sm leading-relaxed">
                   {loveLocations.find(l => l.id === selectedLocation)?.memory}
                 </p>
               </div>
@@ -203,7 +203,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
               {/* Close Button */}
               <Button
                 onClick={() => setSelectedLocation(null)}
-                className="w-full bg-teal-500 hover:bg-teal-600"
+                className="w-full bg-gray-300 hover:bg-gray-700"
               >
                 <Heart className="w-4 h-4 mr-2" />
                 Beautiful Memory!
@@ -213,7 +213,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
         </div>
       )}
 
-      {/* Future Plans */}
+      {/* Future Plans
       <Card className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200">
         <div className="space-y-3">
           <div className="flex items-center space-x-2">
@@ -228,7 +228,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
             <p>💕 And many more memories to create...</p>
           </div>
         </div>
-      </Card>
+      </Card> */}
     </div>
   );
 }
