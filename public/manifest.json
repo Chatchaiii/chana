@@ -1,6 +1,6 @@
 {
-  "short_name": "chana",
-  "name": "chana",
+  "short_name": "Chana",
+  "name": "Chana",
   "icons": [
     {
       "src": "icon-192.png",
@@ -15,6 +15,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000"
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A"
 }
