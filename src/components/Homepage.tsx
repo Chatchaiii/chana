@@ -19,6 +19,7 @@ import {
   Star,
   Quote,
   Image,
+  User,
 } from "lucide-react";
 import { FeatureType } from "../App";
 import Markdown from "react-markdown";
@@ -148,15 +149,25 @@ export function Homepage({ onNavigate }: HomepageProps) {
     <div className="p-4 space-y-6 overflow-x-auto scrollbar-none">
       {/* Header */}
       <div className="flex flex-col items-left space-y-6">
-        <div className="flex gap-8 w-full mb-4 justify-center">
-          <h1 className="relative center text-3xl font-bold text-white flex items-center select-none">
+        <div className="flex w-full mb-4 justify-center relative">
+          {/* Centered CHANA */}
+          <h1 className="relative left-5 text-3xl font-bold text-white flex items-center select-none mx-auto">
             CH
             <Heart className="w-8 h-7 text-pink-600 mx-1" fill="currentcolor" stroke="currentcolor" />
             NA
           </h1>
-          <h1 className="relative right-0 text-xs text-gray-300 flex items-center select-none">
-            happy anniversary of three months
-          </h1>
+          {/* Button on the right */}
+          <div className="relative right-0">
+            <Card className="border-transparent">
+              <Button
+                onClick={() => onNavigate("game")}
+                className="flexitems-center bg-gray-800 font-bold text-gray-300 select-none rounded-full"
+                variant="none"
+              >
+                <User className="text-pink-600" />
+              </Button>
+            </Card>
+          </div>
         </div>
         {/* Carousel */}
         <h1 className="font-bold items-center flex text-2xl text-gray-300 gap-2 select-none">
