@@ -155,9 +155,10 @@ export function Homepage({ onNavigate }: HomepageProps) {
           </h1>
         </div>
         {/* Carousel */}
+        {/* <h1 className="font-bold text-2xl text-gray-300 select-none mb-4">HAPPY ANNIVERSARY</h1> */}
         <div className="relative w-full max-w-xl mx-auto">
           <div
-            className="relative w-full h-60 rounded-none overflow-hidden"
+            className="relative w-full h-60 rounded-2xl overflow-hidden"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -183,14 +184,14 @@ export function Homepage({ onNavigate }: HomepageProps) {
               ))}
             </div>
           </div>
-          {/* Text Body */}
-          <p className="relative font-bold flex gap-8 items-center text-left text-xs text-gray-400 p-4 select-none bg-gray-800">
-            <Quote className="relative left-1 w-10 h-10 text-gray-500" />
-            "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
-          </p>
+          
         </div>
       </div>
-
+      {/* Text Body */}
+      <p className="relative font-bold flex gap-8 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
+        <Quote className="relative left-2 w-10 h-10 text-gray-500" />
+        "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
+      </p>
 
       {/* Features Grid */}
       <h1 className="font-bold items-center flex text-2xl text-gray-300 gap-2 select-none">
