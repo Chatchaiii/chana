@@ -202,11 +202,11 @@ export function Homepage({ onNavigate }: HomepageProps) {
               ))}
             </div>
           </div>
-          
+
         </div>
       </div>
       {/* Text Body */}
-      <p className="relative font-bold flex gap-8 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
+      <p className="relative font-bold flex gap-9 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
         <Quote className="relative left-2 w-10 h-10 text-gray-500" />
         "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
       </p>
@@ -215,7 +215,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
       <h1 className="font-bold items-center flex text-2xl text-gray-300 gap-2 select-none">
         <Star className="w-7 h-7 text-pink-500" />
         Features
-        </h1>
+      </h1>
       <div className="space-y-0 space-x-0 grid grid-cols-2 gap-3">
         {features.map((feature) => (
           <Card
@@ -240,7 +240,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
       <h1 className="font-bold text-2xl text-gray-300 flex items-center select-none gap-2">
         <Calendar className="w-7 h-7 text-pink-500" />
         Today's plan
-        </h1>
+      </h1>
       <div className="relative flex flex-col items-center">
         {sortedTimetable.map((item, idx) => (
           <div className="flex items-center w-full max-w-md" key={item.time + item.title}>
