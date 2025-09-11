@@ -256,7 +256,7 @@ function BlogPostBlock({
           {/* Popup Modal */}
           {showNote && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
-              <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-md shadow-2xl relative border">
+              <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl relative border">
                 <button
                   className="absolute top-0 right-2 text-gray-400 text-2xl"
                   onClick={() => setShowNote(false)}
