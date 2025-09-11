@@ -1,3 +1,25 @@
+// chai_jpeg
+import c_baby_1 from "../assets/images/user/chai/baby_1.jpeg";
+import c_baby_2 from "../assets/images/user/chai/baby_2.jpeg";
+import car from "../assets/images/user/chai/car.jpeg";
+import cat from "../assets/images/user/chai/cat.jpeg";
+import chad from "../assets/images/user/chai/chad.jpeg";
+import mirror_1 from "../assets/images/user/chai/mirror_1.jpeg";
+import mirror_2 from "../assets/images/user/chai/mirror_2.jpeg";
+import c_sleeping from "../assets/images/user/chai/sleeping.jpeg";
+import night from "../assets/images/user/chai/night.jpeg";
+
+// hannah.jpeg
+import ali from "../assets/images/user/hannah/ali.jpeg";
+import h_baby_1 from "../assets/images/user/hannah/baby_1.jpeg";
+import h_baby_2 from "../assets/images/user/hannah/baby_2.jpeg";
+import beach_1 from "../assets/images/user/hannah/beach_1.jpeg";
+import beach_2 from "../assets/images/user/hannah/beach_2.jpeg";
+import selfie from "../assets/images/user/hannah/selfie.jpeg";
+import h_sleeping_1 from "../assets/images/user/hannah/sleeping_1.jpeg";
+import h_sleeping_2 from "../assets/images/user/hannah/sleeping_2.jpeg";
+import zendegim from "../assets/images/user/hannah/zendegim.jpeg";
+
 import React, { useState, useRef, useEffect } from "react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
@@ -5,9 +27,19 @@ import { ArrowLeft, ChevronRight, ChevronUp, User } from "lucide-react";
 
 // Placeholder images
 const placeholderImages = [
-	"https://placekitten.com/400/250",
-	"https://placekitten.com/401/250",
-	"https://placekitten.com/402/250",
+	// hannah.jpeg
+	ali, // 0
+	h_baby_1, // 1
+	h_baby_2, // 2
+	selfie, // 3
+	h_sleeping_1, // 4
+	h_sleeping_2, // 5
+	// chai.jpeg
+	c_baby_1, // 6
+	c_baby_2, // 7
+	cat, // 8
+	chad, // 9
+	c_sleeping, // 10
 ];
 
 interface PersonBio {
@@ -27,24 +59,29 @@ interface PersonBio {
 const personA: PersonBio = {
 	name: "Hannah Mohammadzadeh",
 	birthdate: "23.06.2006",
-	description: "A short description about Person A. Loves cats and coffee.",
-	likings: ["Coffee", "Cats", "Reading", "Travel"],
-	habits: ["Early riser", "Jogging", "Sketching"],
+	description: "If you'd ask me who has the purest and most wonderful soul - It'd be her.",
+	likings: ["- Coffee", "- Dogs", "- Reading", "- Her lovely boyfriend (husband)"],
+	habits: ["- Sleepy", "- Smart", "- Thinker", "- Being hot asf"],
 	slideshowImages: [
-		"https://placekitten.com/410/250",
-		"https://placekitten.com/411/250",
-		"https://placekitten.com/412/250",
+		beach_1,
+		beach_2,
+		zendegim,
 	],
 	blogPosts: [
 		{
-			title: "A's Childhood",
-			images: [placeholderImages[0], placeholderImages[1]],
-			text: "A's childhood was full of adventures and laughter. Always curious and eager to learn new things.",
+			title: "My Baby",
+			images: [placeholderImages[1], placeholderImages[2]],
+			text: "Just look how cute she is.",
 		},
 		{
-			title: "A's Favorite Place",
-			images: [placeholderImages[2]],
-			text: "The old library in the city center is A's favorite place to relax and read.",
+			title: "My Lover",
+			images: [placeholderImages[0]],
+			text: "I'd be gay for you, my lovely Ali.",
+		},
+		{
+			title: "My Sleeping Beauty",
+			images: [placeholderImages[3], placeholderImages[4], placeholderImages[5]],
+			text: "You may find those pics ridiculous - yet they are my favorites.",
 		},
 	],
 };
@@ -52,24 +89,30 @@ const personA: PersonBio = {
 const personB: PersonBio = {
 	name: "Chatchai Kemal Bozkir",
 	birthdate: "13.01.2007",
-	description: "A short description about Person B. Enjoys music and hiking.",
-	likings: ["Music", "Hiking", "Cooking", "Movies"],
-	habits: ["Night owl", "Playing guitar", "Photography"],
+	description: "Most normal thing about him is his humor.",
+	likings: ["- His girlfriend", "- Music", "- His girl", "- Cooking", "- His wife", "- Computers"],
+	habits: ["- Night owl", "- Playing guitar & piano", "- Annoys his girlfriend way too often"],
 	slideshowImages: [
-		"https://placekitten.com/420/250",
-		"https://placekitten.com/421/250",
-		"https://placekitten.com/422/250",
+		car,
+		mirror_1,
+		mirror_2,
+		night,
 	],
 	blogPosts: [
 		{
-			title: "B's First Concert",
-			images: [placeholderImages[1], placeholderImages[2]],
-			text: "B's first concert was an unforgettable experience, sparking a lifelong love for music.",
+			title: "Mini-Chai",
+			images: [placeholderImages[6], placeholderImages[7]],
+			text: "I just chose the cutest pics, all the other ugly pics should stay unseen...",
 		},
 		{
-			title: "B's Hiking Adventure",
-			images: [placeholderImages[0]],
-			text: "Climbing the mountain trail was tough, but the view from the top was worth every step.",
+			title: "Chad",
+			images: [placeholderImages[8], placeholderImages[9]],
+			text: '"Meow" - zitat Ende.',
+		},
+		{
+			title: "Dream",
+			images: [placeholderImages[10]],
+			text: "I would give everything to be able to fall asleep in her arms every single night.",
 		},
 	],
 };
@@ -137,11 +180,10 @@ function ImageCarousel({ images }: { images: string[] }) {
 					{images.map((_, idx) => (
 						<span
 							key={idx}
-							className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${
-								idx === current
-									? "bg-pink-500 scale-110"
-									: "bg-gray-400 opacity-50"
-							}`}
+							className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${idx === current
+								? "bg-pink-500 scale-110"
+								: "bg-gray-400 opacity-50"
+								}`}
 						/>
 					))}
 				</div>
@@ -173,9 +215,8 @@ function BioPanel({
 }) {
 	return (
 		<Card
-			className={`transition-all duration-500 overflow-hidden ${
-				expanded ? "max-h-[1000px] p-7" : "max-h-32 p-5"
-			} mb-4`}
+			className={`transition-all duration-500 overflow-hidden ${expanded ? "max-h-[1000px] p-7" : "max-h-32 p-5"
+				} mb-4`}
 		>
 			<div
 				className="flex items-center justify-between cursor-pointer"
