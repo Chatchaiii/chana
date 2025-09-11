@@ -187,7 +187,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
         </div>
       </div>
       {/* Text Body */}
-      <p className="flex items-center text-center text-xs text-gray-500 p-6 select-none bg-gray-800 rounded-2xl">
+      <p className="relative flex gap-6 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
         <Quote className="w-7 h-7 text-gray-500" />
         "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
       </p>
@@ -226,7 +226,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
         {sortedTimetable.map((item, idx) => (
           <div className="flex items-center w-full max-w-md" key={item.time + item.title}>
             {/* Wire/line on the left */}
-            <div className="flex flex-col items-center mr-2 ml-1">
+            <div className="flex flex-col items-center mr-2 ml-1 select-none">
               {/* Top wire */}
               {idx !== 0 && (
                 <div className="w-1 h-4 rounded-full bg-pink-500" />
@@ -241,7 +241,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
             {/* Box */}
             <Card className="flex-1 mb-2 bg-gray-900 rounded-2xl p-6">
               <div className="flex items-center space-x-3">
-                <span className="text-lg font-bold text-gray-200 w-16">{item.time}</span>
+                <span className="text-lg font-bold text-gray-200 w-16 select-none">{item.time}</span>
                 <div>
                   <div className="font-bold text-gray-200">{item.title}</div>
                   {item.address && (
