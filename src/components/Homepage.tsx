@@ -156,7 +156,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
         </div>
       </div>
       {/* Text Body */}
-      <p className="text-center text-[11pt] font-bold italic text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
+      <p className="text-center text-sm font-bold italic text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
         "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
       </p>
 
