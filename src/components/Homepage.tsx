@@ -15,8 +15,12 @@ import {
   Brain,
   Mail,
   Map,
+  Calendar,
+  Star,
+  Quote,
 } from "lucide-react";
 import { FeatureType } from "../App";
+import Markdown from "react-markdown";
 
 interface HomepageProps {
   onNavigate: (feature: FeatureType) => void;
@@ -112,6 +116,33 @@ export function Homepage({ onNavigate }: HomepageProps) {
     touchStartX.current = null;
   };
 
+  // Timetable data
+  const timetable = [
+    {
+      time: "16:30",
+      title: "Fotoblink",
+      address: "Bergmannstraße 27, 10961 Berlin",
+    },
+    {
+      time: "18:00",
+      title: "Sori Kono",
+      address: "Dominicusstraße 41, 10827 Berlin",
+    },
+    {
+      time: "19:30",
+      title: "Hafis",
+      address: "Neue Kantstraße 17, 14057 Berlin",
+    },
+    {
+      time: "21:00",
+      title: "Home",
+      address: "",
+    },
+  ];
+
+  // Sort by time (HH:mm)
+  const sortedTimetable = [...timetable].sort((a, b) => a.time.localeCompare(b.time));
+
   return (
     <div className="p-4 space-y-6 overflow-x-auto scrollbar-none">
       {/* Header */}
@@ -119,7 +150,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
         <div className="w-full flex mb-4 justify-center">
           <h1 className="text-3xl font-bold text-white flex items-center select-none">
             CH
-            <Heart className="w-8 h-7 text-pink-600 mx-1" fill="currentColor" stroke="none" />
+            <Heart className="w-8 h-7 text-pink-600 mx-1" fill="currentcolor" stroke="currentcolor" />
             NA
           </h1>
         </div>
@@ -156,12 +187,16 @@ export function Homepage({ onNavigate }: HomepageProps) {
         </div>
       </div>
       {/* Text Body */}
-      <p className="text-center text-xs italic text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
+      <p className="flex items-center text-center text-xs text-gray-500 p-6 select-none bg-gray-800 rounded-2xl">
+        <Quote className="w-7 h-7 text-gray-500" />
         "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
       </p>
 
       {/* Features Grid */}
-      <h1 className="font-bold text-2xl text-gray-300 select-none">Features</h1>
+      <h1 className="font-bold items-center flex text-2xl text-gray-300 gap-2 select-none">
+        <Star className="w-7 h-7 text-pink-500" />
+        Features
+        </h1>
       <div className="space-y-0 space-x-0 grid grid-cols-2 gap-3">
         {features.map((feature) => (
           <Card
@@ -183,18 +218,41 @@ export function Homepage({ onNavigate }: HomepageProps) {
       </div>
 
       {/* Timetable */}
-      <h1 className="font-bold text-2xl text-gray-300 select-none">Today's plan</h1>
-      <Card className="p-4 bg-gray-800 rounded-2xl">
-        <div className="space-y-2">
-          <h2 className="text-lg font-bold text-gray-300 select-none">22.09.2025</h2>
-          <div className="text-sm text-gray-400 space-y-1">
-            <p>16:30 - Fotoblink, Bergmannstraße 27, 10961 Berlin</p>
-            <p>18:00 - Sori Kono, Dominicusstraße 41, 10827 Berlin</p>
-            <p>19:30 - Hafis, Neue Kantstraße 17, 14057 Berlin</p>
-            <p>21:00 - Home</p>
+      <h1 className="font-bold text-2xl text-gray-300 flex items-center select-none gap-2">
+        <Calendar className="w-7 h-7 text-pink-500" />
+        Today's plan
+        </h1>
+      <div className="relative flex flex-col items-center">
+        {sortedTimetable.map((item, idx) => (
+          <div className="flex items-center w-full max-w-md" key={item.time + item.title}>
+            {/* Wire/line on the left */}
+            <div className="flex flex-col items-center mr-2 ml-1">
+              {/* Top wire */}
+              {idx !== 0 && (
+                <div className="w-1 h-4 rounded-full bg-pink-500" />
+              )}
+              {/* Dot */}
+              <div className="w-4 h-4 border-2 border-gray-900 rounded-xl bg-pink-500"></div>
+              {/* Bottom wire */}
+              {idx !== sortedTimetable.length - 1 && (
+                <div className="w-1 h-4 rounded-full bg-pink-500" />
+              )}
+            </div>
+            {/* Box */}
+            <Card className="flex-1 mb-2 bg-gray-900 rounded-2xl p-6">
+              <div className="flex items-center space-x-3">
+                <span className="text-lg font-bold text-gray-200 w-16">{item.time}</span>
+                <div>
+                  <div className="font-bold text-gray-200">{item.title}</div>
+                  {item.address && (
+                    <div className="text-xs text-gray-400">{item.address}</div>
+                  )}
+                </div>
+              </div>
+            </Card>
           </div>
-        </div>
-      </Card>
+        ))}
+      </div>
 
       {/* Footer */}
       <div className="h-8 text-center text-sm text-gray-700 select-none">
