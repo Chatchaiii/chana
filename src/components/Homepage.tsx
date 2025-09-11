@@ -117,7 +117,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
       {/* Header */}
       <div className="flex flex-col items-left space-y-6">
         <div className="w-full flex mt-2 mb-4 justify-center">
-          <h1 className="text-3xl font-bold text-white flex items-center select-none my-1">
+          <h1 className="text-3xl font-bold text-white flex items-center select-none">
             CH
             <Heart className="w-8 h-7 text-pink-600 mx-1" fill="currentColor" stroke="none" />
             NA
