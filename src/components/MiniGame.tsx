@@ -1,346 +1,272 @@
-import React, { useState, useEffect } from 'react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
-import { ArrowLeft, Heart, RotateCcw, Trophy, Star } from 'lucide-react';
+import React, { useState, useRef, useEffect } from "react";
+import { Card } from "./ui/card";
+import { Button } from "./ui/button";
+import { ArrowLeft, ChevronRight, ChevronUp, User } from "lucide-react";
+
+// Placeholder images
+const placeholderImages = [
+	"https://placekitten.com/400/250",
+	"https://placekitten.com/401/250",
+	"https://placekitten.com/402/250",
+];
+
+interface PersonBio {
+	name: string;
+	birthdate: string;
+	description: string;
+	likings: string[];
+	habits: string[];
+	slideshowImages?: string[]; // <-- new field for main slideshow
+	blogPosts: {
+		title: string;
+		images: string[];
+		text: string;
+	}[];
+}
+
+const personA: PersonBio = {
+	name: "Hannah Mohammadzadeh",
+	birthdate: "23.06.2006",
+	description: "A short description about Person A. Loves cats and coffee.",
+	likings: ["Coffee", "Cats", "Reading", "Travel"],
+	habits: ["Early riser", "Jogging", "Sketching"],
+	slideshowImages: [
+		"https://placekitten.com/410/250",
+		"https://placekitten.com/411/250",
+		"https://placekitten.com/412/250",
+	],
+	blogPosts: [
+		{
+			title: "A's Childhood",
+			images: [placeholderImages[0], placeholderImages[1]],
+			text: "A's childhood was full of adventures and laughter. Always curious and eager to learn new things.",
+		},
+		{
+			title: "A's Favorite Place",
+			images: [placeholderImages[2]],
+			text: "The old library in the city center is A's favorite place to relax and read.",
+		},
+	],
+};
+
+const personB: PersonBio = {
+	name: "Chatchai Kemal Bozkir",
+	birthdate: "13.01.2007",
+	description: "A short description about Person B. Enjoys music and hiking.",
+	likings: ["Music", "Hiking", "Cooking", "Movies"],
+	habits: ["Night owl", "Playing guitar", "Photography"],
+	slideshowImages: [
+		"https://placekitten.com/420/250",
+		"https://placekitten.com/421/250",
+		"https://placekitten.com/422/250",
+	],
+	blogPosts: [
+		{
+			title: "B's First Concert",
+			images: [placeholderImages[1], placeholderImages[2]],
+			text: "B's first concert was an unforgettable experience, sparking a lifelong love for music.",
+		},
+		{
+			title: "B's Hiking Adventure",
+			images: [placeholderImages[0]],
+			text: "Climbing the mountain trail was tough, but the view from the top was worth every step.",
+		},
+	],
+};
+
+// Carousel component for blog post images
+function ImageCarousel({ images }: { images: string[] }) {
+	const [current, setCurrent] = useState(0);
+	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+	const touchStartX = useRef<number | null>(null);
+
+	useEffect(() => {
+		if (images.length <= 1) return;
+		if (timeoutRef.current) clearTimeout(timeoutRef.current);
+		timeoutRef.current = setTimeout(() => {
+			setCurrent((prev) => (prev + 1) % images.length);
+		}, 5000);
+		return () => {
+			if (timeoutRef.current) clearTimeout(timeoutRef.current);
+		};
+	}, [current, images.length]);
+
+	const handleTouchStart = (e: React.TouchEvent) => {
+		if (images.length <= 1) return;
+		touchStartX.current = e.touches[0].clientX;
+	};
+	const handleTouchEnd = (e: React.TouchEvent) => {
+		if (images.length <= 1 || touchStartX.current === null) return;
+		const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+		if (Math.abs(deltaX) > 50) {
+			if (deltaX > 0) {
+				setCurrent((prev) => (prev - 1 + images.length) % images.length);
+			} else {
+				setCurrent((prev) => (prev + 1) % images.length);
+			}
+		}
+		touchStartX.current = null;
+	};
+
+	if (images.length === 0) return null;
+	return (
+		<div
+			className="relative w-full h-48 rounded-lg overflow-hidden mb-4"
+			onTouchStart={handleTouchStart}
+			onTouchEnd={handleTouchEnd}
+		>
+			<div
+				className="flex transition-transform duration-700 ease-in-out h-48"
+				style={{
+					width: `${images.length * 100}%`,
+					transform: `translateX(-${current * (100 / images.length)}%)`,
+				}}
+			>
+				{images.map((url, idx) => (
+					<img
+						key={idx}
+						src={url}
+						alt={`blog-img-${idx + 1}`}
+						className="w-full h-48 object-cover flex-shrink-0"
+						style={{ width: `${100 / images.length}%` }}
+					/>
+				))}
+			</div>
+			{images.length > 1 && (
+				<div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">
+					{images.map((_, idx) => (
+						<span
+							key={idx}
+							className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${
+								idx === current
+									? "bg-pink-500 scale-110"
+									: "bg-gray-400 opacity-50"
+							}`}
+						/>
+					))}
+				</div>
+			)}
+		</div>
+	);
+}
+
+// BlogPost component
+function BlogPost({ post }: { post: PersonBio["blogPosts"][0] }) {
+	return (
+		<Card className="mb-6 bg-gray-800 rounded-xl shadow-lg p-4">
+			<h3 className="text-lg font-bold text-gray-100 mb-2">{post.title}</h3>
+			<ImageCarousel images={post.images} />
+			<div className="text-gray-300 mb-2">{post.text}</div>
+		</Card>
+	);
+}
+
+// Biography panel
+function BioPanel({
+	person,
+	expanded,
+	onToggle,
+}: {
+	person: PersonBio;
+	expanded: boolean;
+	onToggle: () => void;
+}) {
+	return (
+		<Card
+			className={`transition-all duration-500 overflow-hidden ${
+				expanded ? "max-h-[1000px] p-7" : "max-h-32 p-5"
+			} mb-4`}
+		>
+			<div
+				className="flex items-center justify-between cursor-pointer"
+				onClick={onToggle}
+			>
+				<div className="flex items-center space-x-3">
+					<span className="text-2xl font-bold text-gray-200">
+						{person.name}
+					</span>
+				</div>
+				{expanded ? (
+					<ChevronUp className="w-6 h-6 text-gray-400" />
+				) : (
+					<ChevronRight className="w-6 h-6 text-gray-400" />
+				)}
+			</div>
+			{expanded && (
+				<div className="mt-6 space-y-4">
+					{/* Slideshow above birthdate */}
+					{person.slideshowImages && person.slideshowImages.length > 0 && (
+						<ImageCarousel images={person.slideshowImages} />
+					)}
+					<div>
+						<span className="font-bold text-gray-300">Birthdate</span>{" "}
+						<span className="italic text-gray-400">{person.birthdate}</span>
+					</div>
+					<div>
+						<span className="font-bold text-gray-300">Description</span>
+						<div className="italic text-gray-400">{person.description}</div>
+					</div>
+					<div>
+						<span className="font-bold text-gray-300">Likings</span>
+						<ul className="italic list-disc list-inside text-gray-400">
+							{person.likings.map((like, idx) => (
+								<li key={idx}>{like}</li>
+							))}
+						</ul>
+					</div>
+					<div>
+						<span className="font-bold text-gray-300">Habits</span>
+						<ul className="italic list-disc list-inside text-gray-400">
+							{person.habits.map((habit, idx) => (
+								<li key={idx}>{habit}</li>
+							))}
+						</ul>
+					</div>
+					<div>
+						<div>
+							{person.blogPosts.map((post, idx) => (
+								<BlogPost key={idx} post={post} />
+							))}
+						</div>
+					</div>
+				</div>
+			)}
+		</Card>
+	);
+}
 
 interface MiniGameProps {
-  onBack: () => void;
+	onBack: () => void;
 }
 
 export function MiniGame({ onBack }: MiniGameProps) {
-  const [gameType, setGameType] = useState<'menu' | 'memory' | 'match'>('menu');
-  const [score, setScore] = useState(0);
-  const [gameState, setGameState] = useState<'playing' | 'won' | 'lost'>('playing');
+	const [expanded, setExpanded] = useState<"A" | "B" | null>(null);
 
-  // Memory Game State
-  const [cards, setCards] = useState<Array<{ id: number; emoji: string; isFlipped: boolean; isMatched: boolean }>>([]);
-  const [flippedCards, setFlippedCards] = useState<number[]>([]);
-  const [moves, setMoves] = useState(0);
-
-  // Match Game State
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [matchScore, setMatchScore] = useState(0);
-
-  const loveEmojis = ['💕', '💖', '💝', '💗', '💓', '💘', '🥰', '😍'];
-
-  const matchQuestions = [
-    {
-      question: "What do I love most about you?",
-      options: ["Your smile", "Your eyes", "Your laugh", "All of the above"],
-      correct: 3
-    },
-    {
-      question: "Our perfect date would be:",
-      options: ["Movie night", "Romantic dinner", "Adventure trip", "Cozy home time"],
-      correct: 3
-    },
-    {
-      question: "What makes our relationship special?",
-      options: ["Trust", "Communication", "Love", "Everything together"],
-      correct: 3
-    }
-  ];
-
-  // Initialize Memory Game
-  const initializeMemoryGame = () => {
-    const gameEmojis = loveEmojis.slice(0, 6);
-    const gameCards = [...gameEmojis, ...gameEmojis]
-      .sort(() => Math.random() - 0.5)
-      .map((emoji, index) => ({
-        id: index,
-        emoji,
-        isFlipped: false,
-        isMatched: false
-      }));
-    setCards(gameCards);
-    setFlippedCards([]);
-    setMoves(0);
-    setGameState('playing');
-    setGameType('memory');
-  };
-
-  // Initialize Match Game
-  const initializeMatchGame = () => {
-    setCurrentQuestion(0);
-    setMatchScore(0);
-    setGameState('playing');
-    setGameType('match');
-  };
-
-  // Memory Game Logic
-  const handleCardFlip = (cardId: number) => {
-    if (flippedCards.length === 2 || cards[cardId].isFlipped || cards[cardId].isMatched) return;
-
-    const newCards = cards.map(card =>
-      card.id === cardId ? { ...card, isFlipped: true } : card
-    );
-    setCards(newCards);
-    setFlippedCards([...flippedCards, cardId]);
-  };
-
-  useEffect(() => {
-    if (flippedCards.length === 2) {
-      setMoves(moves + 1);
-      const [first, second] = flippedCards;
-
-      if (cards[first].emoji === cards[second].emoji) {
-        // Match found
-        setTimeout(() => {
-          setCards(prev => prev.map(card =>
-            card.id === first || card.id === second
-              ? { ...card, isMatched: true }
-              : card
-          ));
-          setFlippedCards([]);
-
-          // Check if game is won
-          const newCards = cards.map(card =>
-            card.id === first || card.id === second
-              ? { ...card, isMatched: true }
-              : card
-          );
-          if (newCards.every(card => card.isMatched)) {
-            setGameState('won');
-            setScore(Math.max(0, 100 - moves * 5));
-          }
-        }, 1000);
-      } else {
-        // No match
-        setTimeout(() => {
-          setCards(prev => prev.map(card =>
-            card.id === first || card.id === second
-              ? { ...card, isFlipped: false }
-              : card
-          ));
-          setFlippedCards([]);
-        }, 1000);
-      }
-    }
-  }, [flippedCards, cards, moves]);
-
-  // Match Game Logic
-  const handleMatchAnswer = (answerIndex: number) => {
-    if (answerIndex === matchQuestions[currentQuestion].correct) {
-      setMatchScore(matchScore + 1);
-    }
-
-    if (currentQuestion < matchQuestions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setGameState('won');
-      setScore(Math.round((matchScore / matchQuestions.length) * 100));
-    }
-  };
-
-  const resetGame = () => {
-    setGameType('menu');
-    setScore(0);
-    setGameState('playing');
-  };
-
-  // Game Menu
-  if (gameType === 'menu') {
-    return (
-      <div className="p-6 space-y-6">
-        {/* Header */}
-        <div className="flex items-center space-x-4">
-          <Button
-            onClick={onBack}
-            variant=""
-            size="sm"
-            className="rounded-full bg-grey-800 hover:bg-gray-700"
-          >
-            <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
-          </Button>
-          <h1 className="text-2xl text-indigo-600">Mini-Games</h1>
-        </div>
-
-        {/* Game Selection */}
-        <div className="space-y-4">
-          <h2 className="text-gray-700 text-center">Choose a Love Game!</h2>
-
-          <Card className="p-6 cursor-pointer hover:shadow-lg transition-shadow" onClick={initializeMemoryGame}>
-            <div className="text-center space-y-3">
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto">
-                <Heart className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h3 className="text-gray-800 mb-2">Love Memory Game</h3>
-                <p className="text-sm text-gray-600">
-                  Match pairs of love emojis! Test your memory and create beautiful matches just like we did! 💕
-                </p>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="p-6 cursor-pointer hover:shadow-lg transition-shadow" onClick={initializeMatchGame}>
-            <div className="text-center space-y-3">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center mx-auto">
-                <Star className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h3 className="text-gray-800 mb-2">Love Match Quiz</h3>
-                <p className="text-sm text-gray-600">
-                  Answer questions about our love! Show how well you know what makes our relationship special! ⭐
-                </p>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Love Note */}
-        <Card className="p-4 bg-gradient-to-r from-indigo-50 to-purple-50 border-indigo-200">
-          <div className="text-center space-y-2">
-            <Heart className="w-6 h-6 text-indigo-600 mx-auto" />
-            <p className="text-indigo-800 text-sm">
-              Playing games together is just another way to have fun and create memories!
-              Even in games, everything is better with you! 🎮💕
-            </p>
-          </div>
-        </Card>
-      </div>
-    );
-  }
-
-  // Memory Game
-  if (gameType === 'memory') {
-    return (
-      <div className="p-6 space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Button onClick={resetGame} variant="ghost" size="sm">
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-            <h1 className="text-xl text-pink-600">Love Memory</h1>
-          </div>
-          <Button onClick={initializeMemoryGame} variant="ghost" size="sm">
-            <RotateCcw className="w-5 h-5" />
-          </Button>
-        </div>
-
-        {/* Game Stats */}
-        <div className="flex justify-between text-sm text-gray-600">
-          <span>Moves: {moves}</span>
-          <span>Matches: {cards.filter(c => c.isMatched).length / 2}/{cards.length / 2}</span>
-        </div>
-
-        {/* Game Board */}
-        <div className="grid grid-cols-4 gap-3">
-          {cards.map((card) => (
-            <Card
-              key={card.id}
-              className={`aspect-square flex items-center justify-center cursor-pointer transition-all ${card.isMatched ? 'bg-green-100 border-green-300' :
-                  card.isFlipped ? 'bg-pink-100 border-pink-300' : 'bg-gray-100 hover:bg-gray-200'
-                }`}
-              onClick={() => handleCardFlip(card.id)}
-            >
-              <span className="text-2xl">
-                {card.isFlipped || card.isMatched ? card.emoji : '💝'}
-              </span>
-            </Card>
-          ))}
-        </div>
-
-        {/* Win Screen */}
-        {gameState === 'won' && (
-          <Card className="p-6 bg-gradient-to-r from-pink-50 to-purple-50 border-pink-300">
-            <div className="text-center space-y-4">
-              <Trophy className="w-12 h-12 text-yellow-500 mx-auto" />
-              <div>
-                <h2 className="text-xl text-gray-800 mb-2">Congratulations!</h2>
-                <p className="text-gray-600">You matched all the love emojis!</p>
-                <p className="text-pink-600">Score: {score} points</p>
-              </div>
-              <div className="space-y-2">
-                <Button onClick={initializeMemoryGame} className="w-full bg-pink-500 hover:bg-pink-600">
-                  Play Again
-                </Button>
-                <Button onClick={resetGame} variant="outline" className="w-full">
-                  Back to Games
-                </Button>
-              </div>
-            </div>
-          </Card>
-        )}
-      </div>
-    );
-  }
-
-  // Match Quiz Game
-  if (gameType === 'match') {
-    if (gameState === 'won') {
-      return (
-        <div className="p-6 space-y-6">
-          {/* Header */}
-          <div className="flex items-center space-x-4">
-            <Button onClick={resetGame} variant="ghost" size="sm">
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-            <h1 className="text-xl text-blue-600">Quiz Results</h1>
-          </div>
-
-          <Card className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-300">
-            <div className="text-center space-y-4">
-              <Star className="w-12 h-12 text-yellow-500 mx-auto" />
-              <div>
-                <h2 className="text-xl text-gray-800 mb-2">Love Quiz Complete!</h2>
-                <p className="text-gray-600">You answered {matchScore}/{matchQuestions.length} correctly!</p>
-                <p className="text-blue-600">Score: {score}%</p>
-              </div>
-              <div className="space-y-2">
-                <Button onClick={initializeMatchGame} className="w-full bg-blue-500 hover:bg-blue-600">
-                  Play Again
-                </Button>
-                <Button onClick={resetGame} variant="outline" className="w-full">
-                  Back to Games
-                </Button>
-              </div>
-            </div>
-          </Card>
-        </div>
-      );
-    }
-
-    return (
-      <div className="p-6 space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Button onClick={resetGame} variant="ghost" size="sm">
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-            <h1 className="text-xl text-blue-600">Love Match Quiz</h1>
-          </div>
-          <span className="text-sm text-gray-500">
-            {currentQuestion + 1}/{matchQuestions.length}
-          </span>
-        </div>
-
-        {/* Question */}
-        <Card className="p-6 space-y-6">
-          <div className="text-center">
-            <h2 className="text-lg text-gray-800 mb-6">
-              {matchQuestions[currentQuestion].question}
-            </h2>
-          </div>
-
-          <div className="space-y-3">
-            {matchQuestions[currentQuestion].options.map((option, index) => (
-              <Button
-                key={index}
-                onClick={() => handleMatchAnswer(index)}
-                variant="outline"
-                className="w-full p-4 text-left justify-start hover:bg-blue-50"
-              >
-                {option}
-              </Button>
-            ))}
-          </div>
-        </Card>
-      </div>
-    );
-  }
-
-  return null;
+	return (
+		<div className="p-6 space-y-6">
+			{/* Header */}
+			<div className="flex items-center space-x-4 mb-4">
+				<Button
+					onClick={onBack}
+					variant=""
+					size="sm"
+					className="rounded-full bg-grey-800 hover:bg-gray-700"
+				>
+					<ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
+				</Button>
+				<h1 className="text-2xl text-gray-300">Chana</h1>
+			</div>
+			{/* Two expandable boxes */}
+			<BioPanel
+				person={personA}
+				expanded={expanded === "A"}
+				onToggle={() => setExpanded(expanded === "A" ? null : "A")}
+			/>
+			<BioPanel
+				person={personB}
+				expanded={expanded === "B"}
+				onToggle={() => setExpanded(expanded === "B" ? null : "B")}
+			/>
+		</div>
+	);
 }
