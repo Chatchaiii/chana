@@ -5,12 +5,12 @@
     {
       "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "src/assets/images/homepage/kiss1x1.jpg"
+      "type": "src/assets/icon_chana.jpg"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "src/assets/images/homepage/kiss1x1.jpg"
+      "type": "src/assets/icon_chana.jpg"
     }
   ],
   "start_url": ".",
