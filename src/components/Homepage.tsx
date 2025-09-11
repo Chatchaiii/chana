@@ -18,6 +18,7 @@ import {
   Calendar,
   Star,
   Quote,
+  Image,
 } from "lucide-react";
 import { FeatureType } from "../App";
 import Markdown from "react-markdown";
@@ -147,15 +148,21 @@ export function Homepage({ onNavigate }: HomepageProps) {
     <div className="p-4 space-y-6 overflow-x-auto scrollbar-none">
       {/* Header */}
       <div className="flex flex-col items-left space-y-6">
-        <div className="w-full flex mb-4 justify-center">
-          <h1 className="text-3xl font-bold text-white flex items-center select-none">
+        <div className="flex gap-8 w-full mb-4 justify-center">
+          <h1 className="relative center text-3xl font-bold text-white flex items-center select-none">
             CH
             <Heart className="w-8 h-7 text-pink-600 mx-1" fill="currentcolor" stroke="currentcolor" />
             NA
           </h1>
+          <h1 className="relative right-0 text-xs text-gray-300 flex items-center select-none">
+            happy anniversary of three months
+          </h1>
         </div>
         {/* Carousel */}
-        {/* <h1 className="font-bold text-2xl text-gray-300 select-none mb-4">HAPPY ANNIVERSARY</h1> */}
+        <h1 className="font-bold items-center flex text-2xl text-gray-300 gap-2 select-none">
+          <Image className="w-7 h-7 text-pink-500" />
+          Slideshow
+        </h1>
         <div className="relative w-full max-w-xl mx-auto">
           <div
             className="relative w-full h-60 rounded-2xl overflow-hidden"
