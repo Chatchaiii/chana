@@ -197,7 +197,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
       </Card>
 
       {/* Footer */}
-      <div className="text-center text-sm text-gray-700 my-8 select-none">
+      <div className="h-8 text-center text-sm text-gray-700 select-none">
         خیلی دوستت دارم
       </div>
     </div>
