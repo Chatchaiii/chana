@@ -113,7 +113,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
   };
 
   return (
-    <div className="p-4 space-y-6">
+    <div className="p-4 space-y-6 overflow-x-auto scrollbar-none">
       {/* Header */}
       <div className="flex flex-col items-left space-y-6">
         <div className="w-full flex mt-2 mb-4 justify-center">
