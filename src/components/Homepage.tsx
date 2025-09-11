@@ -187,8 +187,8 @@ export function Homepage({ onNavigate }: HomepageProps) {
         </div>
       </div>
       {/* Text Body */}
-      <p className="relative flex gap-6 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
-        <Quote className="w-7 h-7 text-gray-500" />
+      <p className="relative font-bold flex gap-7 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
+        <Quote className="relative left-1 w-10 h-10 text-gray-500" />
         "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
       </p>
 
