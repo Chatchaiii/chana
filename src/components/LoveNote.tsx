@@ -102,7 +102,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
         >
           <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
-        <h1 className="text-2xl text-gray-300">Hidden Notes</h1>
+        <h1 className="text-2xl text-gray-300 font-bold">Hidden Notes</h1>
       </div>
 
       {/* Instructions */}

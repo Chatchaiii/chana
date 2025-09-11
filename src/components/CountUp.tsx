@@ -88,7 +88,7 @@ export function CountUp({ onBack }: CountUpProps) {
         >
           <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
-        <h1 className="text-2xl text-gray-300">Count-up</h1>
+        <h1 className="text-2xl text-gray-300 font-bold">Count-up</h1>
       </div>
 
       {/* Main Counter */}
