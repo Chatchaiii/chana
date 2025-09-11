@@ -1,0 +1,1 @@
+I haven't told you that yet. But when you left my arms after saying goodbye for the last time, I felt empty. I could smell your scent but you weren't there. It was painful, my heart was burning like fire. Hollow, like there was nothing inside. I left tears as you passed the security control and faded in front of my eyes. I stayed there for a while and sat at the airport.

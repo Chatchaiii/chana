@@ -4,9 +4,4 @@ Starting with June 6th, I've never expected us to come so far when looking back.
 I was so nervous to finally see you again, especially it was so spontaneously. I didn't only want to help you carrying those papercards for you Theatre, but also wanted to see you so fucking bad.
 
 \
-(hidden note)
-
-Funny side-story. I wasn't even visually prepared on that day to meet you again. I was so nervous about my appearance. (I was not shaved, my face was full of hair and my car wasn't washed) I didn't have enough time after university to return back home and prepare myself. So i went to nearest Rossmann and bought shaving stuff and wet wipes... I shaved myself in the car and also cleaned the car with paper and Glasreiniger. You can judge me now for that... I also sprayed the whole car with my cologne... 
-
-\
 I was excited and so happy to see you and when I could finally hug you my world was building up again. The smell of yours... I missed it so bad - and that beautiful face. Of course I couldn't say that, but those were my thoughts. Your smile was even prettier than in my memories and the soothing voice of yours was like listening to my favorite song. And yet, listening to your laughter became my favorite song. I hoped that day would never end. I loved how natural and pure everything felt with you. It was like our souls were always connected since the moment we saw each other. I also loved how we shared our love for sushi captured by this picture.

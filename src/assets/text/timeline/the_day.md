@@ -14,8 +14,3 @@ Eventually I could say the words 'I love you'.
 
 \
 I love you honey. I am proud and honored to be allowed to love you. I thank you for giving me the opportunity to prove to you, that I will be the best person you've ever dreamed of. I will give and do everything I can to give you the best life and to make you the happiest. I want to be the luck in your life and I want to be the one who always makes you smile. I want to be your happiness. I want to be the person you have no regrets on. I want to be everything. I will give you the world.
-
-\
-(hidden note)
-
-'Willst du Uno spielen?'

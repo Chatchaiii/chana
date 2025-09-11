@@ -170,7 +170,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
           >
             <Button
               onClick={() => onNavigate(feature.id)}
-              className="w-full flex items-left justify-start space-x-3 bg-transparent text-gray-300 p-6"
+              className="w-full flex items-left justify-start space-x-3 bg-transparent text-gray-300 p-6 select-none"
               variant="ghost"
             >
               <feature.icon className="w-6 h-6 text-gray-300" />

@@ -2,19 +2,33 @@
 import T_the_start from "../assets/text/timeline/the_start.md?raw";
 import T_the_lake from "../assets/text/timeline/the_lake.md?raw";
 import T_theatre from "../assets/text/timeline/theatre.md?raw";
+import T_the_day from "../assets/text/timeline/the_day.md?raw";
 import T_wannsee from "../assets/text/timeline/wannsee.md?raw";
 import T_photo_booth from "../assets/text/timeline/photo_booth.md?raw";
 import T_reflections from "../assets/text/timeline/reflections.md?raw";
 import T_flight from "../assets/text/timeline/flight.md?raw";
 
+// hidden notes
+import H_the_start from "../assets/text/timeline/hidden/h_the_start.md?raw";
+import H_the_lake from "../assets/text/timeline/hidden/h_the_lake.md?raw";
+import H_the_day from "../assets/text/timeline/hidden/h_the_day.md?raw";
+import H_flight from "../assets/text/timeline/hidden/h_flight.md?raw";
+
 // jpeg
 import P_the_start from "../assets/images/timeline/the_start.jpeg";
-import P_the_lake from "../assets/images/timeline/the_lake_1.jpeg";
-import P_theatre from "../assets/images/timeline/theatre_2.jpeg";
-import P_wannsee from "../assets/images/timeline/wannsee_2.jpeg";
+import P_the_lake1 from "../assets/images/timeline/the_lake_1.jpeg";
+import P_the_lake2 from "../assets/images/timeline/the_lake_2.jpeg";
+import P_the_lake3 from "../assets/images/timeline/the_lake_3.jpeg";
+import P_the_lake5 from "../assets/images/timeline/the_lake_5.jpeg";
+import P_theatre1 from "../assets/images/timeline/theatre_2.jpeg";
+import P_theatre2 from "../assets/images/timeline/theatre_3.jpeg";
+import P_wannsee1 from "../assets/images/timeline/wannsee_1.jpeg";
+import P_wannsee2 from "../assets/images/timeline/wannsee_2.jpeg";
 import P_photo_booth from "../assets/images/timeline/photo_booth.jpeg";
-import P_reflections from "../assets/images/timeline/reflections_1.jpeg";
+import P_reflections1 from "../assets/images/timeline/reflections_1.jpeg";
+import P_reflections2 from "../assets/images/timeline/reflections_2.jpeg";
 import P_flight from "../assets/images/timeline/flight.jpeg";
+
 // config
 import React, { useState } from "react";
 import ReactMarkdown from 'react-markdown';
@@ -28,6 +42,7 @@ import {
   Camera,
   Plane,
   Sparkle,
+  Calendar,
 } from "lucide-react";
 
 interface TimelineProps {
@@ -38,69 +53,136 @@ interface BlogPostBlockProps {
   title: string;
   date: string;
   text: string;
-  imageUrl: string;
+  imageUrls: string[];
   icon: React.ElementType;
+  noteText?: string; // <-- optional note text
 }
 
+// Example: add noteText to your blogPosts if you want a custom note, otherwise omit to hide the button
 const blogPosts: BlogPostBlockProps[] = [
   {
     title: "The Start",
     date: "06.06.2025",
     text: T_the_start,
-    imageUrl: P_the_start,
+    imageUrls: [P_the_start],
     icon: Star,
+    noteText: H_the_start,
   },
   {
     title: "The Lake",
     date: "09.06.2025",
     text: T_the_lake,
-    imageUrl: P_the_lake,
+    imageUrls: [P_the_lake1, P_the_lake2, P_the_lake3, P_the_lake5],
     icon: Waves,
+    noteText: H_the_lake,
   },
   {
     title: "Theatre",
     date: "18.06.2025",
     text: T_theatre,
-    imageUrl: P_theatre,
+    imageUrls: [
+      P_theatre1,
+      P_theatre2
+    ],
     icon: VenetianMask,
+  },
+  {
+    title: "The day",
+    date: "18.06.2025",
+    text: T_the_day,
+    imageUrls: [
+    ],
+    icon: Calendar,
+    noteText: H_the_day,
   },
   {
     title: "Wannsee",
     date: "26.06.2025",
     text: T_wannsee,
-    imageUrl: P_wannsee,
+    imageUrls: [
+      P_wannsee1,
+      P_wannsee2
+    ],
     icon: Waves,
   },
   {
     title: "Photo-booth",
     date: "05.07.2025",
     text: T_photo_booth,
-    imageUrl: P_photo_booth,
+    imageUrls: [
+      P_photo_booth
+    ],
     icon: Camera,
   },
   {
     title: "Reflecions",
     date: "13.07.2025",
     text: T_reflections,
-    imageUrl: P_reflections,
+    imageUrls: [
+      P_reflections1,
+      P_reflections2
+    ],
     icon: Sparkle,
   },
   {
     title: "Flight",
     date: "15.07.2025",
     text: T_flight,
-    imageUrl: P_flight,
+    imageUrls: [
+      P_flight
+    ],
     icon: Plane,
+    noteText: H_flight,
   },
 ];
 
+// BlogPostBlock with hidden note button and popup
 function BlogPostBlock({
   title,
   date,
   text,
-  imageUrl,
+  imageUrls,
   icon: Icon,
+  noteText,
 }: BlogPostBlockProps) {
+  const [current, setCurrent] = React.useState(0);
+  const [showNote, setShowNote] = React.useState(false);
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  const touchStartX = React.useRef<number | null>(null);
+
+  const hasMultipleImages = imageUrls.length > 1;
+  const hasNoImage = imageUrls.length === 0;
+
+  // Auto-rotate every 5 seconds, only if more than one image
+  React.useEffect(() => {
+    if (!hasMultipleImages) return;
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setCurrent((prev) => (prev + 1) % imageUrls.length);
+    }, 5000);
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [current, imageUrls.length, hasMultipleImages]);
+
+  // Swipe handlers, only if more than one image
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!hasMultipleImages) return;
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!hasMultipleImages || touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
+        setCurrent((prev) => (prev - 1 + imageUrls.length) % imageUrls.length);
+      } else {
+        setCurrent((prev) => (prev + 1) % imageUrls.length);
+      }
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <Card className="space-y-2 bg-gray-800 rounded-xl shadow-lg p-6 max-w-2xl mx-auto my-8">
       <div className="flex items-center mb-4 space-x-3">
@@ -110,16 +192,86 @@ function BlogPostBlock({
         <h2 className="text-2xl font-bold text-gray-100">{title}</h2>
         <span className="ml-auto text-sm text-gray-400">{date}</span>
       </div>
-      <img
-        src={imageUrl}
-        alt={title}
-        className="w-full h-64 object-cover rounded-lg mb-4"
-      />
+      {/* Images area */}
+      {!hasNoImage && (
+        <div
+          className="relative w-full h-64 rounded-lg overflow-hidden mb-4"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {hasMultipleImages ? (
+            <>
+              <div
+                className="flex transition-transform duration-700 ease-in-out h-64"
+                style={{
+                  width: `${imageUrls.length * 100}%`,
+                  transform: `translateX(-${current * (100 / imageUrls.length)}%)`,
+                }}
+              >
+                {imageUrls.map((url, idx) => (
+                  <img
+                    key={idx}
+                    src={url}
+                    alt={`${title} ${idx + 1}`}
+                    className="w-full h-64 object-cover flex-shrink-0"
+                    style={{ width: `${100 / imageUrls.length}%` }}
+                  />
+                ))}
+              </div>
+              {/* Indicator dots */}
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">
+                {imageUrls.map((_, idx) => (
+                  <span
+                    key={idx}
+                    className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${
+                      idx === current ? "bg-pink-500 scale-110" : "bg-gray-400 opacity-50"
+                    }`}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <img
+              src={imageUrls[0]}
+              alt={title}
+              className="w-full h-64 object-cover rounded-lg"
+            />
+          )}
+        </div>
+      )}
       <div className="prose prose-invert text-gray-300">
         <ReactMarkdown>
           {text}
         </ReactMarkdown>
       </div>
+      {/* Hidden Note Button */}
+      {noteText && noteText.trim().length > 0 && (
+        <>
+          <Button
+            className="bg-gray-300 text-gray-800 mb-2"
+            onClick={() => setShowNote(true)}
+          >
+            Hidden-Note
+          </Button>
+          {/* Popup Modal */}
+          {showNote && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+              <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-md shadow-2xl relative border">
+                <button
+                  className="absolute top-0 right-2 text-gray-400 text-2xl"
+                  onClick={() => setShowNote(false)}
+                  aria-label="Close"
+                >
+                  ×
+                </button>
+                <div className="text-gray-300">
+                  <ReactMarkdown>{noteText}</ReactMarkdown>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </Card>
   );
 }
@@ -146,176 +298,6 @@ export function Timeline({ onBack }: TimelineProps) {
           <BlogPostBlock key={idx} {...post} />
         ))}
       </div>
-
-      {/* Love Quote
-      <Card className="p-6 bg-gray-900 border-gray-900 mt-8">
-        <div className="text-center space-y-2">
-          <Heart className="w-8 h-8 text-gray-800 mx-auto" />
-          <p className="text-gray-300 italic">
-            "Every love story is beautiful, but ours is my favorite."
-          </p>
-        </div>
-      </Card> */}
     </div>
   );
 }
-
-// ########################################
-
-// import the_start from '../assets/text/the_start/the_start.md?raw';
-// import React, { useState } from 'react';
-// import { Card } from './ui/card';
-// import { Button } from './ui/button';
-// import { ArrowLeft, Heart, Star, Calendar, Waves, VenetianMask, Droplets, Camera } from 'lucide-react';
-
-// interface TimelineProps {
-//   onBack: () => void;
-// }
-
-// export function Timeline({ onBack }: TimelineProps) {
-//   const milestones = [
-//     {
-//       date: "06.06.2025",
-//       title: "The Start",
-//       description: "Starting with June 6th, I've never expected us to come so far when looking back.",
-//       text: the_start,
-//       icon: Star,
-//       color: "bg-gray-600"
-//     },
-//     {
-//       date: "09.06.2025",
-//       title: "The Lake",
-//       description: "One of my core memories of us would be this day.",
-//       text:"dsdsds",
-//       icon: Waves,
-//       color: "bg-gray-600"
-//     },
-//     {
-//       date: "18.06.2025",
-//       title: "Theatre",
-//       description: "God, was I nervous to see your theatre.",
-//       text:"dsdsds",
-//       icon: VenetianMask,
-//       color: "bg-gray-600"
-//     },
-//     {
-//       date: "22.06.2025",
-//       title: "The day",
-//       description: "Nervous to speak, nervous to breathe, nervous to look at you.",
-//       text:"dsdsds",
-//       icon: Droplets,
-//       color: "bg-gray-600"
-//     },
-//     {
-//       date: "26.06.2025",
-//       title: "Wannsee",
-//       description: "The weather first had different plans for us. It was rainy, it was windy, it was cloudy - like a storm.",
-//       text:"dsdsds",
-//       icon: Waves,
-//       color: "bg-gray-600"
-//     },
-//     {
-//       date: "05.07.2025",
-//       title: "Photo-booth",
-//       description: "I may acted like it was a normal day, but I was excited as fuck.",
-//       text:"dsdsds",
-//       icon: Camera,
-//       color: "bg-gray-600"
-//     },
-//     {
-//       date: "Today",
-//       title: "Flight",
-//       description: "Celebrating our beautiful journey and looking forward to more",
-//       text:"dsdsds",
-//       icon: Calendar,
-//       color: "bg-gray-600"
-//     }
-//   ];
-
-//   // State for modal
-//   const [selected, setSelected] = useState<null | number>(null);
-
-//   // Example modal component
-//   function Modal({ milestone, onClose }: { milestone: typeof milestones[0], onClose: () => void }) {
-//     return (
-//       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-//         <div className="bg-gray-800 rounded-lg p-6 max-w-sm w-full relative max-h-[90vh] overflow-y-auto">
-//           <button
-//             className="absolute top-0 right-1 text-gray-400 hover:text-gray-200"
-//             onClick={onClose}
-//             aria-label="Close"
-//           >
-//             ×
-//           </button>
-//           <div className="flex flex-col items-center space-y-4">
-//             <img
-//               src={milestone.title}
-//               alt="error"
-//               className="relative w60 h-60 mx-auto rounded-2xl overflow-hidden shadow-md text-gray-300"
-//             />
-//             <p className="text-gray-300 text-left whitespace-pre-line">
-//               <b>{milestone.title}</b>.<br />
-//               {milestone.text}
-//             </p>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="p-6 space-y-6">
-//       {/* Header */}
-//       <div className="flex items-center space-x-4">
-//         <Button onClick={onBack} variant="ghost" size="sm">
-//           <ArrowLeft className="w-5 h-5" />
-//         </Button>
-//         <h1 className="text-2xl text-gray-300">Timeline</h1>
-//       </div>
-//       {/* Timeline */}
-//       <div className="space-y-4">
-//         {milestones.map((milestone, index) => (
-//           <Card
-//             key={index}
-//             className="p-3 relative cursor-pointer hover:bg-gray-700 transition"
-//             onClick={() => setSelected(index)}
-//           >
-//             <div className="flex items-start space-x-4">
-//               <div className={`p-2 rounded-full ${milestone.color} text-white flex-shrink-0`}>
-//                 <milestone.icon className="w-5 h-5" />
-//               </div>
-//               <div className="flex-1 space-y-2">
-//                 <div className="flex items-center justify-between">
-//                   <h3 className="text-gray-200">{milestone.title}</h3>
-//                   <span className="text-sm text-gray-400">{milestone.date}</span>
-//                 </div>
-//                 <p className="text-gray-300 text-sm leading-relaxed">
-//                   {milestone.description}
-//                 </p>
-//               </div>
-//             </div>
-//           </Card>
-//         ))}
-//       </div>
-
-//       {/* Love Quote */}
-//       <Card className="p-6 bg-gray-900 border-gray-900">
-//         <div className="text-center space-y-2">
-//           <Heart className="w-8 h-8 text-gray-800 mx-auto" />
-//           <p className="text-gray-300 italic">
-//             "Every love story is beautiful, but ours is my favorite."
-//           </p>
-//         </div>
-//       </Card>
-
-//       {/* Modal */}
-//       {selected !== null && (
-//         <Modal
-//           milestone={milestones[selected]}
-//           onClose={() => setSelected(null)}
-//         />
-//       )}
-//     </div>
-//   );
-// }
-

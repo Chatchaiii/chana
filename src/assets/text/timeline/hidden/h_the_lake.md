@@ -1,0 +1,1 @@
+I don't know if I was able to hide my excitement good enough, but I was so fucking happy to lay down next to you and that even this was captured. Not only our first time laying down next to each other but also our first picture together. I could never forget how happy I was at that moment.
