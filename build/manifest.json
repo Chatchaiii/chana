@@ -5,12 +5,12 @@
     {
       "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "src/assets/icon_chana.jpg"
+      "type": "src/assets/appIcon/icon_chana.jpg"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "src/assets/icon_chana.jpg"
+      "type": "src/assets/appIcon/icon_chana.jpg"
     }
   ],
   "start_url": ".",
