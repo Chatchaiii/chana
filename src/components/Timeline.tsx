@@ -31,7 +31,7 @@ import P_flight from "../assets/images/timeline/flight.jpeg";
 
 // config
 import React, { useState } from "react";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import {
@@ -80,18 +80,14 @@ const blogPosts: BlogPostBlockProps[] = [
     title: "Theatre",
     date: "18.06.2025",
     text: T_theatre,
-    imageUrls: [
-      P_theatre1,
-      P_theatre2
-    ],
+    imageUrls: [P_theatre1, P_theatre2],
     icon: VenetianMask,
   },
   {
     title: "The day",
     date: "18.06.2025",
     text: T_the_day,
-    imageUrls: [
-    ],
+    imageUrls: [],
     icon: Calendar,
     noteText: H_the_day,
   },
@@ -99,38 +95,28 @@ const blogPosts: BlogPostBlockProps[] = [
     title: "Wannsee",
     date: "26.06.2025",
     text: T_wannsee,
-    imageUrls: [
-      P_wannsee1,
-      P_wannsee2
-    ],
+    imageUrls: [P_wannsee1, P_wannsee2],
     icon: Waves,
   },
   {
     title: "Photo-booth",
     date: "05.07.2025",
     text: T_photo_booth,
-    imageUrls: [
-      P_photo_booth
-    ],
+    imageUrls: [P_photo_booth],
     icon: Camera,
   },
   {
-    title: "Reflecions",
+    title: "Reflections",
     date: "13.07.2025",
     text: T_reflections,
-    imageUrls: [
-      P_reflections1,
-      P_reflections2
-    ],
+    imageUrls: [P_reflections1, P_reflections2],
     icon: Sparkle,
   },
   {
     title: "Flight",
     date: "15.07.2025",
     text: T_flight,
-    imageUrls: [
-      P_flight
-    ],
+    imageUrls: [P_flight],
     icon: Plane,
     noteText: H_flight,
   },
@@ -224,7 +210,9 @@ function BlogPostBlock({
                   <span
                     key={idx}
                     className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${
-                      idx === current ? "bg-pink-500 scale-110" : "bg-gray-400 opacity-50"
+                      idx === current
+                        ? "bg-pink-500 scale-110"
+                        : "bg-gray-400 opacity-50"
                     }`}
                   />
                 ))}
@@ -240,9 +228,7 @@ function BlogPostBlock({
         </div>
       )}
       <div className="prose prose-invert text-gray-300">
-        <ReactMarkdown>
-          {text}
-        </ReactMarkdown>
+        <ReactMarkdown>{text}</ReactMarkdown>
       </div>
       {/* Hidden Note Button */}
       {noteText && noteText.trim().length > 0 && (
@@ -301,3 +287,4 @@ export function Timeline({ onBack }: TimelineProps) {
     </div>
   );
 }
+

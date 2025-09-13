@@ -18,11 +18,11 @@ import P_flight from "../assets/images/timeline/flight.jpeg";
 import V_photo_booth from "../assets/video/photo_booth.mov";
 
 // config
-import React, { useState } from 'react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
-import { ArrowLeft } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import React, { useState } from "react";
+import { Card } from "./ui/card";
+import { Button } from "./ui/button";
+import { ArrowLeft } from "lucide-react";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 interface ScrapbookProps {
   onBack: () => void;
@@ -45,117 +45,120 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
       src: P_the_start,
       caption: "Sushi",
       date: "06.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 2,
       src: P_the_lake1,
       caption: "Bridge",
       date: "09.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 3,
       src: P_the_lake2,
       caption: "Bridge 2",
       date: "09.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 4,
       src: P_the_lake3,
       caption: "Feet",
       date: "09.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 5,
       src: P_the_lake4,
       caption: "Ali & Mehmet",
       date: "09.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 6,
       src: P_the_lake5,
       caption: "First Selfie",
       date: "09.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 7,
       src: P_theatre1,
       caption: "Hot Persian",
       date: "18.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 8,
       src: P_theatre2,
       caption: "Hot Persian (in Bed)",
       date: "18.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 9,
       src: P_wannsee1,
       caption: "Happiness",
       date: "26.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 10,
       src: P_wannsee2,
       caption: "Sunset",
       date: "26.06.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 11,
       src: P_photo_booth,
       caption: "Photo-booth",
       date: "05.07.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 12,
       src: V_photo_booth,
-      caption: "I Wanna Be Yours",
+      caption: "No. 1 Pary Anthem",
       date: "05.07.2025",
-      type: "video"
+      type: "video",
     },
     {
       id: 13,
       src: P_reflections1,
       caption: "Mirror",
       date: "13.07.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 14,
       src: P_reflections2,
       caption: "My flower",
       date: "13.07.2025",
-      type: "image"
+      type: "image",
     },
     {
       id: 15,
       src: P_flight,
       caption: "Flight",
       date: "15.07.2025",
-      type: "image"
+      type: "image",
     },
   ];
 
   // Group items by date
-  const groupedItems = items.reduce<Record<string, PhotoOrVideo[]>>((acc, item) => {
-    if (!acc[item.date]) acc[item.date] = [];
-    acc[item.date].push(item);
-    return acc;
-  }, {});
+  const groupedItems = items.reduce<Record<string, PhotoOrVideo[]>>(
+    (acc, item) => {
+      if (!acc[item.date]) acc[item.date] = [];
+      acc[item.date].push(item);
+      return acc;
+    },
+    {},
+  );
 
   // Find selected item
-  const selectedItem = items.find(item => item.id === selectedId);
+  const selectedItem = items.find((item) => item.id === selectedId);
 
   return (
     <div className="p-6 space-y-6">
@@ -176,7 +179,9 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
       <div className="space-y-6">
         {Object.entries(groupedItems).map(([date, itemsForDate]) => (
           <div key={date}>
-            <h2 className="text-lg font-bold font-mono text-gray-300 mb-2">{date}</h2>
+            <h2 className="text-lg font-bold font-mono text-gray-300 mb-2">
+              {date}
+            </h2>
             <div className="grid grid-cols-2 gap-3">
               {itemsForDate.map((item) => (
                 <Card
@@ -203,7 +208,9 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
                       )}
                     </div>
                     <div className="text-center">
-                      <p className="font-bold text-sm text-gray-400">{item.caption}</p>
+                      <p className="font-bold text-sm text-gray-400">
+                        {item.caption}
+                      </p>
                     </div>
                   </div>
                 </Card>
@@ -219,7 +226,10 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedId(null)}
         >
-          <Card className="max-w-sm w-full p-4" onClick={e => e.stopPropagation()}>
+          <Card
+            className="max-w-sm w-full p-4"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="space-y-4">
               <div className="rounded-lg overflow-hidden">
                 {selectedItem.type === "video" ? (
@@ -248,3 +258,4 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
     </div>
   );
 }
+

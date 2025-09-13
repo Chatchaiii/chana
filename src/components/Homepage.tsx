@@ -109,7 +109,9 @@ export function Homepage({ onNavigate }: HomepageProps) {
     if (Math.abs(deltaX) > 50) {
       if (deltaX > 0) {
         // swipe right
-        setCurrent((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+        setCurrent(
+          (prev) => (prev - 1 + carouselImages.length) % carouselImages.length,
+        );
       } else {
         // swipe left
         setCurrent((prev) => (prev + 1) % carouselImages.length);
@@ -143,7 +145,9 @@ export function Homepage({ onNavigate }: HomepageProps) {
   ];
 
   // Sort by time (HH:mm)
-  const sortedTimetable = [...timetable].sort((a, b) => a.time.localeCompare(b.time));
+  const sortedTimetable = [...timetable].sort((a, b) =>
+    a.time.localeCompare(b.time),
+  );
 
   return (
     <div className="p-4 space-y-6 overflow-x-auto scrollbar-none">
@@ -153,7 +157,11 @@ export function Homepage({ onNavigate }: HomepageProps) {
           {/* Centered CHANA */}
           <h1 className="relative left-5 text-3xl font-bold text-white flex items-center select-none mx-auto">
             CH
-            <Heart className="w-8 h-7 text-pink-600 mx-1" fill="currentcolor" stroke="currentcolor" />
+            <Heart
+              className="w-8 h-7 text-pink-600 mx-1"
+              fill="currentcolor"
+              stroke="currentcolor"
+            />
             NA
           </h1>
           {/* Button on the right */}
@@ -202,13 +210,13 @@ export function Homepage({ onNavigate }: HomepageProps) {
               ))}
             </div>
           </div>
-
         </div>
       </div>
       {/* Text Body */}
       <p className="relative font-bold flex gap-9 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
         <Quote className="relative left-2 w-10 h-10 text-gray-500" />
-        "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
+        "In all the world, there is no heart for me like yours. In all the
+        world, there is no love for you like mine."
       </p>
 
       {/* Features Grid */}
@@ -228,9 +236,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
               variant="ghost"
             >
               <feature.icon className="w-6 h-6 text-gray-300" />
-              <span className="flex-1 text-left">
-                {feature.name}
-              </span>
+              <span className="flex-1 text-left">{feature.name}</span>
             </Button>
           </Card>
         ))}
@@ -243,7 +249,10 @@ export function Homepage({ onNavigate }: HomepageProps) {
       </h1>
       <div className="relative flex flex-col items-center">
         {sortedTimetable.map((item, idx) => (
-          <div className="flex items-center w-full max-w-md" key={item.time + item.title}>
+          <div
+            className="flex items-center w-full max-w-md"
+            key={item.time + item.title}
+          >
             {/* Wire/line on the left */}
             <div className="flex flex-col items-center mr-2 ml-1 select-none">
               {/* Top wire */}
@@ -251,7 +260,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
                 <div className="w-1 h-4 rounded-full bg-pink-500" />
               )}
               {/* Dot */}
-              <div className="w-4 h-4 border-2 border-gray-900 rounded-xl bg-pink-500"></div>
+              <div className="w-4 h-4 border-2 border-gray-1000 rounded-xl bg-pink-500"></div>
               {/* Bottom wire */}
               {idx !== sortedTimetable.length - 1 && (
                 <div className="w-1 h-4 rounded-full bg-pink-500" />
@@ -260,7 +269,9 @@ export function Homepage({ onNavigate }: HomepageProps) {
             {/* Box */}
             <Card className="flex-1 mb-2 bg-gray-900 rounded-2xl p-6">
               <div className="flex items-center space-x-3">
-                <span className="text-lg font-bold text-gray-200 w-16 select-none">{item.time}</span>
+                <span className="text-lg font-bold text-gray-200 w-16 select-none">
+                  {item.time}
+                </span>
                 <div>
                   <div className="font-bold text-gray-200">{item.title}</div>
                   {item.address && (
