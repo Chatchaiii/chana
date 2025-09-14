@@ -192,11 +192,10 @@ function ImageCarousel({ images }: { images: string[] }) {
           {images.map((_, idx) => (
             <span
               key={idx}
-              className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${
-                idx === current
-                  ? "bg-pink-500 scale-110"
-                  : "bg-gray-400 opacity-50"
-              }`}
+              className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${idx === current
+                ? "bg-pink-500 scale-110"
+                : "bg-gray-400 opacity-50"
+                }`}
             />
           ))}
         </div>
@@ -228,9 +227,8 @@ function BioPanel({
 }) {
   return (
     <Card
-      className={`transition-all duration-500 overflow-hidden ${
-        expanded ? "max-h-[1000px] p-7" : "max-h-32 p-5"
-      } mb-4`}
+      className={`transition-all duration-500 overflow-hidden ${expanded ? "max-h-[1000px] p-7" : "max-h-32 p-5"
+        } mb-4`}
     >
       <div
         className="flex items-center justify-between cursor-pointer"
@@ -290,11 +288,11 @@ function BioPanel({
   );
 }
 
-interface MiniGameProps {
+interface UserProps {
   onBack: () => void;
 }
 
-export function MiniGame({ onBack }: MiniGameProps) {
+export function User({ onBack }: UserProps) {
   const [expanded, setExpanded] = useState<"A" | "B" | null>(null);
 
   return (

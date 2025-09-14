@@ -5,15 +5,15 @@ import { Scrapbook } from './components/Scrapbook';
 import { LoveQuiz } from './components/LoveQuiz';
 import { CountUp } from './components/CountUp';
 import { LoveNote } from './components/LoveNote';
-import { MusicPlayer } from './components/MusicPlayer';
+import { PasswordProtection } from './components/PasswordProtection';
 import { GiftBox } from './components/GiftBox';
 import { LoveMap } from './components/LoveMap';
-import { MiniGame } from './components/MiniGame';
+import { User } from './components/User';
 
-export type FeatureType = 'home' | 'timeline' | 'scrapbook' | 'quiz' | 'countup' | 'note' | 'music' | 'gifts' | 'map' | 'game';
+export type FeatureType = 'home' | 'timeline' | 'scrapbook' | 'quiz' | 'countup' | 'note' | 'password' | 'gifts' | 'map' | 'user';
 
 export default function App() {
-  const [currentFeature, setCurrentFeature] = useState<FeatureType>('home');
+  const [currentFeature, setCurrentFeature] = useState<FeatureType>('password');
 
   const renderFeature = () => {
     switch (currentFeature) {
@@ -29,14 +29,14 @@ export default function App() {
         return <CountUp onBack={() => setCurrentFeature('home')} />;
       case 'note':
         return <LoveNote onBack={() => setCurrentFeature('home')} />;
-      case 'music':
-        return <MusicPlayer onBack={() => setCurrentFeature('home')} />;
+      case 'password':
+        return <PasswordProtection onBack={() => setCurrentFeature('home')} />;
       case 'gifts':
         return <GiftBox onBack={() => setCurrentFeature('home')} />;
       case 'map':
         return <LoveMap onBack={() => setCurrentFeature('home')} />;
-      case 'game':
-        return <MiniGame onBack={() => setCurrentFeature('home')} />;
+      case 'user':
+        return <User onBack={() => setCurrentFeature('home')} />;
       default:
         return <Homepage onNavigate={setCurrentFeature} />;
     }
