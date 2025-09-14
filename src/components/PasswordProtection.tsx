@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CircleArrowRight } from "lucide-react";
+import { CircleArrowRight, Heart } from "lucide-react";
 
 interface PasswordProtectionProps {
   onBack: () => void;
@@ -17,8 +17,15 @@ export function PasswordProtection({ onBack }: PasswordProtectionProps) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
         <div className="bg-gray-800 p-8 rounded-2xl shadow-lg flex flex-col items-center">
-          {/* <h2 className="text-xl font-bold text-gray-300 mb-4">Enter Password</h2> */}
-          <input
+          <h1 className="text-3xl font-bold text-white flex items-center select-none mx-auto mb-2">
+            CH
+            <Heart
+              className="w-8 h-7 text-pink-600 mx-1"
+              fill="currentcolor"
+              stroke="currentcolor"
+            />
+            NA
+          </h1>          <input
             type="password"
             className="p-2 rounded bg-gray-800 text-gray-200 mb-2 outline-none"
             value={password}
@@ -30,7 +37,7 @@ export function PasswordProtection({ onBack }: PasswordProtectionProps) {
                   setEntered(true);
                   setError("");
                 } else {
-                  setError("no-possible");
+                  setError("no possible");
                 }
               }
             }}
@@ -44,7 +51,7 @@ export function PasswordProtection({ onBack }: PasswordProtectionProps) {
                 setEntered(true);
                 setError("");
               } else {
-                setError("No-possible");
+                setError("no possible");
               }
             }}
           >
