@@ -14,9 +14,10 @@ interface CountUpProps {
 
 export function CountUp({ onBack }: CountUpProps) {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
   // Set our relationship start date to 22.06.2025, 8pm
-  const relationshipStart = new Date(2025, 5, 22, 20, 0, 0, 0); // Months are 0-indexed: 5 = June
+  const relationshipStart = new Date(2025, 5, 22, 20, 0, 0, 0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -25,6 +26,25 @@ export function CountUp({ onBack }: CountUpProps) {
 
     return () => clearInterval(timer);
   }, []);
+
+  // Swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const deltaX = touchEndX - touchStartX;
+
+    if (deltaX > 80) {
+      // swipe right threshold
+      onBack();
+    }
+
+    setTouchStartX(null);
+  };
 
   // If currentTime is before relationshipStart, show zeros
   const timeDifference =
@@ -77,7 +97,11 @@ export function CountUp({ onBack }: CountUpProps) {
   ];
 
   return (
-    <div className="p-6 space-y-6">
+    <div
+      className="p-6 space-y-6"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Header */}
       <div className="flex items-center space-x-4">
         <Button
@@ -101,36 +125,20 @@ export function CountUp({ onBack }: CountUpProps) {
             </h2>
             <div className="grid grid-cols-2 gap-4 text-center">
               <div className="space-y-1">
-                <div className="text-3xl text-gray-300">
-                  {days}
-                </div>
-                <div className="text-sm text-gray-300">
-                  Days
-                </div>
+                <div className="text-3xl text-gray-300">{days}</div>
+                <div className="text-sm text-gray-300">Days</div>
               </div>
               <div className="space-y-1">
-                <div className="text-3xl text-gray-300">
-                  {hours}
-                </div>
-                <div className="text-sm text-gray-300">
-                  Hours
-                </div>
+                <div className="text-3xl text-gray-300">{hours}</div>
+                <div className="text-sm text-gray-300">Hours</div>
               </div>
               <div className="space-y-1">
-                <div className="text-3xl text-gray-300">
-                  {minutes}
-                </div>
-                <div className="text-sm text-gray-300">
-                  Minutes
-                </div>
+                <div className="text-3xl text-gray-300">{minutes}</div>
+                <div className="text-sm text-gray-300">Minutes</div>
               </div>
               <div className="space-y-1">
-                <div className="text-3xl text-gray-300">
-                  {seconds}
-                </div>
-                <div className="text-sm text-gray-300">
-                  Seconds
-                </div>
+                <div className="text-3xl text-gray-300">{seconds}</div>
+                <div className="text-sm text-gray-300">Seconds</div>
               </div>
             </div>
           </div>
@@ -144,12 +152,8 @@ export function CountUp({ onBack }: CountUpProps) {
           <Card key={index} className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <milestone.icon
-                  className={`w-6 h-6 ${milestone.color}`}
-                />
-                <span className="text-gray-300">
-                  {milestone.label}
-                </span>
+                <milestone.icon className={`w-6 h-6 ${milestone.color}`} />
+                <span className="text-gray-300">{milestone.label}</span>
               </div>
               <span className={`text-2xl ${milestone.color}`}>
                 {milestone.value.toLocaleString()}
@@ -174,21 +178,15 @@ export function CountUp({ onBack }: CountUpProps) {
             </div>
             <div className="flex justify-between">
               <span>Smiles shared:</span>
-              <span className="text-gray-300">
-                Countless
-              </span>
+              <span className="text-gray-300">Countless</span>
             </div>
             <div className="flex justify-between">
               <span>Hugs given:</span>
-              <span className="text-gray-300">
-                Not enough
-              </span>
+              <span className="text-gray-300">Not enough</span>
             </div>
             <div className="flex justify-between">
               <span>Love level:</span>
-              <span className="text-gray-300">
-                Infinite
-              </span>
+              <span className="text-gray-300">Infinite</span>
             </div>
           </div>
         </div>
