@@ -21,6 +21,9 @@ export function PasswordProtection({ onBack }: PasswordProtectionProps) {
           <h1 className="text-3xl font-bold text-white flex items-center select-none mx-auto mb-2">
             CH
             <motion.div
+              drag
+              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} // keeps it constrained
+              dragElastic={0.2} // controls how far it can be pulled beyond constraints
               animate={{
                 scale: [1, 1.5, 1.5, 1, 1],
                 rotate: [0, 0, 0, 0, 0],

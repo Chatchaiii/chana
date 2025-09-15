@@ -10,6 +10,8 @@ import {
   Coffee,
   Star
 } from 'lucide-react';
+import { motion } from 'motion/react';
+import { isAbsolute } from 'path';
 
 interface LoveMapProps {
   onBack: () => void;
@@ -156,116 +158,131 @@ export function LoveMap({ onBack }: LoveMapProps) {
 
           {/* Location Pins */}
           {loveLocations.map((location) => (
-            <button
-              key={location.id}
-              onClick={() => setSelectedLocation(location.id)}
-              className={`absolute transform -translate-x-1/2 -translate-y-1/2 ${location.color} text-white rounded-full p-2 shadow-lg hover:scale-110 transition-transform z-10`}
+            <motion.div
+              drag
+              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} // keeps it constrained
+              dragElastic={0.2} // controls how far it can be pulled beyond constraints
+              className="absolute"
               style={{
                 left: `${location.coordinates.x}%`,
                 top: `${location.coordinates.y}%`,
               }}
             >
-              <location.icon className="w-4 h-4" />
-            </button>
+              <button
+                key={location.id}
+                onClick={() => setSelectedLocation(location.id)}
+                className={`absolute transform -translate-x-1/2 -translate-y-1/2 ${location.color} text-white rounded-full p-2 shadow-lg hover:scale-110 transition-transform z-10`}
+                style={{
+                  left: `${location.coordinates.x}%`,
+                  top: `${location.coordinates.y}%`,
+                }}
+              >
+                <location.icon className="w-4 h-4" />
+              </button>
+            </motion.div>
           ))}
         </div>
-      </Card>
-
+      </Card >
+      \
       {/* Location List */}
-      <div className="space-y-3">
+      < div className="space-y-3" >
         <h2 className="text-gray-300 font-bold">Our Love Journey Locations</h2>
-        {loveLocations.map((location) => (
-          <Card
-            key={location.id}
-            className="p-4 cursor-pointer hover:shadow-md transition-shadow"
-            onClick={() => setSelectedLocation(location.id)}
-          >
-            <div className="flex items-center space-x-4">
-              <div
-                className={`p-2 rounded-full ${location.color} text-white`}
-              >
-                <location.icon className="w-5 h-5" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-gray-300 font-bold">{location.name}</h3>
-                  <span className="text-xs text-gray-400">{location.date}</span>
+        {
+          loveLocations.map((location) => (
+            <Card
+              key={location.id}
+              className="p-4 cursor-pointer hover:shadow-md transition-shadow"
+              onClick={() => setSelectedLocation(location.id)}
+            >
+              <div className="flex items-center space-x-4">
+                <div
+                  className={`p-2 rounded-full ${location.color} text-white`}
+                >
+                  <location.icon className="w-5 h-5" />
                 </div>
-                <div className="flex items-center space-x-2 mt-1">
-                  <span className="text-sm text-gray-400">{location.type}</span>
-                  <span className="text-xs text-gray-500">
-                    {location.description}
-                  </span>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-gray-300 font-bold">{location.name}</h3>
+                    <span className="text-xs text-gray-400">{location.date}</span>
+                  </div>
+                  <div className="flex items-center space-x-2 mt-1">
+                    <span className="text-sm text-gray-400">{location.type}</span>
+                    <span className="text-xs text-gray-500">
+                      {location.description}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Card>
-        ))}
-      </div>
+            </Card>
+          ))
+        }
+      </div >
 
       {/* Memory Modal */}
-      {selectedLocation && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedLocation(null)}
-        >
-          <Card className="max-w-sm w-full p-6">
-            <div className="space-y-4">
-              {/* Location Header */}
-              <div className="text-center space-y-3">
-                <div
-                  className={`w-16 h-16 ${loveLocations.find((l) => l.id === selectedLocation)?.color
-                    } rounded-full flex items-center justify-center mx-auto`}
-                >
-                  {React.createElement(
-                    loveLocations.find((l) => l.id === selectedLocation)?.icon ||
-                    MapPin,
-                    { className: 'w-8 h-8 text-white' }
-                  )}
+      {
+        selectedLocation && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            onClick={() => setSelectedLocation(null)}
+          >
+            <Card className="max-w-sm w-full p-6">
+              <div className="space-y-4">
+                {/* Location Header */}
+                <div className="text-center space-y-3">
+                  <div
+                    className={`w-16 h-16 ${loveLocations.find((l) => l.id === selectedLocation)?.color
+                      } rounded-full flex items-center justify-center mx-auto`}
+                  >
+                    {React.createElement(
+                      loveLocations.find((l) => l.id === selectedLocation)?.icon ||
+                      MapPin,
+                      { className: 'w-8 h-8 text-white' }
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="text-xl text-gray-300 font-bold">
+                      {
+                        loveLocations.find((l) => l.id === selectedLocation)
+                          ?.name
+                      }
+                    </h3>
+                    <p className="text-sm text-gray-400">
+                      {
+                        loveLocations.find((l) => l.id === selectedLocation)
+                          ?.type
+                      }{' '}
+                      •{' '}
+                      {
+                        loveLocations.find((l) => l.id === selectedLocation)
+                          ?.date
+                      }
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl text-gray-300 font-bold">
+
+                {/* Memory */}
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <p className="text-gray-300 text-sm leading-relaxed">
                     {
                       loveLocations.find((l) => l.id === selectedLocation)
-                        ?.name
-                    }
-                  </h3>
-                  <p className="text-sm text-gray-400">
-                    {
-                      loveLocations.find((l) => l.id === selectedLocation)
-                        ?.type
-                    }{' '}
-                    •{' '}
-                    {
-                      loveLocations.find((l) => l.id === selectedLocation)
-                        ?.date
+                        ?.memory
                     }
                   </p>
                 </div>
-              </div>
 
-              {/* Memory */}
-              <div className="bg-gray-800 rounded-lg p-4">
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  {
-                    loveLocations.find((l) => l.id === selectedLocation)
-                      ?.memory
-                  }
-                </p>
+                {/* Close Button */}
+                <Button
+                  onClick={() => setSelectedLocation(null)}
+                  className="w-full bg-gray-300 hover:bg-gray-700"
+                >
+                  <Heart className="w-4 h-4 mr-2" />
+                  Beautiful Memory!
+                </Button>
               </div>
-
-              {/* Close Button */}
-              <Button
-                onClick={() => setSelectedLocation(null)}
-                className="w-full bg-gray-300 hover:bg-gray-700"
-              >
-                <Heart className="w-4 h-4 mr-2" />
-                Beautiful Memory!
-              </Button>
-            </div>
-          </Card>
-        </div>
-      )}
-    </div>
+            </Card>
+          </div>
+        )
+      }
+    </div >
   );
 }
