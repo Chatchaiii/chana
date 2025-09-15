@@ -1,0 +1,1 @@
+It was funny to prepare the scavenger hunt for you. Not only because I constantly had to suppress my smile, but also how to hide them while you brought bags full of food. I tried to hide insides of my trunk so you wouldn't notice. I didn't expect you to really not notice it.

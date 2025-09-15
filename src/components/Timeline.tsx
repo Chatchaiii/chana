@@ -7,12 +7,15 @@ import T_wannsee from "../assets/text/timeline/wannsee.md?raw";
 import T_photo_booth from "../assets/text/timeline/photo_booth.md?raw";
 import T_reflections from "../assets/text/timeline/reflections.md?raw";
 import T_flight from "../assets/text/timeline/flight.md?raw";
+import T_reunion from "../assets/text/timeline/reunion.md?raw";
+import T_birthday from "../assets/text/timeline/birthday.md?raw";
 
 // hidden notes
 import H_the_start from "../assets/text/timeline/hidden/h_the_start.md?raw";
 import H_the_lake from "../assets/text/timeline/hidden/h_the_lake.md?raw";
 import H_the_day from "../assets/text/timeline/hidden/h_the_day.md?raw";
 import H_flight from "../assets/text/timeline/hidden/h_flight.md?raw";
+import H_birthday from "../assets/text/timeline/hidden/h_birthday.md?raw";
 
 // jpeg
 import P_the_start from "../assets/images/timeline/the_start.jpeg";
@@ -28,6 +31,14 @@ import P_photo_booth from "../assets/images/timeline/photo_booth.jpeg";
 import P_reflections1 from "../assets/images/timeline/reflections_1.jpeg";
 import P_reflections2 from "../assets/images/timeline/reflections_2.jpeg";
 import P_flight from "../assets/images/timeline/flight.jpeg";
+import P_reunion from "../assets/images/timeline/reunion.jpeg";
+import P_birthday_1 from "../assets/images/timeline/birthday_1.jpeg";
+import P_birthday_2 from "../assets/images/timeline/birthday_2.jpeg";
+import P_birthday_3 from "../assets/images/timeline/birthday_3.jpeg";
+import P_birthday_4 from "../assets/images/timeline/birthday_4.jpeg";
+import P_birthday_5 from "../assets/images/timeline/birthday_5.jpeg";
+import P_birthday_6 from "../assets/images/timeline/birthday_6.jpeg";
+import P_birthday_7 from "../assets/images/timeline/birthday_7.jpeg";
 
 // config
 import React, { useState, useEffect, useRef } from "react";
@@ -43,6 +54,8 @@ import {
   Plane,
   Sparkle,
   Calendar,
+  Users,
+  Cake,
 } from "lucide-react";
 
 interface TimelineProps {
@@ -118,6 +131,21 @@ const blogPosts: BlogPostBlockProps[] = [
     imageUrls: [P_flight],
     icon: Plane,
     noteText: H_flight,
+  },
+  {
+    title: "Reunion",
+    date: "19.07.2025",
+    text: T_reunion,
+    imageUrls: [P_reunion],
+    icon: Users,
+  },
+  {
+    title: "Birthday",
+    date: "20.07.2025",
+    text: T_birthday,
+    imageUrls: [P_birthday_1, P_birthday_2, P_birthday_3, P_birthday_4, P_birthday_5, P_birthday_6, P_birthday_7],
+    icon: Cake,
+    noteText: H_birthday,
   },
 ];
 
