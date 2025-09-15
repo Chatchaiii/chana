@@ -19,13 +19,13 @@
       "purpose": "any"
     },
     {
-      "src": "/assets/appIcon/manifest-icon-192.maskable.png",
+      "src": "/assets/appIcon/icon_chana_192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/assets/appIcon/manifest-icon-512.maskable.png",
+      "src": "/assets/appIcon/icon_chana_512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

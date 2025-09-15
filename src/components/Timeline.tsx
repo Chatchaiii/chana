@@ -9,6 +9,10 @@ import T_reflections from "../assets/text/timeline/reflections.md?raw";
 import T_flight from "../assets/text/timeline/flight.md?raw";
 import T_reunion from "../assets/text/timeline/reunion.md?raw";
 import T_birthday from "../assets/text/timeline/birthday.md?raw";
+import T_birthday_2 from "../assets/text/timeline/birthday_2.md?raw";
+import T_ldr from "../assets/text/timeline/ldr.md?raw";
+import T_return from "../assets/text/timeline/return.md?raw";
+import T_eternal from "../assets/text/timeline/eternal.md?raw";
 
 // hidden notes
 import H_the_start from "../assets/text/timeline/hidden/h_the_start.md?raw";
@@ -16,6 +20,7 @@ import H_the_lake from "../assets/text/timeline/hidden/h_the_lake.md?raw";
 import H_the_day from "../assets/text/timeline/hidden/h_the_day.md?raw";
 import H_flight from "../assets/text/timeline/hidden/h_flight.md?raw";
 import H_birthday from "../assets/text/timeline/hidden/h_birthday.md?raw";
+import H_birthday_2 from "../assets/text/timeline/hidden/h_birthday_2.md?raw";
 
 // jpeg
 import P_the_start from "../assets/images/timeline/the_start.jpeg";
@@ -23,8 +28,9 @@ import P_the_lake1 from "../assets/images/timeline/the_lake_1.jpeg";
 import P_the_lake2 from "../assets/images/timeline/the_lake_2.jpeg";
 import P_the_lake3 from "../assets/images/timeline/the_lake_3.jpeg";
 import P_the_lake5 from "../assets/images/timeline/the_lake_5.jpeg";
-import P_theatre1 from "../assets/images/timeline/theatre_2.jpeg";
-import P_theatre2 from "../assets/images/timeline/theatre_3.jpeg";
+import P_theatre1 from "../assets/images/timeline/theatre_1.jpeg";
+import P_theatre2 from "../assets/images/timeline/theatre_2.jpeg";
+import P_theatre3 from "../assets/images/timeline/theatre_3.jpeg";
 import P_wannsee1 from "../assets/images/timeline/wannsee_1.jpeg";
 import P_wannsee2 from "../assets/images/timeline/wannsee_2.jpeg";
 import P_photo_booth from "../assets/images/timeline/photo_booth.jpeg";
@@ -39,6 +45,11 @@ import P_birthday_4 from "../assets/images/timeline/birthday_4.jpeg";
 import P_birthday_5 from "../assets/images/timeline/birthday_5.jpeg";
 import P_birthday_6 from "../assets/images/timeline/birthday_6.jpeg";
 import P_birthday_7 from "../assets/images/timeline/birthday_7.jpeg";
+import P_birthday_2_1 from "../assets/images/timeline/birthday_2_1.jpeg";
+import P_birthday_2_2 from "../assets/images/timeline/birthday_2_2.jpeg";
+import P_ldr from "../assets/images/timeline/ldr.jpeg";
+import P_return from "../assets/images/timeline/return.jpeg";
+import P_eternal from "../assets/images/timeline/eternal.jpeg";
 
 // config
 import React, { useState, useEffect, useRef } from "react";
@@ -56,6 +67,9 @@ import {
   Calendar,
   Users,
   Cake,
+  MapPinned,
+  Undo2,
+  Gem,
 } from "lucide-react";
 
 interface TimelineProps {
@@ -92,12 +106,12 @@ const blogPosts: BlogPostBlockProps[] = [
     title: "Theatre",
     date: "18.06.2025",
     text: T_theatre,
-    imageUrls: [P_theatre1, P_theatre2],
+    imageUrls: [P_theatre1, P_theatre2, P_theatre3],
     icon: VenetianMask,
   },
   {
     title: "The day",
-    date: "18.06.2025",
+    date: "22.06.2025",
     text: T_the_day,
     imageUrls: [],
     icon: Calendar,
@@ -146,6 +160,35 @@ const blogPosts: BlogPostBlockProps[] = [
     imageUrls: [P_birthday_1, P_birthday_2, P_birthday_3, P_birthday_4, P_birthday_5, P_birthday_6, P_birthday_7],
     icon: Cake,
     noteText: H_birthday,
+  },
+  {
+    title: "Birthday_2",
+    date: "23.07.2025",
+    text: T_birthday_2,
+    imageUrls: [P_birthday_2_1, P_birthday_2_2],
+    icon: Cake,
+    noteText: H_birthday_2,
+  },
+  {
+    title: "Ldr",
+    date: "01.08.2025",
+    text: T_ldr,
+    imageUrls: [P_ldr],
+    icon: MapPinned,
+  },
+  {
+    title: "Return",
+    date: "05.08.2025",
+    text: T_return,
+    imageUrls: [P_return],
+    icon: Undo2,
+  },
+  {
+    title: "Eternal",
+    date: "08.08.2025",
+    text: T_eternal,
+    imageUrls: [P_eternal],
+    icon: Gem,
   },
 ];
 

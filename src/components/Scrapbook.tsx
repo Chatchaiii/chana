@@ -5,17 +5,32 @@ import P_the_lake2 from "../assets/images/timeline/the_lake_2.jpeg";
 import P_the_lake3 from "../assets/images/timeline/the_lake_3.jpeg";
 import P_the_lake4 from "../assets/images/timeline/the_lake_4.jpeg";
 import P_the_lake5 from "../assets/images/timeline/the_lake_5.jpeg";
-import P_theatre1 from "../assets/images/timeline/theatre_2.jpeg";
-import P_theatre2 from "../assets/images/timeline/theatre_3.jpeg";
+import P_theatre1 from "../assets/images/timeline/theatre_1.jpeg";
+import P_theatre2 from "../assets/images/timeline/theatre_2.jpeg";
+import P_theatre3 from "../assets/images/timeline/theatre_3.jpeg";
 import P_wannsee1 from "../assets/images/timeline/wannsee_1.jpeg";
 import P_wannsee2 from "../assets/images/timeline/wannsee_2.jpeg";
 import P_photo_booth from "../assets/images/timeline/photo_booth.jpeg";
 import P_reflections1 from "../assets/images/timeline/reflections_1.jpeg";
 import P_reflections2 from "../assets/images/timeline/reflections_2.jpeg";
 import P_flight from "../assets/images/timeline/flight.jpeg";
+import P_reunion from "../assets/images/timeline/reunion.jpeg";
+import P_birthday_1 from "../assets/images/timeline/birthday_1.jpeg";
+import P_birthday_2 from "../assets/images/timeline/birthday_2.jpeg";
+import P_birthday_3 from "../assets/images/timeline/birthday_3.jpeg";
+import P_birthday_4 from "../assets/images/timeline/birthday_4.jpeg";
+import P_birthday_5 from "../assets/images/timeline/birthday_5.jpeg";
+import P_birthday_6 from "../assets/images/timeline/birthday_6.jpeg";
+import P_birthday_7 from "../assets/images/timeline/birthday_7.jpeg";
+import P_birthday_2_1 from "../assets/images/timeline/birthday_2_1.jpeg";
+import P_birthday_2_2 from "../assets/images/timeline/birthday_2_2.jpeg";
+import P_ldr from "../assets/images/timeline/ldr.jpeg";
+import P_return from "../assets/images/timeline/return.jpeg";
+import P_eternal from "../assets/images/timeline/eternal.jpeg";
 
 // video
 import V_photo_booth from "../assets/video/photo_booth.mov";
+import V_ldr from "../assets/video/ldr.mov";
 
 // config
 import React, { useState, useEffect } from "react";
@@ -61,14 +76,29 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
     { id: 5, src: P_the_lake4, caption: "Ali & Mehmet", date: "09.06.2025", type: "image" },
     { id: 6, src: P_the_lake5, caption: "First Selfie", date: "09.06.2025", type: "image" },
     { id: 7, src: P_theatre1, caption: "Hot Persian", date: "18.06.2025", type: "image" },
-    { id: 8, src: P_theatre2, caption: "Hot Persian (in Bed)", date: "18.06.2025", type: "image" },
-    { id: 9, src: P_wannsee1, caption: "Happiness", date: "26.06.2025", type: "image" },
-    { id: 10, src: P_wannsee2, caption: "Sunset", date: "26.06.2025", type: "image" },
-    { id: 11, src: P_photo_booth, caption: "Photo-booth", date: "05.07.2025", type: "image" },
-    { id: 12, src: V_photo_booth, caption: "No. 1 Party Anthem", date: "05.07.2025", type: "video" },
-    { id: 13, src: P_reflections1, caption: "Mirror", date: "13.07.2025", type: "image" },
-    { id: 14, src: P_reflections2, caption: "My flower", date: "13.07.2025", type: "image" },
-    { id: 15, src: P_flight, caption: "Flight", date: "15.07.2025", type: "image" },
+    { id: 8, src: P_theatre2, caption: "Eyes don't lie", date: "18.06.2025", type: "image" },
+    { id: 9, src: P_theatre3, caption: "Hot Persian (in Bed)", date: "18.06.2025", type: "image" },
+    { id: 10, src: P_wannsee1, caption: "Happiness", date: "26.06.2025", type: "image" },
+    { id: 11, src: P_wannsee2, caption: "Sunset", date: "26.06.2025", type: "image" },
+    { id: 12, src: P_photo_booth, caption: "Photo-booth", date: "05.07.2025", type: "image" },
+    { id: 13, src: V_photo_booth, caption: "No. 1 Party Anthem", date: "05.07.2025", type: "video" },
+    { id: 14, src: P_reflections1, caption: "Reflections of us", date: "13.07.2025", type: "image" },
+    { id: 15, src: P_reflections2, caption: "My flower", date: "13.07.2025", type: "image" },
+    { id: 16, src: P_flight, caption: "Flight", date: "15.07.2025", type: "image" },
+    { id: 17, src: P_reunion, caption: "Reunion", date: "19.07.2025", type: "image" },
+    { id: 18, src: P_birthday_1, caption: "Scavenger hunt", date: "20.07.2025", type: "image" },
+    { id: 23, src: P_birthday_6, caption: "Flower-girl", date: "20.07.2025", type: "image" },
+    { id: 19, src: P_birthday_2, caption: "", date: "20.07.2025", type: "image" },
+    { id: 20, src: P_birthday_3, caption: "", date: "20.07.2025", type: "image" },
+    { id: 21, src: P_birthday_4, caption: "", date: "20.07.2025", type: "image" },
+    { id: 22, src: P_birthday_5, caption: "", date: "20.07.2025", type: "image" },
+    { id: 24, src: P_birthday_7, caption: "", date: "20.07.2025", type: "image" },
+    { id: 25, src: P_birthday_2_1, caption: "Oh Hannah, I wanna feel you close", date: "23.07.2025", type: "image" },
+    { id: 26, src: P_birthday_2_2, caption: "Oh, Hannah, come lie with my bones", date: "23.07.2025", type: "image" },
+    { id: 27, src: P_ldr, caption: "Sleep little baby", date: "01.08.2025", type: "image" },
+    { id: 28, src: V_ldr, caption: "Mwahhh", date: "01.08.2025", type: "video" },
+    { id: 29, src: P_return, caption: "Return", date: "05.08.2025", type: "image" },
+    { id: 30, src: P_eternal, caption: "Eternal forever", date: "08.08.2025", type: "image" },
   ];
 
   // Group items by date

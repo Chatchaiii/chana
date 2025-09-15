@@ -1,0 +1,1 @@
+No mater how long 'eternity' sounds - not even that period of time would be enough for me to spend with you. I hope our love will be as eternal as eternal our bracelets are.
