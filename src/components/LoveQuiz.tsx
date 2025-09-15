@@ -141,7 +141,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <Button onClick={onBack} size="sm" className="rounded-full bg-gray-800 hover:bg-gray-700">
+          <Button onClick={onBack} size="sm" className="rounded-full bg-gray-900 hover:bg-gray-700">
             <ArrowLeft className="w-5 h-5 text-gray-300" />
           </Button>
           <h1 className="text-2xl text-gray-300 font-bold">Quiz</h1>
@@ -169,7 +169,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
         <div className="space-y-3">
           {questions[currentQuestion].options.map((option, index) => {
             let buttonClass =
-              "w-full p-4 text-left border rounded-lg transition-colors ";
+              "w-full p-4 text-left border rounded-lg transition-colors";
 
             if (answered) {
               if (index === questions[currentQuestion].correct) {
@@ -189,6 +189,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
                 onClick={() => handleAnswerSelect(index)}
                 className={buttonClass}
                 disabled={answered}
+                variant="ghost"
               >
                 <div className="flex items-center justify-between w-full">
                   <span>{option}</span>

@@ -20,9 +20,11 @@ import {
   Quote,
   Image,
   User,
+  Lock,
 } from "lucide-react";
 import { FeatureType } from "../App";
 import Markdown from "react-markdown";
+import { motion } from "motion/react"
 
 interface HomepageProps {
   onNavigate: (feature: FeatureType) => void;
@@ -154,26 +156,87 @@ export function Homepage({ onNavigate }: HomepageProps) {
       {/* Header */}
       <div className="flex flex-col items-left space-y-6">
         <div className="flex w-full mb-4 justify-center relative">
+          {/* Button on the left */}
+          <div className="relative left-0">
+            <Card className="border-transparent">
+              <motion.div
+                whileHover={{
+                  scale: [null, 1.1, null],
+                  transition: {
+                    duration: 0.3,
+                    times: [0, 0.6, 1],
+                    ease: ["easeInOut", "easeOut"],
+                  },
+                }}
+                transition={{
+                  duration: 0.2,
+                  ease: "easeOut",
+                }}
+              >
+                <Button
+                  onClick={() => onNavigate("password")}
+                  className="flexitems-center bg-transparent font-bold text-gray-300 select-none rounded-full"
+                  variant="none"
+                >
+                  <Lock className="text-gray-300" />
+                </Button>
+              </motion.div>
+            </Card>
+          </div>
           {/* Centered CHANA */}
-          <h1 className="relative left-5 text-3xl font-bold text-white flex items-center select-none mx-auto">
+          <h1 className="text-3xl font-bold text-white flex items-center select-none mx-auto">
             CH
-            <Heart
-              className="w-8 h-7 text-pink-600 mx-1"
-              fill="currentcolor"
-              stroke="currentcolor"
-            />
+            <motion.div
+              drag
+              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} // keeps it constrained
+              dragElastic={0.2} // controls how far it can be pulled beyond constraints
+              animate={{
+                scale: [1, 1.5, 1.5, 1, 1],
+                rotate: [0, 0, 0, 0, 0],
+                borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+              }}
+              transition={{
+                duration: 2,
+                ease: "easeInOut",
+                times: [0, 0.2, 0.5, 0.8, 1],
+                repeat: Infinity,
+                repeatDelay: 1,
+              }}
+              className="relative z-100"
+            >
+              <Heart
+                className="w-8 h-7 text-pink-600 mx-1"
+                fill="currentcolor"
+                stroke="currentcolor"
+              />
+            </motion.div>
             NA
           </h1>
           {/* Button on the right */}
           <div className="relative right-0">
             <Card className="border-transparent">
-              <Button
-                onClick={() => onNavigate("user")}
-                className="flexitems-center bg-gray-800 font-bold text-gray-300 select-none rounded-full"
-                variant="none"
+              <motion.div
+                whileHover={{
+                  scale: [null, 1.1, null],
+                  transition: {
+                    duration: 0.3,
+                    times: [0, 0.6, 1],
+                    ease: ["easeInOut", "easeOut"],
+                  },
+                }}
+                transition={{
+                  duration: 0.2,
+                  ease: "easeOut",
+                }}
               >
-                <User className="text-pink-600" />
-              </Button>
+                <Button
+                  onClick={() => onNavigate("user")}
+                  className="flexitems-center bg-gray-800 font-bold text-gray-300 select-none rounded-full"
+                  variant="none"
+                >
+                  <User className="text-pink-600" />
+                </Button>
+              </motion.div>
             </Card>
           </div>
         </div>
@@ -226,19 +289,35 @@ export function Homepage({ onNavigate }: HomepageProps) {
       </h1>
       <div className="space-y-0 space-x-0 grid grid-cols-2 gap-3">
         {features.map((feature) => (
-          <Card
-            key={feature.id}
-            className="hover:bg-gray-950 transition-shadow p-0"
+          <motion.div
+            drag
+            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} // keeps it constrained
+            dragElastic={0.2} // controls how far it can be pulled beyond constraints
+            whileHover={{
+              scale: [null, 1.1, null],
+              transition: {
+                duration: 0.3,
+                times: [0, 0.6, 1],
+                ease: ["easeInOut", "easeOut"],
+              },
+            }}
+            transition={{
+              duration: 0.2,
+              ease: "easeOut",
+            }}
           >
-            <Button
-              onClick={() => onNavigate(feature.id)}
-              className="w-full flex items-left justify-start space-x-3 bg-transparent text-gray-300 p-6 select-none"
-              variant="ghost"
-            >
-              <feature.icon className="w-6 h-6 text-gray-300" />
-              <span className="flex-1 text-left">{feature.name}</span>
-            </Button>
-          </Card>
+            <Card key={feature.id}>
+              <Button
+                onClick={() => onNavigate(feature.id)}
+                className="w-full flex items-left justify-start space-x-3 p-6 select-none text-gray-300"
+                variant="none"
+              >
+                <feature.icon className="text-gray-300 font-bold" />
+                <span className="text-gray-300 font-bold">{feature.name}</span>
+              </Button>
+            </Card>
+          </motion.div>
+
         ))}
       </div>
 
@@ -269,11 +348,11 @@ export function Homepage({ onNavigate }: HomepageProps) {
             {/* Box */}
             <Card className="flex-1 mb-2 bg-gray-900 rounded-2xl p-6">
               <div className="flex items-center space-x-3">
-                <span className="text-lg font-bold text-gray-200 w-16 select-none">
+                <span className="text-lg font-bold text-gray-300 w-16 select-none">
                   {item.time}
                 </span>
                 <div>
-                  <div className="font-bold text-gray-200">{item.title}</div>
+                  <div className="font-bold text-gray-300">{item.title}</div>
                   {item.address && (
                     <div className="text-xs text-gray-400">{item.address}</div>
                   )}

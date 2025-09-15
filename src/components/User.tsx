@@ -24,6 +24,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { ArrowLeft, ChevronRight, ChevronUp, Heart } from "lucide-react";
+import { motion } from "motion/react"
 
 // Placeholder images
 const placeholderImages = [
@@ -294,11 +295,26 @@ export function User({ onBack }: { onBack: () => void }) {
         </Button>
         <h1 className="absolute left-1/2 transform -translate-x-1/2 text-3xl font-bold text-white flex items-center select-none mx-auto">
           CH
-          <Heart
-            className="w-8 h-7 text-pink-600 mx-1"
-            fill="currentcolor"
-            stroke="currentcolor"
-          />
+          <motion.div
+            animate={{
+              scale: [1, 1.5, 1.5, 1, 1],
+              rotate: [0, 0, 0, 0, 0],
+              borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+            }}
+            transition={{
+              duration: 2,
+              ease: "easeInOut",
+              times: [0, 0.2, 0.5, 0.8, 1],
+              repeat: Infinity,
+              repeatDelay: 1,
+            }}
+          >
+            <Heart
+              className="w-8 h-7 text-pink-600 mx-1"
+              fill="currentcolor"
+              stroke="currentcolor"
+            />
+          </motion.div>
           NA
         </h1>
       </div>
