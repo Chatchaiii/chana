@@ -23,23 +23,21 @@ import zendegim from "../assets/images/user/hannah/zendegim.jpeg";
 import React, { useState, useRef, useEffect } from "react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import { ArrowLeft, ChevronRight, ChevronUp, User } from "lucide-react";
+import { ArrowLeft, ChevronRight, ChevronUp, Heart } from "lucide-react";
 
 // Placeholder images
 const placeholderImages = [
-  // hannah.jpeg
-  ali, // 0
-  h_baby_1, // 1
-  h_baby_2, // 2
-  selfie, // 3
-  h_sleeping_1, // 4
-  h_sleeping_2, // 5
-  // chai.jpeg
-  c_baby_1, // 6
-  c_baby_2, // 7
-  cat, // 8
-  chad, // 9
-  c_sleeping, // 10
+  ali,
+  h_baby_1,
+  h_baby_2,
+  selfie,
+  h_sleeping_1,
+  h_sleeping_2,
+  c_baby_1,
+  c_baby_2,
+  cat,
+  chad,
+  c_sleeping,
 ];
 
 interface PersonBio {
@@ -48,7 +46,7 @@ interface PersonBio {
   description: string;
   likings: string[];
   habits: string[];
-  slideshowImages?: string[]; // <-- new field for main slideshow
+  slideshowImages?: string[];
   blogPosts: {
     title: string;
     images: string[];
@@ -61,12 +59,7 @@ const personA: PersonBio = {
   birthdate: "23.06.2006",
   description:
     "If you'd ask me who has the purest and most wonderful soul - It'd be her.",
-  likings: [
-    "- Coffee",
-    "- Dogs",
-    "- Reading",
-    "- Her lovely boyfriend (husband)",
-  ],
+  likings: ["- Coffee", "- Dogs", "- Reading", "- Her lovely boyfriend (husband)"],
   habits: ["- Sleepy", "- Smart", "- Thinker", "- Being hot asf"],
   slideshowImages: [beach_1, beach_2, zendegim],
   blogPosts: [
@@ -82,11 +75,7 @@ const personA: PersonBio = {
     },
     {
       title: "My Sleeping Beauty",
-      images: [
-        placeholderImages[3],
-        placeholderImages[4],
-        placeholderImages[5],
-      ],
+      images: [placeholderImages[3], placeholderImages[4], placeholderImages[5]],
       text: "You may find those pics ridiculous - yet they are my favorites.",
     },
   ],
@@ -96,19 +85,8 @@ const personB: PersonBio = {
   name: "Chatchai Kemal Bozkir",
   birthdate: "13.01.2007",
   description: "Most normal thing about him is his humor.",
-  likings: [
-    "- His girlfriend",
-    "- Music",
-    "- His girl",
-    "- Cooking",
-    "- His wife",
-    "- Computers",
-  ],
-  habits: [
-    "- Night owl",
-    "- Playing guitar & piano",
-    "- Annoys his girlfriend way too often",
-  ],
+  likings: ["- His girlfriend", "- Music", "- His girl", "- Cooking", "- His wife", "- Computers"],
+  habits: ["- Night owl", "- Playing guitar & piano", "- Annoys his girlfriend way too often"],
   slideshowImages: [car, mirror_1, mirror_2, night],
   blogPosts: [
     {
@@ -129,7 +107,7 @@ const personB: PersonBio = {
   ],
 };
 
-// Carousel component for blog post images
+// Carousel component for images
 function ImageCarousel({ images }: { images: string[] }) {
   const [current, setCurrent] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -192,9 +170,7 @@ function ImageCarousel({ images }: { images: string[] }) {
           {images.map((_, idx) => (
             <span
               key={idx}
-              className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${idx === current
-                ? "bg-pink-500 scale-110"
-                : "bg-gray-400 opacity-50"
+              className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${idx === current ? "bg-pink-500 scale-110" : "bg-gray-400 opacity-50"
                 }`}
             />
           ))}
@@ -235,9 +211,7 @@ function BioPanel({
         onClick={onToggle}
       >
         <div className="flex items-center space-x-3">
-          <span className="text-2xl font-bold text-gray-200">
-            {person.name}
-          </span>
+          <span className="text-2xl font-bold text-gray-200">{person.name}</span>
         </div>
         {expanded ? (
           <ChevronUp className="w-6 h-6 text-gray-400" />
@@ -247,7 +221,6 @@ function BioPanel({
       </div>
       {expanded && (
         <div className="mt-6 space-y-4">
-          {/* Slideshow above birthdate */}
           {person.slideshowImages && person.slideshowImages.length > 0 && (
             <ImageCarousel images={person.slideshowImages} />
           )}
@@ -276,11 +249,9 @@ function BioPanel({
             </ul>
           </div>
           <div>
-            <div>
-              {person.blogPosts.map((post, idx) => (
-                <BlogPost key={idx} post={post} />
-              ))}
-            </div>
+            {person.blogPosts.map((post, idx) => (
+              <BlogPost key={idx} post={post} />
+            ))}
           </div>
         </div>
       )}
@@ -288,15 +259,29 @@ function BioPanel({
   );
 }
 
-interface UserProps {
-  onBack: () => void;
-}
-
-export function User({ onBack }: UserProps) {
+export function User({ onBack }: { onBack: () => void }) {
   const [expanded, setExpanded] = useState<"A" | "B" | null>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    if (deltaX > 80) {
+      onBack();
+    }
+    touchStartX.current = null;
+  };
 
   return (
-    <div className="p-6 space-y-6">
+    <div
+      className="p-6 space-y-6"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Header */}
       <div className="flex items-center space-x-4 mb-4">
         <Button
@@ -307,8 +292,17 @@ export function User({ onBack }: UserProps) {
         >
           <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
-        <h1 className="font-bold text-2xl text-gray-300">Chana</h1>
+        <h1 className="absolute left-1/2 transform -translate-x-1/2 text-3xl font-bold text-white flex items-center select-none mx-auto">
+          CH
+          <Heart
+            className="w-8 h-7 text-pink-600 mx-1"
+            fill="currentcolor"
+            stroke="currentcolor"
+          />
+          NA
+        </h1>
       </div>
+
       {/* Two expandable boxes */}
       <BioPanel
         person={personA}
@@ -323,4 +317,3 @@ export function User({ onBack }: UserProps) {
     </div>
   );
 }
-

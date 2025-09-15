@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { ArrowLeft, MapPin, Heart, Calendar, Camera, Coffee, Star } from 'lucide-react';
+import {
+  ArrowLeft,
+  MapPin,
+  Heart,
+  Calendar,
+  Camera,
+  Coffee,
+  Star
+} from 'lucide-react';
 
 interface LoveMapProps {
   onBack: () => void;
@@ -9,6 +17,24 @@ interface LoveMapProps {
 
 export function LoveMap({ onBack }: LoveMapProps) {
   const [selectedLocation, setSelectedLocation] = useState<number | null>(null);
+
+  // --- Swipe detection state ---
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diffX = touchEndX - touchStartX;
+
+    if (diffX > 100) {
+      onBack(); // Trigger back on swipe right
+    }
+    setTouchStartX(null);
+  };
 
   const loveLocations = [
     {
@@ -20,7 +46,8 @@ export function LoveMap({ onBack }: LoveMapProps) {
       icon: Coffee,
       color: "bg-amber-500",
       coordinates: { x: 30, y: 25 },
-      memory: "I remember ordering my usual latte and then seeing you smile. Suddenly, coffee became the least important thing in that room. Your laugh made my heart skip a beat, and I knew I had to talk to you. Best decision ever! ☕️💕"
+      memory:
+        "I remember ordering my usual latte and then seeing you smile. Suddenly, coffee became the least important thing in that room. Your laugh made my heart skip a beat, and I knew I had to talk to you. Best decision ever! ☕️💕",
     },
     {
       id: 2,
@@ -31,7 +58,8 @@ export function LoveMap({ onBack }: LoveMapProps) {
       icon: Star,
       color: "bg-orange-500",
       coordinates: { x: 70, y: 40 },
-      memory: "We talked for hours as the sun painted the sky in beautiful colors. You said something funny and I laughed so hard I nearly fell off the bench. That's when I realized how comfortable I felt with you, like we'd known each other forever. 🌅💖"
+      memory:
+        "We talked for hours as the sun painted the sky in beautiful colors. You said something funny and I laughed so hard I nearly fell off the bench. That's when I realized how comfortable I felt with you, like we'd known each other forever. 🌅💖",
     },
     {
       id: 3,
@@ -42,7 +70,8 @@ export function LoveMap({ onBack }: LoveMapProps) {
       icon: Heart,
       color: "bg-green-500",
       coordinates: { x: 50, y: 60 },
-      memory: "We were walking hand in hand when you stopped and asked if I wanted to be yours. My heart exploded with joy! I said yes before you even finished the question. The ducks in the pond seemed to celebrate with us! 🦆💕"
+      memory:
+        "We were walking hand in hand when you stopped and asked if I wanted to be yours. My heart exploded with joy! I said yes before you even finished the question. The ducks in the pond seemed to celebrate with us! 🦆💕",
     },
     {
       id: 4,
@@ -53,7 +82,8 @@ export function LoveMap({ onBack }: LoveMapProps) {
       icon: Camera,
       color: "bg-purple-500",
       coordinates: { x: 40, y: 30 },
-      memory: "You pretended to understand modern art while I secretly took photos of you admiring the paintings. You were more beautiful than any artwork in that gallery. We created our own masterpiece that day - us! 🎨💝"
+      memory:
+        "You pretended to understand modern art while I secretly took photos of you admiring the paintings. You were more beautiful than any artwork in that gallery. We created our own masterpiece that day - us! 🎨💝",
     },
     {
       id: 5,
@@ -64,7 +94,8 @@ export function LoveMap({ onBack }: LoveMapProps) {
       icon: Heart,
       color: "bg-pink-500",
       coordinates: { x: 60, y: 70 },
-      memory: "I was so nervous about you meeting my friends, but you charmed them instantly with your kindness and humor. By the end of the night, they were planning our wedding! You fit perfectly into my world. 👥💕"
+      memory:
+        "I was so nervous about you meeting my friends, but you charmed them instantly with your kindness and humor. By the end of the night, they were planning our wedding! You fit perfectly into my world. 👥💕",
     },
     {
       id: 6,
@@ -75,12 +106,17 @@ export function LoveMap({ onBack }: LoveMapProps) {
       icon: MapPin,
       color: "bg-blue-500",
       coordinates: { x: 45, y: 45 },
-      memory: "This has become 'our spot' - where we go to talk about everything and nothing. Whether we're sharing dreams, fears, or just enjoying comfortable silence, this place holds so many of our conversations and connections. 💬💙"
-    }
+      memory:
+        "This has become 'our spot' - where we go to talk about everything and nothing. Whether we're sharing dreams, fears, or just enjoying comfortable silence, this place holds so many of our conversations and connections. 💬💙",
+    },
   ];
 
   return (
-    <div className="p-6 space-y-6">
+    <div
+      className="p-6 space-y-6"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Header */}
       <div className="flex items-center space-x-4">
         <Button
@@ -99,8 +135,8 @@ export function LoveMap({ onBack }: LoveMapProps) {
         <div className="flex items-start space-x-3">
           <MapPin className="w-5 h-5 text-gray-300 flex-shrink-0 mt-0.5" />
           <p className="text-gray-300 text-sm">
-            Special places in our love. Each location marks a meaningful moment we've shared together.
-            Tap any location to revisit that memory.
+            Special places in our love. Each location marks a meaningful moment
+            we've shared together. Tap any location to revisit that memory.
           </p>
         </div>
       </Card>
@@ -110,12 +146,9 @@ export function LoveMap({ onBack }: LoveMapProps) {
         <div className="relative bg-gray-800 rounded-lg h-80 overflow-hidden">
           {/* Map Background Elements */}
           <div className="absolute inset-0">
-            {/* Simple roads/paths */}
             <div className="absolute top-16 left-0 w-full h-1 bg-gray-300"></div>
             <div className="absolute top-0 left-20 w-1 h-full bg-gray-300"></div>
             <div className="absolute bottom-20 left-0 w-full h-1 bg-gray-300 opacity-50"></div>
-
-            {/* Decorative elements */}
             <div className="absolute top-10 right-10 w-8 h-8 bg-gray-400 rounded-full opacity-30"></div>
             <div className="absolute bottom-10 left-10 w-6 h-6 bg-gray-400 rounded-full opacity-30"></div>
             <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-gray-400 rounded-full opacity-30"></div>
@@ -129,7 +162,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
               className={`absolute transform -translate-x-1/2 -translate-y-1/2 ${location.color} text-white rounded-full p-2 shadow-lg hover:scale-110 transition-transform z-10`}
               style={{
                 left: `${location.coordinates.x}%`,
-                top: `${location.coordinates.y}%`
+                top: `${location.coordinates.y}%`,
               }}
             >
               <location.icon className="w-4 h-4" />
@@ -148,7 +181,9 @@ export function LoveMap({ onBack }: LoveMapProps) {
             onClick={() => setSelectedLocation(location.id)}
           >
             <div className="flex items-center space-x-4">
-              <div className={`p-2 rounded-full ${location.color} text-white`}>
+              <div
+                className={`p-2 rounded-full ${location.color} text-white`}
+              >
                 <location.icon className="w-5 h-5" />
               </div>
               <div className="flex-1">
@@ -158,8 +193,9 @@ export function LoveMap({ onBack }: LoveMapProps) {
                 </div>
                 <div className="flex items-center space-x-2 mt-1">
                   <span className="text-sm text-gray-400">{location.type}</span>
-                  <span className="text-xs text-gray-400"></span>
-                  <span className="text-xs text-gray-500">{location.description}</span>
+                  <span className="text-xs text-gray-500">
+                    {location.description}
+                  </span>
                 </div>
               </div>
             </div>
@@ -177,18 +213,33 @@ export function LoveMap({ onBack }: LoveMapProps) {
             <div className="space-y-4">
               {/* Location Header */}
               <div className="text-center space-y-3">
-                <div className={`w-16 h-16 ${loveLocations.find(l => l.id === selectedLocation)?.color} rounded-full flex items-center justify-center mx-auto`}>
+                <div
+                  className={`w-16 h-16 ${loveLocations.find((l) => l.id === selectedLocation)?.color
+                    } rounded-full flex items-center justify-center mx-auto`}
+                >
                   {React.createElement(
-                    loveLocations.find(l => l.id === selectedLocation)?.icon || MapPin,
-                    { className: "w-8 h-8 text-white" }
+                    loveLocations.find((l) => l.id === selectedLocation)?.icon ||
+                    MapPin,
+                    { className: 'w-8 h-8 text-white' }
                   )}
                 </div>
                 <div>
                   <h3 className="text-xl text-gray-300 font-bold">
-                    {loveLocations.find(l => l.id === selectedLocation)?.name}
+                    {
+                      loveLocations.find((l) => l.id === selectedLocation)
+                        ?.name
+                    }
                   </h3>
                   <p className="text-sm text-gray-400">
-                    {loveLocations.find(l => l.id === selectedLocation)?.type} • {loveLocations.find(l => l.id === selectedLocation)?.date}
+                    {
+                      loveLocations.find((l) => l.id === selectedLocation)
+                        ?.type
+                    }{' '}
+                    •{' '}
+                    {
+                      loveLocations.find((l) => l.id === selectedLocation)
+                        ?.date
+                    }
                   </p>
                 </div>
               </div>
@@ -196,7 +247,10 @@ export function LoveMap({ onBack }: LoveMapProps) {
               {/* Memory */}
               <div className="bg-gray-800 rounded-lg p-4">
                 <p className="text-gray-300 text-sm leading-relaxed">
-                  {loveLocations.find(l => l.id === selectedLocation)?.memory}
+                  {
+                    loveLocations.find((l) => l.id === selectedLocation)
+                      ?.memory
+                  }
                 </p>
               </div>
 
@@ -212,23 +266,6 @@ export function LoveMap({ onBack }: LoveMapProps) {
           </Card>
         </div>
       )}
-
-      {/* Future Plans
-      <Card className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200">
-        <div className="space-y-3">
-          <div className="flex items-center space-x-2">
-            <Calendar className="w-5 h-5 text-purple-600" />
-            <h3 className="text-purple-800">Future Adventures</h3>
-          </div>
-          <div className="text-sm text-purple-700 space-y-1">
-            <p>🏖️ Beach vacation together</p>
-            <p>🏔️ Mountain hiking adventure</p>
-            <p>🏛️ Museum dates in new cities</p>
-            <p>🍳 Cooking classes at home</p>
-            <p>💕 And many more memories to create...</p>
-          </div>
-        </div>
-      </Card> */}
     </div>
   );
 }

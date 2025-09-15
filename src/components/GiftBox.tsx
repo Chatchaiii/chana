@@ -10,6 +10,7 @@ interface GiftBoxProps {
 export function GiftBox({ onBack }: GiftBoxProps) {
   const [openedGifts, setOpenedGifts] = useState<number[]>([]);
   const [selectedGift, setSelectedGift] = useState<number | null>(null);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
   const gifts = [
     {
@@ -71,8 +72,31 @@ export function GiftBox({ onBack }: GiftBoxProps) {
 
   const isOpened = (giftId: number) => openedGifts.includes(giftId);
 
+  // Swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const deltaX = touchEndX - touchStartX;
+
+    if (deltaX > 80) {
+      // swipe right threshold
+      onBack();
+    }
+
+    setTouchStartX(null);
+  };
+
   return (
-    <div className="p-6 space-y-6">
+    <div
+      className="p-6 space-y-6"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Header */}
       <div className="flex items-center space-x-4">
         <Button
@@ -109,7 +133,9 @@ export function GiftBox({ onBack }: GiftBoxProps) {
             onClick={() => handleOpenGift(gift.id)}
           >
             <div className="text-center space-y-3">
-              <div className={`w-16 h-16 bg-gradient-to-br ${gift.color} rounded-xl flex items-center justify-center mx-auto relative`}>
+              <div
+                className={`w-16 h-16 bg-gradient-to-br ${gift.color} rounded-xl flex items-center justify-center mx-auto relative`}
+              >
                 {isOpened(gift.id) ? (
                   <span className="text-2xl">{gift.icon}</span>
                 ) : (
@@ -126,9 +152,7 @@ export function GiftBox({ onBack }: GiftBoxProps) {
                 </p>
               </div>
               {isOpened(gift.id) && (
-                <div className="text-xs text-orange-600">
-                  ✨ Opened!
-                </div>
+                <div className="text-xs text-orange-600">✨ Opened!</div>
               )}
             </div>
           </Card>
@@ -171,20 +195,23 @@ export function GiftBox({ onBack }: GiftBoxProps) {
             <div className="space-y-4">
               {/* Gift Header */}
               <div className="text-center space-y-3">
-                <div className={`w-20 h-20 bg-gradient-to-br ${gifts.find(g => g.id === selectedGift)?.color} rounded-xl flex items-center justify-center mx-auto`}>
+                <div
+                  className={`w-20 h-20 bg-gradient-to-br ${gifts.find((g) => g.id === selectedGift)?.color
+                    } rounded-xl flex items-center justify-center mx-auto`}
+                >
                   <span className="text-3xl">
-                    {gifts.find(g => g.id === selectedGift)?.icon}
+                    {gifts.find((g) => g.id === selectedGift)?.icon}
                   </span>
                 </div>
                 <h3 className="text-xl text-gray-800">
-                  {gifts.find(g => g.id === selectedGift)?.name}
+                  {gifts.find((g) => g.id === selectedGift)?.name}
                 </h3>
               </div>
 
               {/* Gift Message */}
               <div className="bg-gray-50 rounded-lg p-4">
                 <p className="text-gray-700 text-sm leading-relaxed">
-                  {gifts.find(g => g.id === selectedGift)?.message}
+                  {gifts.find((g) => g.id === selectedGift)?.message}
                 </p>
               </div>
 

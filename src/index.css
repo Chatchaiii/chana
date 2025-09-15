@@ -695,6 +695,26 @@
     right: calc(var(--spacing) * 4);
   }
 
+  .right-5 {
+    right: calc(var(--spacing) * 5);
+  }
+
+  .right-6 {
+    right: calc(var(--spacing) * 6);
+  }
+
+  .right-7 {
+    right: calc(var(--spacing) * 7);
+  }
+
+  .right-8 {
+    right: calc(var(--spacing) * 8);
+  }
+
+  .right-9 {
+    right: calc(var(--spacing) * 9);
+  }
+
   .right-10 {
     right: calc(var(--spacing) * 10);
   }

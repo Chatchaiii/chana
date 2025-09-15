@@ -30,7 +30,7 @@ import P_reflections2 from "../assets/images/timeline/reflections_2.jpeg";
 import P_flight from "../assets/images/timeline/flight.jpeg";
 
 // config
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
@@ -55,10 +55,9 @@ interface BlogPostBlockProps {
   text: string;
   imageUrls: string[];
   icon: React.ElementType;
-  noteText?: string; // <-- optional note text
+  noteText?: string;
 }
 
-// Example: add noteText to your blogPosts if you want a custom note, otherwise omit to hide the button
 const blogPosts: BlogPostBlockProps[] = [
   {
     title: "The Start",
@@ -122,7 +121,7 @@ const blogPosts: BlogPostBlockProps[] = [
   },
 ];
 
-// BlogPostBlock with hidden note button and popup
+// BlogPostBlock
 function BlogPostBlock({
   title,
   date,
@@ -131,16 +130,16 @@ function BlogPostBlock({
   icon: Icon,
   noteText,
 }: BlogPostBlockProps) {
-  const [current, setCurrent] = React.useState(0);
-  const [showNote, setShowNote] = React.useState(false);
-  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-  const touchStartX = React.useRef<number | null>(null);
+  const [current, setCurrent] = useState(0);
+  const [showNote, setShowNote] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const hasMultipleImages = imageUrls.length > 1;
   const hasNoImage = imageUrls.length === 0;
 
-  // Auto-rotate every 5 seconds, only if more than one image
-  React.useEffect(() => {
+  // auto-rotate gallery
+  useEffect(() => {
     if (!hasMultipleImages) return;
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
@@ -151,13 +150,13 @@ function BlogPostBlock({
     };
   }, [current, imageUrls.length, hasMultipleImages]);
 
-  // Swipe handlers, only if more than one image
+  // swipe gallery
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!hasMultipleImages) return;
     touchStartX.current = e.touches[0].clientX;
   };
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (!hasMultipleImages || touchStartX.current === null) return;
+    if (touchStartX.current === null) return;
     const deltaX = e.changedTouches[0].clientX - touchStartX.current;
     if (Math.abs(deltaX) > 50) {
       if (deltaX > 0) {
@@ -178,7 +177,8 @@ function BlogPostBlock({
         <h2 className="text-2xl font-bold text-gray-100">{title}</h2>
         <span className="ml-auto text-sm text-gray-400">{date}</span>
       </div>
-      {/* Images area */}
+
+      {/* Images */}
       {!hasNoImage && (
         <div
           className="relative w-full h-64 rounded-lg overflow-hidden mb-4"
@@ -204,16 +204,14 @@ function BlogPostBlock({
                   />
                 ))}
               </div>
-              {/* Indicator dots */}
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">
                 {imageUrls.map((_, idx) => (
                   <span
                     key={idx}
-                    className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${
-                      idx === current
-                        ? "bg-pink-500 scale-110"
-                        : "bg-gray-400 opacity-50"
-                    }`}
+                    className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${idx === current
+                      ? "bg-pink-500 scale-110"
+                      : "bg-gray-400 opacity-50"
+                      }`}
                   />
                 ))}
               </div>
@@ -227,10 +225,11 @@ function BlogPostBlock({
           )}
         </div>
       )}
+
       <div className="prose prose-invert text-gray-300">
         <ReactMarkdown>{text}</ReactMarkdown>
       </div>
-      {/* Hidden Note Button */}
+
       {noteText && noteText.trim().length > 0 && (
         <>
           <Button
@@ -239,7 +238,6 @@ function BlogPostBlock({
           >
             Hidden-Note
           </Button>
-          {/* Popup Modal */}
           {showNote && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
               <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl relative border">
@@ -262,9 +260,52 @@ function BlogPostBlock({
   );
 }
 
+// Timeline
 export function Timeline({ onBack }: TimelineProps) {
+  const touchStartX = useRef<number | null>(null);
+
+  // Escape key = back
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onBack]);
+
+  // swipe right = back
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    if (deltaX > 80) {
+      onBack();
+    }
+    touchStartX.current = null;
+  };
+
+  // auto-play videos
+  useEffect(() => {
+    const videos = document.querySelectorAll("video");
+    videos.forEach((video) => {
+      video.setAttribute("playsinline", "");
+      video.setAttribute("muted", "true");
+      video.autoplay = true;
+      video.loop = true;
+      video.muted = true;
+      video.play().catch(() => { });
+    });
+  }, []);
+
   return (
-    <div className="space-y-6 min-h-screen flex flex-col p-6 bg-gray-900">
+    <div
+      className="space-y-6 min-h-screen flex flex-col p-6 bg-gray-900"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Header */}
       <div className="flex items-center space-x-4 mb-8 bg-gray-900">
         <Button
@@ -287,4 +328,3 @@ export function Timeline({ onBack }: TimelineProps) {
     </div>
   );
 }
-

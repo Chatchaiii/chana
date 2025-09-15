@@ -13,6 +13,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [answered, setAnswered] = useState(false);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
   const questions = [
     {
@@ -35,9 +36,9 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
     },
     {
       question: "What makes me laugh the most?",
-      options: ["Your jokes", "Funny movies", "Bin ich ein hurensohn?", "Our inside jokes"],
+      options: ["Your jokes", "Funny movies", "Our German jokes", "Our inside jokes"],
       correct: 2,
-      explanation: "Nagut"
+      explanation: "You always get me with those silly German jokes."
     },
     {
       question: "What's my love language?",
@@ -49,10 +50,8 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
 
   const handleAnswerSelect = (answerIndex: number) => {
     if (answered) return;
-
     setSelectedAnswer(answerIndex);
     setAnswered(true);
-
     if (answerIndex === questions[currentQuestion].correct) {
       setScore(score + 1);
     }
@@ -84,9 +83,24 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
     return "We have so much more to discover about each other!";
   };
 
+  // --- Swipe handling ---
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const diffX = e.changedTouches[0].clientX - touchStartX;
+    if (diffX > 100) {
+      onBack(); // swipe right → back
+    } else if (diffX < -100 && answered) {
+      handleNext(); // swipe left → next if answered
+    }
+    setTouchStartX(null);
+  };
+
   if (showResult) {
     return (
-      <div className="p-6 space-y-6">
+      <div className="p-6 space-y-6" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         {/* Header */}
         <div className="flex items-center space-x-4">
           <Button onClick={onBack} variant="ghost" size="sm">
@@ -98,7 +112,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
         {/* Results */}
         <Card className="p-6 text-center space-y-6">
           <div className="space-y-4">
-            <Heart className="w-16 h-16 text-gray-400 mx-auto" />
+            <Heart className="w-16 h-16 text-pink-500 mx-auto" />
             <div>
               <h2 className="text-3xl text-gray-200 mb-2">{score}/{questions.length}</h2>
               <p className="text-gray-300">{getScoreMessage()}</p>
@@ -106,7 +120,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
           </div>
 
           <div className="space-y-3">
-            <Button onClick={resetQuiz} className="w-full bg-gray-100 hover:bg-gray-700">
+            <Button onClick={resetQuiz} className="w-full bg-pink-500 hover:bg-pink-600">
               Take Quiz Again
             </Button>
             <Button onClick={onBack} variant="outline" className="w-full">
@@ -119,17 +133,16 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <div
+      className="p-6 space-y-6"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <Button
-            onClick={onBack}
-            variant=""
-            size="sm"
-            className="rounded-full bg-grey-800 hover:bg-gray-700"
-          >
-            <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
+          <Button onClick={onBack} size="sm" className="rounded-full bg-gray-800 hover:bg-gray-700">
+            <ArrowLeft className="w-5 h-5 text-gray-300" />
           </Button>
           <h1 className="text-2xl text-gray-300 font-bold">Quiz</h1>
         </div>
@@ -139,11 +152,11 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-gray-900 rounded-full h-2">
+      <div className="w-full bg-gray-300 rounded-full h-2">
         <div
-          className="bg-gray-300 h-2 rounded-full transition-all duration-300"
+          className="bg-pink-500 h-2 rounded-full transition-all duration-300"
           style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-        ></div>
+        />
       </div>
 
       {/* Question */}
@@ -155,7 +168,8 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
         {/* Answer Options */}
         <div className="space-y-3">
           {questions[currentQuestion].options.map((option, index) => {
-            let buttonClass = "w-full p-4 text-left border rounded-lg transition-colors ";
+            let buttonClass =
+              "w-full p-4 text-left border rounded-lg transition-colors ";
 
             if (answered) {
               if (index === questions[currentQuestion].correct) {
@@ -170,22 +184,24 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
             }
 
             return (
-              <button
+              <Button
                 key={index}
                 onClick={() => handleAnswerSelect(index)}
                 className={buttonClass}
                 disabled={answered}
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between w-full">
                   <span>{option}</span>
                   {answered && index === questions[currentQuestion].correct && (
                     <CheckCircle className="w-5 h-5 text-green-600" />
                   )}
-                  {answered && index === selectedAnswer && index !== questions[currentQuestion].correct && (
-                    <XCircle className="w-5 h-5 text-red-600" />
-                  )}
+                  {answered &&
+                    index === selectedAnswer &&
+                    index !== questions[currentQuestion].correct && (
+                      <XCircle className="w-5 h-5 text-red-600" />
+                    )}
                 </div>
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -201,8 +217,13 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
 
         {/* Next Button */}
         {answered && (
-          <Button onClick={handleNext} className="w-full bg-gray-100 hover:bg-gray-700">
-            {currentQuestion < questions.length - 1 ? 'Next Question' : 'See Results'}
+          <Button
+            onClick={handleNext}
+            className="w-full bg-pink-500 hover:bg-pink-600"
+          >
+            {currentQuestion < questions.length - 1
+              ? "Next Question"
+              : "See Results"}
           </Button>
         )}
       </Card>

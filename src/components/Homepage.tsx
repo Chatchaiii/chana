@@ -168,7 +168,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
           <div className="relative right-0">
             <Card className="border-transparent">
               <Button
-                onClick={() => onNavigate("game")}
+                onClick={() => onNavigate("user")}
                 className="flexitems-center bg-gray-800 font-bold text-gray-300 select-none rounded-full"
                 variant="none"
               >
