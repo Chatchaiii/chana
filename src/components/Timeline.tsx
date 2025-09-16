@@ -335,7 +335,7 @@ function BlogPostExpanded({
             </div>
             {/* Close button */}
             <button
-              className="relative -top-0.7 text-gray-200 text-3xl z-50 hover:text-white"
+              className="relative -top-0.7 right-1 text-gray-200 text-3xl z-50 hover:text-white"
               onClick={onClose}
               aria-label="Close"
             >
@@ -439,7 +439,7 @@ export function Timeline({ onBack }: TimelineProps) {
 
       // Prevent touchmove on mobile
       const preventTouch = (e: TouchEvent) => e.preventDefault();
-      document.body.addEventListener("touchmove", preventTouch, { passive: false });
+      document.body.addEventListener("touchmove", preventTouch, { passive: true });
 
       return () => {
         document.body.style.overflow = originalOverflow;
