@@ -152,7 +152,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-gray-300 rounded-full h-2">
+      <div className="w-full bg-gray-900 rounded-full h-2">
         <div
           className="bg-pink-500 h-2 rounded-full transition-all duration-300"
           style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}

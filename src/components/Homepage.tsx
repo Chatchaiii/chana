@@ -168,6 +168,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
                     ease: ["easeInOut", "easeOut"],
                   },
                 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{
                   duration: 0.2,
                   ease: "easeOut",
@@ -217,13 +218,14 @@ export function Homepage({ onNavigate }: HomepageProps) {
             <Card className="border-transparent">
               <motion.div
                 whileHover={{
-                  scale: [null, 1.1, null],
+                  scale: [null, 1.03, null],
                   transition: {
                     duration: 0.3,
                     times: [0, 0.6, 1],
                     ease: ["easeInOut", "easeOut"],
                   },
                 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{
                   duration: 0.2,
                   ease: "easeOut",
@@ -294,13 +296,14 @@ export function Homepage({ onNavigate }: HomepageProps) {
             dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} // keeps it constrained
             dragElastic={0.2} // controls how far it can be pulled beyond constraints
             whileHover={{
-              scale: [null, 1.1, null],
+              scale: [null, 1.03, null],
               transition: {
                 duration: 0.3,
                 times: [0, 0.6, 1],
                 ease: ["easeInOut", "easeOut"],
               },
             }}
+            whileTap={{ scale: 0.98 }}
             transition={{
               duration: 0.2,
               ease: "easeOut",
@@ -309,11 +312,11 @@ export function Homepage({ onNavigate }: HomepageProps) {
             <Card key={feature.id}>
               <Button
                 onClick={() => onNavigate(feature.id)}
-                className="w-full flex items-left justify-start space-x-3 p-6 select-none text-gray-300"
+                className="w-full flex items-left justify-start space-x-2 p-6 select-none text-gray-300"
                 variant="none"
               >
-                <feature.icon className="text-gray-300 font-bold" />
-                <span className="text-gray-300 font-bold">{feature.name}</span>
+                <feature.icon className="ml-1 text-gray-300 font-bold" />
+                <span className="text-gray-300">{feature.name}</span>
               </Button>
             </Card>
           </motion.div>

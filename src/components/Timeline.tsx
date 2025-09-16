@@ -223,17 +223,26 @@ function BlogPostCollapsed({
   return (
     <motion.div
       layoutId={`blogpost-${title}`}
+      whileHover={{
+                  scale: [null, 1.03, null],
+                  transition: {
+                    duration: 0.3,
+                    times: [0, 0.6, 1],
+                    ease: ["easeInOut", "easeOut"],
+                  },
+                }}
+      whileTap={{ scale: 0.98 }}
       transition={{
         type: "spring",
         stiffness: 1000,
         damping: 100,
       }}
-      className="bg-gray-800 rounded-xl shadow-lg px-6 py-6 flex items-center space-x-4 cursor-pointer mb-2"
+      className="bg-gray-900 border rounded-2xl shadow-lg px-6 py-4 flex items-center space-x-6 cursor-pointer mb-3"
       onClick={onExpand}
       style={{ overflow: "hidden" }}
     >
-      <div className="p-2 rounded-full bg-gray-600 text-gray-300">
-        <Icon className="w-6 h-4" />
+      <div className="px-2 py-2 rounded-full text-gray-300">
+        <Icon className="w-4 h-4" />
       </div>
       <div className="flex flex-col-2 items-center w-full">
         <h2 className="text-xl font-bold text-gray-300">{title}</h2>
@@ -292,20 +301,20 @@ function BlogPostExpanded({
   return (
     <motion.div
       layoutId={`blogpost-${title}`}
-      className="fixed inset-0 z-100 flex justify-center"
+      className="fixed inset-0 shadow-lg z-100 flex justify-center"
       style={{
         pointerEvents: "auto",
-        background: "oklch(28.094% 0.00003 271.152)",
+        background: "#0A0A0A",
         boxSizing: "border-box",
       }}
       transition={{
         type: "spring",
-        stiffness: 300,
-        damping: 30,
+        stiffness: 1000,
+        damping: 100,
       }}
     >
       <motion.div
-        className="bg-gray-800 rounded-2xl p-10 mx-auto overflow-y-auto"
+        className="bg-gray-900 rounded-2xl p-4 mx-auto overflow-y-auto"
         style={{ minHeight: 400 }}
         initial={{ borderRadius: 24 }}
         animate={{ borderRadius: 24 }}
@@ -317,21 +326,23 @@ function BlogPostExpanded({
         }}
       >
         {/* Title always visible */}
-        <div className="flex items-center -mt-4 mb-6 space-x-3 w-full">
-          <div className="p-2 rounded-full bg-gray-600 text-white">
-            <Icon className="w-6 h-4" />
+        <div className="p-2 flex items-center bg-gray-800 rounded-lg mt-1 mb-6 space-x-3 w-full">
+            <div className="p-2 rounded-full text-white">
+              <Icon className="w-6 h-4" />
+            </div>
+            <div className="flex items-center w-full">
+              <h2 className="text-2xl font-bold text-gray-200">{title}</h2>
+              <span className="ml-auto text-sm text-gray-200">{date}</span>
+            </div>
+            {/* Close button */}
+            <button
+              className="relative -top-1 right-1 text-gray-200 text-3xl z-50 hover:text-white"
+              onClick={onClose}
+              aria-label="Close"
+            >
+              ×
+            </button>
           </div>
-          <h2 className="text-2xl font-bold text-gray-200">{title}</h2>
-          <span className="ml-auto text-sm text-gray-400">{date}</span>
-          {/* Close button */}
-          <button
-            className="relative -top-1 text-gray-300 text-3xl z-50 hover:text-white"
-            onClick={onClose}
-            aria-label="Close"
-          >
-            ×
-          </button>
-        </div>
         {/* Images */}
         {!hasNoImage && (
           <div
@@ -370,21 +381,21 @@ function BlogPostExpanded({
           </div>
         )}
 
-        <div className="text-gray-300 w-full mb-6">
+        <div className="bg-gray-800 rounded-lg p-4 text-gray-200 w-full mb-6">
           <ReactMarkdown>{text}</ReactMarkdown>
         </div>
 
         {noteText && noteText.trim().length > 0 && (
           <>
             <Button
-              className="bg-gray-300 text-gray-800 -mb-4 w-full"
+              className="bg-gray-300 mb-1 text-gray-800 w-full"
               onClick={() => setShowNote(true)}
             >
               Hidden-Note
             </Button>
             {showNote && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
-                <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl relative border">
+                <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-sm relative border">
                   <button
                     className="absolute -top-1 right-2 text-gray-400 text-2xl"
                     onClick={() => setShowNote(false)}
@@ -435,7 +446,7 @@ export function Timeline({ onBack }: TimelineProps) {
   }, [expandedIdx, onBack]);
 
   return (
-    <div className="space-y-6 min-h-screen flex flex-col p-6 bg-gray-900 relative">
+    <div className="relative space-y-6 min-h-screen flex flex-col p-4 bg-gray-900 mt-2">
       {/* Header */}
       <AnimatePresence>
         {expandedIdx === null && (
@@ -445,13 +456,13 @@ export function Timeline({ onBack }: TimelineProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="flex items-center space-x-4 mb-8 bg-gray-900 z-10"
+            className="flex items-center space-x-4 bg-gray-900 z-10"
           >
             <Button
               onClick={onBack}
               variant=""
               size="sm"
-              className="rounded-full bg-grey-800 hover:bg-gray-700"
+              className="rounded-full bg-gray-900 hover:bg-white"
             >
               <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
             </Button>
