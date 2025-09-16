@@ -78,6 +78,7 @@ import {
   Gem,
   Infinity as InfinityIcon,
   X,
+  EyeOff,
 } from "lucide-react";
 
 interface TimelineProps {
@@ -388,10 +389,11 @@ function BlogPostExpanded({
         {noteText && noteText.trim().length > 0 && (
           <>
             <Button
-              className="bg-gray-300 mb-1 text-gray-800 w-full"
+              className="bg-gray-300 mb-1 text-gray-800 w-full font-bold"
               onClick={() => setShowNote(true)}
             >
-              Hidden-Note
+              <EyeOff className="w-4 h-4" />
+              <div>Hidden-Note</div>
             </Button>
             {showNote && (
               <div className="p-4 fixed inset-0 z-50 flex items-center justify-center bg-black" style={{ backgroundColor: "#0A0A0A" }}>

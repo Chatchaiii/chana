@@ -141,7 +141,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
                     </div>
                   ) : (
                     <Button onClick={() => setAttemptingUnlock(note.id)} size="sm" variant="outline" className="w-full">
-                      <Lock className="w-4 h-4 mr-2" /> Try to Unlock
+                      <Lock className="w-4 h-4 mr-1" /> Try to Unlock
                     </Button>
                   )}
                 </div>
@@ -150,9 +150,9 @@ export function LoveNote({ onBack }: LoveNoteProps) {
               {isUnlocked(note.id) && (
                 <Button
                   onClick={() => setSelectedNote(note.id)}
-                  className="w-full bg-pink-500 hover:bg-pink-600"
+                  className="w-full font-bold text-white bg-pink-500 hover:bg-pink-600"
                 >
-                  <Eye className="w-4 h-4 mr-2" /> Read Note
+                  <Eye className="w-4 h-4" /> Read Note
                 </Button>
               )}
             </div>
@@ -161,14 +161,14 @@ export function LoveNote({ onBack }: LoveNoteProps) {
       </div>
 
       {/* Progress */}
-      <Card className="p-4 bg-gray-300">
+      <Card className="p-4 bg-pink-500">
         <div className="text-center space-y-2">
-          <p className="text-gray-800 font-bold">
+          <p className="text-gray-200 font-bold">
             Notes Unlocked: {unlockedNotes.length}/{loveNotes.length}
           </p>
-          <div className="w-full bg-gray-400 rounded-full h-2">
+          <div className="w-full bg-pink-500 rounded-full h-2">
             <div
-              className="bg-gray-800 h-2 rounded-full transition-all duration-300"
+              className="bg-gray-200 h-2 rounded-full transition-all duration-300"
               style={{ width: `${(unlockedNotes.length / loveNotes.length) * 100}%` }}
             />
           </div>

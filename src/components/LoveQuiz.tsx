@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { ArrowLeft, Heart, CheckCircle, XCircle } from 'lucide-react';
+import { ArrowLeft, Heart, CheckCircle, XCircle, RotateCw, House } from 'lucide-react';
 
 interface LoveQuizProps {
   onBack: () => void;
@@ -114,17 +114,19 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
           <div className="space-y-4">
             <Heart className="w-16 h-16 text-pink-500 mx-auto" />
             <div>
-              <h2 className="text-3xl text-gray-200 mb-2">{score}/{questions.length}</h2>
-              <p className="text-gray-300">{getScoreMessage()}</p>
+              <h2 className="text-3xl text-gray-200 mb-5 font-bold">{score}/{questions.length}</h2>
+              <p className="text-gray-200 font-bold">{getScoreMessage()}</p>
             </div>
           </div>
 
           <div className="space-y-3">
-            <Button onClick={resetQuiz} className="w-full bg-pink-500 hover:bg-pink-600">
-              Take Quiz Again
+            <Button onClick={resetQuiz} className="font-bold text-white w-full bg-pink-500 hover:bg-pink-600">
+              <RotateCw className="w-5 h-5 inline" />
+              <div>Take Quiz Again</div>
             </Button>
             <Button onClick={onBack} variant="outline" className="w-full">
-              Back to Home
+              <House className="w-5 h-5 inline" />
+              <div>Back to Home</div>
             </Button>
           </div>
         </Card>
@@ -162,14 +164,14 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
       {/* Question */}
       <Card className="p-6 space-y-6">
         <div className="text-center">
-          <h2 className="text-xl text-gray-200 mb-6">{questions[currentQuestion].question}</h2>
+          <h2 className="mt-5 text-xl text-gray-200">{questions[currentQuestion].question}</h2>
         </div>
 
         {/* Answer Options */}
         <div className="space-y-3">
           {questions[currentQuestion].options.map((option, index) => {
             let buttonClass =
-              "w-full p-4 text-left border rounded-lg transition-colors";
+              "w-full p-6 text-left border rounded-lg transition-colors";
 
             if (answered) {
               if (index === questions[currentQuestion].correct) {
@@ -220,7 +222,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
         {answered && (
           <Button
             onClick={handleNext}
-            className="w-full bg-pink-500 hover:bg-pink-600"
+            className="w-full bg-pink-500 hover:bg-pink-400 text-white font-bold"
           >
             {currentQuestion < questions.length - 1
               ? "Next Question"

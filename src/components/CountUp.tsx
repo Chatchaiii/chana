@@ -6,6 +6,10 @@ import {
   Heart,
   Calendar,
   Clock,
+  Infinity,
+  Activity,
+  Smile,
+  UsersRound,
 } from "lucide-react";
 
 interface CountUpProps {
@@ -118,11 +122,13 @@ export function CountUp({ onBack }: CountUpProps) {
       {/* Main Counter */}
       <Card className="p-6 bg-gray-800">
         <div className="text-center space-y-4">
-          <Heart className="w-12 h-12 text-gray-300 mx-auto" />
           <div>
-            <h2 className="text-2xl text-gray-300 mb-2 font-bold">
-              We've been together for
-            </h2>
+            <div className="flex items-center mb-5 p-3">
+              <Heart className="w-12 h-12 text-pink-500 mx-auto" />
+              <h2 className="text-2xl text-gray-300 font-bold mx-auto">
+                We've been together for
+              </h2>
+            </div>
             <div className="grid grid-cols-2 gap-4 text-center">
               <div className="space-y-1">
                 <div className="text-3xl text-gray-300">{days}</div>
@@ -170,35 +176,41 @@ export function CountUp({ onBack }: CountUpProps) {
             Fun Love Facts
           </h3>
           <div className="space-y-3 text-sm text-gray-300">
-            <div className="flex justify-between">
+            <div className="flex">
+              <Activity className="w-4 h-5 mr-2" />
               <span>Heartbeats together (approx):</span>
-              <span className="text-gray-300">
+              <span className="text-gray-300 ml-auto">
                 {(totalMinutes * 70).toLocaleString()}
               </span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex">
+              <Smile className="w-4 h-5 mr-2" />
               <span>Smiles shared:</span>
-              <span className="text-gray-300">Countless</span>
+              <span className="text-gray-300 ml-auto">Countless</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex">
+              <UsersRound className="w-4 h-5 mr-2" />
               <span>Hugs given:</span>
-              <span className="text-gray-300">Not enough</span>
+              <span className="text-gray-300 ml-auto">Not enough</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex">
+              <Heart className="w-4 h-5 mr-2" />
               <span>Love level:</span>
-              <span className="text-gray-300">Infinite</span>
+              <span className="text-gray-200 ml-auto">
+                <Infinity className="w-4 h-5" />
+              </span>
             </div>
           </div>
         </div>
       </Card>
 
       {/* Anniversary Date */}
-      <Card className="p-4 text-center bg-gray-300 border border-gray-300">
+      <Card className="p-4 text-center border border-transparent">
         <div className="space-y-2">
-          <p className="text-gray-800 font-bold">
+          <p className="-mb-1 text-gray-400 font-bold">
             Our relationship started on:
           </p>
-          <p className="text-lg text-gray-800">
+          <p className="text-sm italic text-gray-500">
             {relationshipStart.toLocaleDateString("en-DE", {
               weekday: "long",
               year: "numeric",
