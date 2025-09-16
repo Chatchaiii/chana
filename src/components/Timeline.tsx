@@ -60,7 +60,6 @@ import P_infinite_4 from "../assets/images/timeline/infinite_4.jpeg";
 // config
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -234,8 +233,8 @@ function BlogPostCollapsed({
       whileTap={{ scale: 0.98 }}
       transition={{
         type: "spring",
-        stiffness: 1000,
-        damping: 100,
+        stiffness: 300,
+        damping: 30,
       }}
       className="bg-gray-900 border rounded-2xl shadow-lg px-6 py-4 flex items-center space-x-6 cursor-pointer mb-3"
       onClick={onExpand}
@@ -309,8 +308,8 @@ function BlogPostExpanded({
       }}
       transition={{
         type: "spring",
-        stiffness: 1000,
-        damping: 100,
+        stiffness: 300,
+        damping: 30,
       }}
     >
       <motion.div
@@ -321,8 +320,8 @@ function BlogPostExpanded({
         exit={{ borderRadius: 24 }}
         transition={{
           type: "spring",
-          stiffness: 1000,
-          damping: 100,
+          stiffness: 300,
+          damping: 30,
         }}
       >
         {/* Title always visible */}
@@ -419,14 +418,36 @@ function BlogPostExpanded({
 // Timeline
 export function Timeline({ onBack }: TimelineProps) {
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+  const scrollYRef = useRef<number>(0);
 
-  // Prevent background scroll when expanded
+  // Prevent background scroll and preserve scroll position when expanded,
+  // but keep the expanded post at its original position (expand in place)
   useEffect(() => {
     if (expandedIdx !== null) {
-      const original = document.body.style.overflow;
+      // Save scroll position
+      scrollYRef.current = window.scrollY;
+      // Prevent background scroll
+      const originalOverflow = document.body.style.overflow;
+      const originalPosition = document.body.style.position;
+      const originalTop = document.body.style.top;
+      const originalWidth = document.body.style.width;
+
       document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollYRef.current}px`;
+      document.body.style.width = "100%";
+
+      // Prevent touchmove on mobile
+      const preventTouch = (e: TouchEvent) => e.preventDefault();
+      document.body.addEventListener("touchmove", preventTouch, { passive: false });
+
       return () => {
-        document.body.style.overflow = original;
+        document.body.style.overflow = originalOverflow;
+        document.body.style.position = originalPosition;
+        document.body.style.top = originalTop;
+        document.body.style.width = originalWidth;
+        document.body.removeEventListener("touchmove", preventTouch);
+        window.scrollTo(0, scrollYRef.current);
       };
     }
   }, [expandedIdx]);

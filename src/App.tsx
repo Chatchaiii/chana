@@ -55,7 +55,7 @@ export default function App() {
         <div style={{ display: currentFeature === 'map' ? 'block' : 'none' }}>
           <LoveMap onBack={() => setCurrentFeature('home')} />
         </div>
-        
+
         <div style={{ display: currentFeature === 'user' ? 'block' : 'none' }}>
           <User onBack={() => setCurrentFeature('home')} />
         </div>
