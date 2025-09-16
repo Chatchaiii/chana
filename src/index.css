@@ -939,6 +939,18 @@
     margin-block: calc(var(--spacing) * 1);
   }
 
+  .-mt-1 {
+    margin-top: calc(var(--spacing) * -1);
+  }
+
+  .-mt-2 {
+    margin-top: calc(var(--spacing) * -2);
+  }
+
+  .-mt-3 {
+    margin-top: calc(var(--spacing) * -3);
+  }
+
   .-mt-4 {
     margin-top: calc(var(--spacing) * -4);
   }
@@ -1021,6 +1033,10 @@
 
   .-mb-5 {
     margin-bottom: calc(var(--spacing) * -5);
+  }
+
+  .mb-auto {
+    margin-bottom: auto;
   }
 
   .mb-1 {

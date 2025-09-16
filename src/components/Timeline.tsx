@@ -77,6 +77,7 @@ import {
   Undo2,
   Gem,
   Infinity as InfinityIcon,
+  X,
 } from "lucide-react";
 
 interface TimelineProps {
@@ -335,11 +336,11 @@ function BlogPostExpanded({
             </div>
             {/* Close button */}
             <button
-              className="relative -top-0.7 right-1 text-gray-200 text-3xl z-50 hover:text-white"
+              className="text-gray-200 text-3xl z-50 hover:text-white"
               onClick={onClose}
               aria-label="Close"
             >
-              ×
+              <X className="w-6 h-4" />
             </button>
           </div>
         {/* Images */}
@@ -393,18 +394,18 @@ function BlogPostExpanded({
               Hidden-Note
             </Button>
             {showNote && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
-                <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-sm relative border">
+              <div className="p-4 fixed inset-0 z-50 flex items-center justify-center bg-black" style={{ backgroundColor: "#0A0A0A" }}>
+                <div className="bg-gray-800 rounded-2xl p-6 w-full">
+                  <div className="text-gray-300 -mt-2">
+                    <ReactMarkdown>{noteText}</ReactMarkdown>
+                  </div>
                   <button
-                    className="absolute -top-1 right-2 text-gray-400 text-2xl"
+                    className="mt-4 flex items-center justify-center rounded-lg py-2 bg-gray-300 text-gray-700 text-2xl w-full cursor-pointer"
                     onClick={() => setShowNote(false)}
                     aria-label="Close"
                   >
-                    ×
+                    <X className="w-6 h-4" />
                   </button>
-                  <div className="text-gray-300">
-                    <ReactMarkdown>{noteText}</ReactMarkdown>
-                  </div>
                 </div>
               </div>
             )}
