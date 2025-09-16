@@ -335,7 +335,7 @@ function BlogPostExpanded({
             </div>
             {/* Close button */}
             <button
-              className="relative -top-1 right-1 text-gray-200 text-3xl z-50 hover:text-white"
+              className="relative -top-0.7 text-gray-200 text-3xl z-50 hover:text-white"
               onClick={onClose}
               aria-label="Close"
             >

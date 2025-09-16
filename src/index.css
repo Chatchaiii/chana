@@ -635,6 +635,42 @@
     inset-block: calc(var(--spacing) * 0);
   }
 
+  .-top-0\.1 {
+    top: calc(var(--spacing) * -0.1);
+  }
+
+  .-top-0\.2 {
+    top: calc(var(--spacing) * -0.2);
+  }
+
+  .-top-0\.3 {
+    top: calc(var(--spacing) * -0.3);
+  }
+
+  .-top-0\.4 {
+    top: calc(var(--spacing) * -0.4);
+  }
+
+  .-top-0\.5 {
+    top: calc(var(--spacing) * -0.5);
+  }
+
+  .-top-0\.6 {
+    top: calc(var(--spacing) * -0.6);
+  }
+
+  .-top-0\.7 {
+    top: calc(var(--spacing) * -0.7);
+  }
+
+  .-top-0\.8 {
+    top: calc(var(--spacing) * -0.8);
+  }
+
+  .-top-0\.9 {
+    top: calc(var(--spacing) * -0.9);
+  }
+
   .-top-1 {
     top: calc(var(--spacing) * -1);
   }
@@ -645,6 +681,10 @@
 
   .top-0 {
     top: calc(var(--spacing) * 0);
+  }
+
+  .top-0\.5 {
+    top: calc(var(--spacing) * 0.5);
   }
 
   .top-1\.5 {
