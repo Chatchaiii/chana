@@ -326,10 +326,10 @@ export function Homepage({ onNavigate }: HomepageProps) {
         <Calendar className="w-7 h-7 text-pink-500" />
         Today's plan
       </h1>
-      <div className="relative flex flex-col items-center">
+      <div className="flex flex-col items-center">
         {sortedTimetable.map((item, idx) => (
           <div
-            className="flex items-center w-full max-w-md"
+            className="flex items-center w-full"
             key={item.time + item.title}
           >
             {/* Wire/line on the left */}

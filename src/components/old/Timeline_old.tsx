@@ -58,11 +58,10 @@ import P_infinite_3 from "../assets/images/timeline/infinite_3.jpeg";
 import P_infinite_4 from "../assets/images/timeline/infinite_4.jpeg";
 
 // config
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
   Star,
@@ -77,7 +76,7 @@ import {
   MapPinned,
   Undo2,
   Gem,
-  Infinity as InfinityIcon,
+  Infinity
 } from "lucide-react";
 
 interface TimelineProps {
@@ -203,58 +202,25 @@ const blogPosts: BlogPostBlockProps[] = [
     date: "15.08.2025",
     text: T_infinite,
     imageUrls: [P_infinite_1, P_infinite_2, P_infinite_3, P_infinite_4],
-    icon: InfinityIcon,
+    icon: Infinity,
     noteText: H_infinite,
   },
 ];
 
 // BlogPostBlock
-function BlogPostCollapsed({
-  title,
-  date,
-  icon: Icon,
-  onExpand,
-}: {
-  title: string;
-  date: string;
-  icon: React.ElementType;
-  onExpand: () => void;
-}) {
-  return (
-    <motion.div
-      layoutId={`blogpost-${title}`}
-      transition={{
-        type: "spring",
-        stiffness: 1000,
-        damping: 100,
-      }}
-      className="bg-gray-800 rounded-xl shadow-lg px-6 py-6 flex items-center space-x-4 cursor-pointer mb-2"
-      onClick={onExpand}
-      style={{ overflow: "hidden" }}
-    >
-      <div className="p-2 rounded-full bg-gray-600 text-gray-300">
-        <Icon className="w-6 h-4" />
-      </div>
-      <div className="flex flex-col-2 items-center w-full">
-        <h2 className="text-xl font-bold text-gray-300">{title}</h2>
-        <span className="ml-auto text-sm text-gray-400">{date}</span>
-      </div>
-    </motion.div>
-  );
-}
-
-function BlogPostExpanded({
+function BlogPostBlock({
   title,
   date,
   text,
   imageUrls,
   icon: Icon,
   noteText,
-  onClose,
-}: BlogPostBlockProps & { onClose: () => void }) {
+}: BlogPostBlockProps) {
   const [current, setCurrent] = useState(0);
   const [showNote, setShowNote] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartX = useRef<number | null>(null);
+
   const hasMultipleImages = imageUrls.length > 1;
   const hasNoImage = imageUrls.length === 0;
 
@@ -271,7 +237,6 @@ function BlogPostExpanded({
   }, [current, imageUrls.length, hasMultipleImages]);
 
   // swipe gallery
-  const touchStartX = useRef<number | null>(null);
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!hasMultipleImages) return;
     touchStartX.current = e.touches[0].clientX;
@@ -290,198 +255,162 @@ function BlogPostExpanded({
   };
 
   return (
-    <motion.div
-      layoutId={`blogpost-${title}`}
-      className="fixed inset-0 z-100 flex justify-center"
-      style={{
-        pointerEvents: "auto",
-        background: "oklch(28.094% 0.00003 271.152)",
-        boxSizing: "border-box",
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-      }}
-    >
-      <motion.div
-        className="bg-gray-800 rounded-2xl p-10 mx-auto overflow-y-auto"
-        style={{ minHeight: 400 }}
-        initial={{ borderRadius: 24 }}
-        animate={{ borderRadius: 24 }}
-        exit={{ borderRadius: 24 }}
-        transition={{
-          type: "spring",
-          stiffness: 1000,
-          damping: 100,
-        }}
-      >
-        {/* Title always visible */}
-        <div className="flex items-center -mt-4 mb-6 space-x-3 w-full">
-          <div className="p-2 rounded-full bg-gray-600 text-white">
-            <Icon className="w-6 h-4" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-200">{title}</h2>
-          <span className="ml-auto text-sm text-gray-400">{date}</span>
-          {/* Close button */}
-          <button
-            className="relative -top-1 text-gray-300 text-3xl z-50 hover:text-white"
-            onClick={onClose}
-            aria-label="Close"
-          >
-            ×
-          </button>
+    <Card className="space-y-2 bg-gray-800 rounded-xl shadow-lg p-6 max-w-2xl mx-auto my-8">
+      <div className="flex items-center mb-4 space-x-3">
+        <div className="p-2 rounded-full bg-gray-600 text-white">
+          <Icon className="w-6 h-4" />
         </div>
-        {/* Images */}
-        {!hasNoImage && (
-          <div
-            className="relative w-full h-64 mb-6 rounded-lg overflow-hidden"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+        <h2 className="text-2xl font-bold text-gray-100">{title}</h2>
+        <span className="ml-auto text-sm text-gray-400">{date}</span>
+      </div>
+
+      {/* Images */}
+      {!hasNoImage && (
+        <div
+          className="relative w-full h-64 rounded-lg overflow-hidden mb-4"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {hasMultipleImages ? (
+            <>
+              <div
+                className="flex transition-transform duration-700 ease-in-out h-64"
+                style={{
+                  width: `${imageUrls.length * 100}%`,
+                  transform: `translateX(-${current * (100 / imageUrls.length)}%)`,
+                }}
+              >
+                {imageUrls.map((url, idx) => (
+                  <img
+                    key={idx}
+                    src={url}
+                    alt={`${title} ${idx + 1}`}
+                    className="w-full h-64 object-cover flex-shrink-0"
+                    style={{ width: `${100 / imageUrls.length}%` }}
+                  />
+                ))}
+              </div>
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">
+                {imageUrls.map((_, idx) => (
+                  <span
+                    key={idx}
+                    className={`inline-block w-2 h-2 rounded-full transition-all duration-300 ${idx === current
+                      ? "bg-pink-500 scale-110"
+                      : "bg-gray-400 opacity-50"
+                      }`}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <img
+              src={imageUrls[0]}
+              alt={title}
+              className="w-full h-64 object-cover rounded-lg"
+            />
+          )}
+        </div>
+      )}
+
+      <div className="prose prose-invert text-gray-300">
+        <ReactMarkdown>{text}</ReactMarkdown>
+      </div>
+
+      {noteText && noteText.trim().length > 0 && (
+        <>
+          <Button
+            className="bg-gray-300 text-gray-800 mb-2"
+            onClick={() => setShowNote(true)}
           >
-            {hasMultipleImages ? (
-              <>
-                <div
-                  className="flex transition-transform duration-700 ease-in-out h-64"
-                  style={{
-                    width: `${imageUrls.length * 100}%`,
-                    transform: `translateX(-${current * (100 / imageUrls.length)}%)`,
-                  }}
+            Hidden-Note
+          </Button>
+          {showNote && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+              <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl relative border">
+                <button
+                  className="absolute top-0 right-2 text-gray-400 text-2xl"
+                  onClick={() => setShowNote(false)}
+                  aria-label="Close"
                 >
-                  {imageUrls.map((url, idx) => (
-                    <img
-                      key={idx}
-                      src={url}
-                      alt={`${title} ${idx + 1}`}
-                      className="w-full h-64 object-cover flex-shrink-0"
-                      style={{ width: `${100 / imageUrls.length}%` }}
-                    />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <img
-                src={imageUrls[0]}
-                alt={title}
-                className="w-full h-64 object-cover flex-shrink-0"
-                style={{ width: `${100 / imageUrls.length}%` }}
-              />
-            )}
-          </div>
-        )}
-
-        <div className="text-gray-300 w-full mb-6">
-          <ReactMarkdown>{text}</ReactMarkdown>
-        </div>
-
-        {noteText && noteText.trim().length > 0 && (
-          <>
-            <Button
-              className="bg-gray-300 text-gray-800 -mb-4 w-full"
-              onClick={() => setShowNote(true)}
-            >
-              Hidden-Note
-            </Button>
-            {showNote && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
-                <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl relative border">
-                  <button
-                    className="absolute -top-1 right-2 text-gray-400 text-2xl"
-                    onClick={() => setShowNote(false)}
-                    aria-label="Close"
-                  >
-                    ×
-                  </button>
-                  <div className="text-gray-300">
-                    <ReactMarkdown>{noteText}</ReactMarkdown>
-                  </div>
+                  ×
+                </button>
+                <div className="text-gray-300">
+                  <ReactMarkdown>{noteText}</ReactMarkdown>
                 </div>
               </div>
-            )}
-          </>
-        )}
-      </motion.div>
-    </motion.div>
+            </div>
+          )}
+        </>
+      )}
+    </Card>
   );
 }
 
 // Timeline
 export function Timeline({ onBack }: TimelineProps) {
-  const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
-  // Prevent background scroll when expanded
-  useEffect(() => {
-    if (expandedIdx !== null) {
-      const original = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = original;
-      };
-    }
-  }, [expandedIdx]);
-
-  // Escape key closes expanded
+  // Escape key = back
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && expandedIdx !== null) {
-        setExpandedIdx(null);
-      }
-      if (e.key === "Escape" && expandedIdx === null) {
-        onBack();
+      if (e.key === "Escape") {
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [expandedIdx, onBack]);
+  }, [onBack]);
+
+  // swipe right = back
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    if (deltaX > 80) {
+      onBack();
+    }
+    touchStartX.current = null;
+  };
+
+  // auto-play videos
+  useEffect(() => {
+    const videos = document.querySelectorAll("video");
+    videos.forEach((video) => {
+      video.setAttribute("playsinline", "");
+      video.setAttribute("muted", "true");
+      video.autoplay = true;
+      video.loop = true;
+      video.muted = true;
+      video.play().catch(() => { });
+    });
+  }, []);
 
   return (
-    <div className="space-y-6 min-h-screen flex flex-col p-6 bg-gray-900 relative">
+    <div
+      className="space-y-6 min-h-screen flex flex-col p-6 bg-gray-900"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Header */}
-      <AnimatePresence>
-        {expandedIdx === null && (
-          <motion.div
-            key="timeline-header"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="flex items-center space-x-4 mb-8 bg-gray-900 z-10"
-          >
-            <Button
-              onClick={onBack}
-              variant=""
-              size="sm"
-              className="rounded-full bg-grey-800 hover:bg-gray-700"
-            >
-              <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
-            </Button>
-            <h1 className="text-2xl text-gray-300 font-bold">Timeline</h1>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Blog Posts List (always rendered) */}
-      <div className="space-y-6 flex-1 relative z-0">
-        {blogPosts.map((post, idx) => (
-          <BlogPostCollapsed
-            key={idx}
-            title={post.title}
-            date={post.date}
-            icon={post.icon}
-            onExpand={() => setExpandedIdx(idx)}
-          />
-        ))}
+      <div className="flex items-center space-x-4 mb-8 bg-gray-900">
+        <Button
+          onClick={onBack}
+          variant=""
+          size="sm"
+          className="rounded-full bg-grey-800 hover:bg-gray-700"
+        >
+          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
+        </Button>
+        <h1 className="text-2xl text-gray-300 font-bold">Timeline</h1>
       </div>
 
-      {/* Expanded Post Overlay (only overlays, does not unmount list) */}
-      <AnimatePresence>
-        {expandedIdx !== null && (
-          <BlogPostExpanded
-            {...blogPosts[expandedIdx]}
-            onClose={() => setExpandedIdx(null)}
-          />
-        )}
-      </AnimatePresence>
+      {/* Blog Posts */}
+      <div className="space-y-6 flex-1">
+        {blogPosts.map((post, idx) => (
+          <BlogPostBlock key={idx} {...post} />
+        ))}
+      </div>
     </div>
   );
 }

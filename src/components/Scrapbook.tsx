@@ -145,7 +145,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
             <h2 className="text-lg font-bold font-mono text-gray-300 mb-2">
               {date}
             </h2>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               {itemsForDate.map((item) => (
                 <Card
                   key={item.id}

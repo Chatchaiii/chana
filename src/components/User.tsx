@@ -294,28 +294,32 @@ export function User({ onBack }: { onBack: () => void }) {
           <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
         </Button>
         <h1 className="absolute left-1/2 transform -translate-x-1/2 text-3xl font-bold text-white flex items-center select-none mx-auto">
-          CH
-          <motion.div
-            animate={{
-              scale: [1, 1.5, 1.5, 1, 1],
-              rotate: [0, 0, 0, 0, 0],
-              borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-            }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              times: [0, 0.2, 0.5, 0.8, 1],
-              repeat: Infinity,
-              repeatDelay: 1,
-            }}
-          >
-            <Heart
-              className="w-8 h-7 text-pink-600 mx-1"
-              fill="currentcolor"
-              stroke="currentcolor"
-            />
-          </motion.div>
-          NA
+            CH
+            <motion.div
+              drag
+              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} // keeps it constrained
+              dragElastic={0.2} // controls how far it can be pulled beyond constraints
+              animate={{
+                scale: [1, 1.5, 1.5, 1, 1],
+                rotate: [0, 0, 0, 0, 0],
+                borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+              }}
+              transition={{
+                duration: 2,
+                ease: "easeInOut",
+                times: [0, 0.2, 0.5, 0.8, 1],
+                repeat: Infinity,
+                repeatDelay: 1,
+              }}
+              className="relative z-100"
+            >
+              <Heart
+                className="w-8 h-7 text-pink-600 mx-1"
+                fill="currentcolor"
+                stroke="currentcolor"
+              />
+            </motion.div>
+            NA
         </h1>
       </div>
 
