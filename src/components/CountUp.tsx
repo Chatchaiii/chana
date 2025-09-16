@@ -40,7 +40,7 @@ export function CountUp({ onBack }: CountUpProps) {
 
     if (deltaX > 80) {
       // swipe right threshold
-      onBack();
+      // onBack();
     }
 
     setTouchStartX(null);

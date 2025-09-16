@@ -13,6 +13,7 @@ import T_birthday_2 from "../assets/text/timeline/birthday_2.md?raw";
 import T_ldr from "../assets/text/timeline/ldr.md?raw";
 import T_return from "../assets/text/timeline/return.md?raw";
 import T_eternal from "../assets/text/timeline/eternal.md?raw";
+import T_infinite from "../assets/text/timeline/infinite.md?raw";
 
 // hidden notes
 import H_the_start from "../assets/text/timeline/hidden/h_the_start.md?raw";
@@ -21,6 +22,7 @@ import H_the_day from "../assets/text/timeline/hidden/h_the_day.md?raw";
 import H_flight from "../assets/text/timeline/hidden/h_flight.md?raw";
 import H_birthday from "../assets/text/timeline/hidden/h_birthday.md?raw";
 import H_birthday_2 from "../assets/text/timeline/hidden/h_birthday_2.md?raw";
+import H_infinite from "../assets/text/timeline/hidden/h_infinite.md?raw";
 
 // jpeg
 import P_the_start from "../assets/images/timeline/the_start.jpeg";
@@ -50,6 +52,10 @@ import P_birthday_2_2 from "../assets/images/timeline/birthday_2_2.jpeg";
 import P_ldr from "../assets/images/timeline/ldr.jpeg";
 import P_return from "../assets/images/timeline/return.jpeg";
 import P_eternal from "../assets/images/timeline/eternal.jpeg";
+import P_infinite_1 from "../assets/images/timeline/infinite_1.jpeg";
+import P_infinite_2 from "../assets/images/timeline/infinite_2.jpeg";
+import P_infinite_3 from "../assets/images/timeline/infinite_3.jpeg";
+import P_infinite_4 from "../assets/images/timeline/infinite_4.jpeg";
 
 // config
 import React, { useState, useEffect, useRef } from "react";
@@ -70,6 +76,7 @@ import {
   MapPinned,
   Undo2,
   Gem,
+  Infinity
 } from "lucide-react";
 
 interface TimelineProps {
@@ -189,6 +196,14 @@ const blogPosts: BlogPostBlockProps[] = [
     text: T_eternal,
     imageUrls: [P_eternal],
     icon: Gem,
+  },
+  {
+    title: "Infinite",
+    date: "15.08.2025",
+    text: T_infinite,
+    imageUrls: [P_infinite_1, P_infinite_2, P_infinite_3, P_infinite_4],
+    icon: Infinity,
+    noteText: H_infinite,
   },
 ];
 

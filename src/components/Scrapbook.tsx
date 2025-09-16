@@ -119,7 +119,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
         if (touchStartX !== null) {
           const deltaX = e.changedTouches[0].clientX - touchStartX;
           if (deltaX > 100) {
-            onBack();
+            // onBack();
           }
         }
         setTouchStartX(null);

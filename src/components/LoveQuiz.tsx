@@ -91,9 +91,9 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
     if (touchStartX === null) return;
     const diffX = e.changedTouches[0].clientX - touchStartX;
     if (diffX > 100) {
-      onBack(); // swipe right → back
+      // onBack(); // swipe right → back
     } else if (diffX < -100 && answered) {
-      handleNext(); // swipe left → next if answered
+      // handleNext(); // swipe left → next if answered
     }
     setTouchStartX(null);
   };

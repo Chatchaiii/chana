@@ -272,7 +272,7 @@ export function User({ onBack }: { onBack: () => void }) {
     if (touchStartX.current === null) return;
     const deltaX = e.changedTouches[0].clientX - touchStartX.current;
     if (deltaX > 80) {
-      onBack();
+      // onBack();
     }
     touchStartX.current = null;
   };

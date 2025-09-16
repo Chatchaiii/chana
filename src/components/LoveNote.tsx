@@ -37,7 +37,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
     if (touchStartX === null) return;
     const diffX = e.changedTouches[0].clientX - touchStartX;
     if (diffX > 100) {
-      onBack();
+      // onBack();
     }
     setTouchStartX(null);
   };

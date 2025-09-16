@@ -33,7 +33,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
     const diffX = touchEndX - touchStartX;
 
     if (diffX > 100) {
-      onBack(); // Trigger back on swipe right
+      // onBack(); // Trigger back on swipe right
     }
     setTouchStartX(null);
   };
