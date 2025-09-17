@@ -533,7 +533,8 @@ export function Timeline({ onBack }: TimelineProps) {
   }, [pendingIdx, imagesLoaded]);
 
   return (
-    <div className="relative min-h-screen flex flex-col p-4 bg-gray-900 mt-2">
+    <div>
+      <div className="relative min-h-screen flex flex-col p-4 bg-gray-900 mt-2">
       {/* Header */}
       {/* <motion.div
         drag
@@ -592,7 +593,7 @@ export function Timeline({ onBack }: TimelineProps) {
           />
         )}
       </AnimatePresence>
-
+      </div>
       <div className="fixed flex-col-2 select-none">
         <motion.div
           drag
