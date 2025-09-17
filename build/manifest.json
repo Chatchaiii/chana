@@ -5,6 +5,7 @@
   "display": "standalone",
   "background_color": "#0A0A0A",
   "theme_color": "#0A0A0A",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/assets/appIcon/icon_chana_192.png",
@@ -30,5 +31,7 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "prefer_related_applications": false,
+  "scope": "/"
 }
