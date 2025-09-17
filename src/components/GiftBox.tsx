@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowLeft, Gift, Heart, Star, Sparkles, Package } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface GiftBoxProps {
   onBack: () => void;
@@ -98,17 +99,38 @@ export function GiftBox({ onBack }: GiftBoxProps) {
       onTouchEnd={handleTouchEnd}
     >
       {/* Header */}
-      <div className="flex items-center space-x-4">
-        <Button
-          onClick={onBack}
-          variant=""
-          size="sm"
-          className="rounded-full bg-grey-800 hover:bg-gray-700"
-        >
-          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
-        </Button>
-        <h1 className="text-2xl text-orange-600">Virtual Gift Box</h1>
-      </div>
+      <motion.div
+        drag
+        dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+        dragElastic={0.2}
+        whileHover={{
+          scale: [null, 1.01, null],
+          transition: {
+            duration: 0.3,
+            times: [0, 0.6, 1],
+            ease: ["easeInOut", "easeOut"],
+          },
+        }}
+        whileTap={{ scale: 0.98 }}
+        transition={{
+          duration: 0.2,
+          ease: "easeOut",
+        }}
+      >
+        <div className="grid grid-cols-1 items-center select-none">
+          <Card className="border border-8">
+            <Button
+              onClick={onBack}
+              variant="none"
+              size="sm"
+              className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
+            >
+              <ArrowLeft className="w-5 h-5 text-gray-200" />
+            <span className="ml-4 text-2xl text-gray-200 font-bold">Gift Box</span>
+            </Button>
+          </Card>
+        </div>
+      </motion.div>
 
       {/* Instructions */}
       <Card className="p-4 bg-orange-50 border-orange-200">

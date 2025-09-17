@@ -16,6 +16,7 @@ import ask from '../assets/text/notes/ask.md?raw';
 import her_zaman from '../assets/text/notes/her_zaman.md?raw';
 import kal_boeyle from '../assets/text/notes/kal_boeyle.md?raw';
 import oezel from '../assets/text/notes/oezel.md?raw';
+import { motion } from 'framer-motion';
 
 interface LoveNoteProps {
   onBack: () => void;
@@ -73,16 +74,38 @@ export function LoveNote({ onBack }: LoveNoteProps) {
       onTouchEnd={handleTouchEnd}
     >
       {/* Header */}
-      <div className="flex items-center space-x-4">
-        <Button
-          onClick={onBack}
-          size="sm"
-          className="rounded-full bg-gray-900 hover:bg-gray-700"
-        >
-          <ArrowLeft className="w-5 h-5 text-gray-300" />
-        </Button>
-        <h1 className="text-2xl text-gray-300 font-bold">Hidden Notes</h1>
-      </div>
+      <motion.div
+        drag
+        dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+        dragElastic={0.2}
+        whileHover={{
+          scale: [null, 1.01, null],
+          transition: {
+            duration: 0.3,
+            times: [0, 0.6, 1],
+            ease: ["easeInOut", "easeOut"],
+          },
+        }}
+        whileTap={{ scale: 0.98 }}
+        transition={{
+          duration: 0.2,
+          ease: "easeOut",
+        }}
+      >
+        <div className="grid grid-cols-1 items-center select-none">
+          <Card className="border border-8">
+            <Button
+              onClick={onBack}
+              variant="none"
+              size="sm"
+              className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
+            >
+              <ArrowLeft className="w-5 h-5 text-gray-200" />
+            <span className="ml-4 text-2xl text-gray-200 font-bold">Hidden Notes</span>
+            </Button>
+          </Card>
+        </div>
+      </motion.div>
 
       {/* Instructions */}
       <Card className="p-4 bg-gray-800">
@@ -161,12 +184,12 @@ export function LoveNote({ onBack }: LoveNoteProps) {
       </div>
 
       {/* Progress */}
-      <Card className="p-4 bg-pink-500">
+      <Card className="p-4 bg-pink-600">
         <div className="text-center space-y-2">
           <p className="text-gray-200 font-bold">
             Notes Unlocked: {unlockedNotes.length}/{loveNotes.length}
           </p>
-          <div className="w-full bg-pink-500 rounded-full h-2">
+          <div className="w-full bg-pink-600 rounded-full h-2">
             <div
               className="bg-gray-200 h-2 rounded-full transition-all duration-300"
               style={{ width: `${(unlockedNotes.length / loveNotes.length) * 100}%` }}

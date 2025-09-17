@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowLeft, Heart, CheckCircle, XCircle, RotateCw, House } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface LoveQuizProps {
   onBack: () => void;
@@ -102,12 +103,38 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
     return (
       <div className="p-6 space-y-6" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         {/* Header */}
-        <div className="flex items-center space-x-4">
-          <Button onClick={onBack} variant="ghost" size="sm">
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-          <h1 className="text-2xl text-gray-300">Quiz Results</h1>
-        </div>
+        <motion.div
+          drag
+          dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+          dragElastic={0.2}
+          whileHover={{
+            scale: [null, 1.01, null],
+            transition: {
+              duration: 0.3,
+              times: [0, 0.6, 1],
+              ease: ["easeInOut", "easeOut"],
+            },
+          }}
+          whileTap={{ scale: 0.98 }}
+          transition={{
+            duration: 0.2,
+            ease: "easeOut",
+          }}
+        >
+          <div className="grid grid-cols-1 items-center select-none">
+            <Card className="border border-8">
+              <Button
+                onClick={onBack}
+                variant="none"
+                size="sm"
+                className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
+              >
+                <ArrowLeft className="w-5 h-5 text-gray-200" />
+              <span className="ml-4 text-2xl text-gray-200 font-bold">Quiz</span>
+              </Button>
+            </Card>
+          </div>
+        </motion.div>
 
         {/* Results */}
         <Card className="p-6 text-center space-y-6">
@@ -142,12 +169,38 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
     >
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <Button onClick={onBack} size="sm" className="rounded-full bg-gray-900 hover:bg-gray-700">
-            <ArrowLeft className="w-5 h-5 text-gray-300" />
-          </Button>
-          <h1 className="text-2xl text-gray-300 font-bold">Quiz</h1>
-        </div>
+        <motion.div
+          drag
+          dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+          dragElastic={0.2}
+          whileHover={{
+            scale: [null, 1.03, null],
+            transition: {
+              duration: 0.3,
+              times: [0, 0.6, 1],
+              ease: ["easeInOut", "easeOut"],
+            },
+          }}
+          whileTap={{ scale: 0.98 }}
+          transition={{
+            duration: 0.2,
+            ease: "easeOut",
+          }}
+        >
+          <div className="grid grid-cols-1 items-center select-none">
+            <Card className="border border-8">
+              <Button
+                onClick={onBack}
+                variant="none"
+                size="sm"
+                className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
+              >
+                <ArrowLeft className="w-5 h-5 text-gray-200" />
+              <span className="ml-4 text-2xl text-gray-200 font-bold">Quiz</span>
+              </Button>
+            </Card>
+          </div>
+        </motion.div>
         <div className="text-sm text-gray-500">
           {currentQuestion + 1}/{questions.length}
         </div>

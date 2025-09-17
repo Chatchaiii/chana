@@ -11,6 +11,7 @@ import {
   Smile,
   UsersRound,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface CountUpProps {
   onBack: () => void;
@@ -106,30 +107,55 @@ export function CountUp({ onBack }: CountUpProps) {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Header */}
-      <div className="flex items-center space-x-4">
-        <Button
-          onClick={onBack}
-          variant=""
-          size="sm"
-          className="rounded-full bg-grey-800 hover:bg-gray-700"
-        >
-          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
-        </Button>
-        <h1 className="text-2xl text-gray-300 font-bold">Count-up</h1>
-      </div>
+      <motion.div
+        drag
+        dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+        dragElastic={0.2}
+        whileHover={{
+          scale: [null, 1.01, null],
+          transition: {
+            duration: 0.3,
+            times: [0, 0.6, 1],
+            ease: ["easeInOut", "easeOut"],
+          },
+        }}
+        whileTap={{ scale: 0.98 }}
+        transition={{
+          duration: 0.2,
+          ease: "easeOut",
+        }}
+      >
+        <div className="grid grid-cols-1 items-center select-none">
+          <Card className="border border-8">
+            <Button
+              onClick={onBack}
+              variant="none"
+              size="sm"
+              className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
+            >
+              <ArrowLeft className="w-5 h-5 text-gray-200" />
+            <span className="ml-4 text-2xl text-gray-200 font-bold">Count-up</span>
+            </Button>
+          </Card>
+        </div>
+      </motion.div>
 
       {/* Main Counter */}
       <Card className="p-6 bg-gray-800">
         <div className="text-center space-y-4">
           <div>
-            <div className="flex items-center mb-5 p-3">
-              <Heart className="w-12 h-12 text-pink-500 mx-auto" />
-              <h2 className="text-2xl text-gray-300 font-bold mx-auto">
+            <div className="flex items-center justify-between mb-5 p-3">
+              <Heart 
+                className="h-6 text-pink-500"
+              />
+              <h2 className="text-xl text-gray-300 font-bold">
                 We've been together for
               </h2>
+              <Heart 
+                className="h-6 text-pink-500"
+              />
             </div>
-            <div className="grid grid-cols-2 gap-4 text-center">
+            <div className="grid grid-cols-4 gap-4 text-center font-bold">
               <div className="space-y-1">
                 <div className="text-3xl text-gray-300">{days}</div>
                 <div className="text-sm text-gray-300">Days</div>
@@ -158,7 +184,7 @@ export function CountUp({ onBack }: CountUpProps) {
           <Card key={index} className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <milestone.icon className={`w-6 h-6 ${milestone.color}`} />
+                <milestone.icon className={`w-6 h-6 text-pink-500`} />
                 <span className="text-gray-300">{milestone.label}</span>
               </div>
               <span className={`text-2xl ${milestone.color}`}>
@@ -177,24 +203,24 @@ export function CountUp({ onBack }: CountUpProps) {
           </h3>
           <div className="space-y-3 text-sm text-gray-300">
             <div className="flex">
-              <Activity className="w-4 h-5 mr-2" />
+              <Activity className="w-4 h-5 mr-2 text-pink-500" />
               <span>Heartbeats together (approx):</span>
               <span className="text-gray-300 ml-auto">
                 {(totalMinutes * 70).toLocaleString()}
               </span>
             </div>
             <div className="flex">
-              <Smile className="w-4 h-5 mr-2" />
+              <Smile className="w-4 h-5 mr-2 text-pink-500" />
               <span>Smiles shared:</span>
               <span className="text-gray-300 ml-auto">Countless</span>
             </div>
             <div className="flex">
-              <UsersRound className="w-4 h-5 mr-2" />
+              <UsersRound className="w-4 h-5 mr-2 text-pink-500" />
               <span>Hugs given:</span>
               <span className="text-gray-300 ml-auto">Not enough</span>
             </div>
             <div className="flex">
-              <Heart className="w-4 h-5 mr-2" />
+              <Heart className="w-4 h-5 mr-2 text-pink-500" />
               <span>Love level:</span>
               <span className="text-gray-200 ml-auto">
                 <Infinity className="w-4 h-5" />

@@ -21,6 +21,7 @@ import {
   Image,
   User,
   Lock,
+  Users,
 } from "lucide-react";
 import { FeatureType } from "../App";
 import Markdown from "react-markdown";
@@ -176,7 +177,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
               >
                 <Button
                   onClick={() => onNavigate("password")}
-                  className="flexitems-center bg-transparent font-bold text-gray-300 select-none rounded-full"
+                  className="flexitems-center bg-transparent font-bold text-gray-300 select-none rounded-full cursor-pointer"
                   variant="none"
                 >
                   <Lock className="text-gray-300" />
@@ -206,7 +207,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
               className="relative z-100"
             >
               <Heart
-                className="w-8 h-7 text-pink-600 mx-1"
+                className="w-8 h-7 text-pink-600 mx-1 cursor-pointer"
                 fill="currentcolor"
                 stroke="currentcolor"
               />
@@ -233,10 +234,10 @@ export function Homepage({ onNavigate }: HomepageProps) {
               >
                 <Button
                   onClick={() => onNavigate("user")}
-                  className="flexitems-center bg-gray-800 font-bold text-gray-300 select-none rounded-full"
+                  className="flexitems-center bg-gray-800 font-bold text-gray-300 select-none rounded-full cursor-pointer"
                   variant="none"
                 >
-                  <User className="text-pink-600" />
+                  <Users className="text-pink-600" />
                 </Button>
               </motion.div>
             </Card>
@@ -312,7 +313,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
             <Card key={feature.id}>
               <Button
                 onClick={() => onNavigate(feature.id)}
-                className="w-full flex items-left justify-start space-x-2 p-6 select-none text-gray-300"
+                className="w-full flex items-left justify-start space-x-2 p-6 select-none text-gray-300 cursor-pointer"
                 variant="none"
               >
                 <feature.icon className="ml-1 text-gray-300 font-bold" />

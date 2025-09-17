@@ -38,6 +38,7 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { ArrowLeft } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { motion } from "framer-motion";
 
 interface ScrapbookProps {
   onBack: () => void;
@@ -126,17 +127,38 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
       }}
     >
       {/* Header */}
-      <div className="flex items-center space-x-4">
-        <Button
-          onClick={onBack}
-          variant=""
-          size="sm"
-          className="rounded-full bg-gray-900 hover:bg-gray-700"
-        >
-          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
-        </Button>
-        <h1 className="text-2xl text-gray-300 font-bold">Scrapbook</h1>
-      </div>
+      <motion.div
+        drag
+        dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+        dragElastic={0.2}
+        whileHover={{
+          scale: [null, 1.01, null],
+          transition: {
+            duration: 0.3,
+            times: [0, 0.6, 1],
+            ease: ["easeInOut", "easeOut"],
+          },
+        }}
+        whileTap={{ scale: 0.98 }}
+        transition={{
+          duration: 0.2,
+          ease: "easeOut",
+        }}
+      >
+        <div className="grid grid-cols-1 items-center select-none">
+          <Card className="border border-8">
+            <Button
+              onClick={onBack}
+              variant="none"
+              size="sm"
+              className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
+            >
+              <ArrowLeft className="w-5 h-5 text-gray-200" />
+            <span className="ml-4 text-2xl text-gray-200 font-bold">Scrapbook</span>
+            </Button>
+          </Card>
+        </div>
+      </motion.div>
 
       {/* Grouped Sections */}
       <div className="space-y-6">
@@ -145,15 +167,15 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
             <h2 className="text-lg font-bold font-mono text-gray-300 mb-2">
               {date}
             </h2>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 gap-3">
               {itemsForDate.map((item) => (
                 <Card
                   key={item.id}
                   className="p-2 cursor-pointer hover:shadow-lg transition-shadow"
                   onClick={() => setSelectedId(item.id)}
                 >
-                  <div className="space-y-2">
-                    <div className="aspect-square rounded-lg overflow-hidden">
+                  <div className="flex items-center">
+                    <div className="w-16 aspect-square rounded-lg overflow-hidden">
                       {item.type === "video" ? (
                         <video
                           src={item.src}
@@ -172,7 +194,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
                         />
                       )}
                     </div>
-                    <div className="text-center">
+                    <div className="ml-4">
                       <p className="font-bold text-sm text-gray-400">{item.caption}</p>
                     </div>
                   </div>

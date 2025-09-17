@@ -120,17 +120,38 @@ export function LoveMap({ onBack }: LoveMapProps) {
       onTouchEnd={handleTouchEnd}
     >
       {/* Header */}
-      <div className="flex items-center space-x-4">
-        <Button
-          onClick={onBack}
-          variant=""
-          size="sm"
-          className="rounded-full bg-grey-300 hover:bg-gray-700"
-        >
-          <ArrowLeft className="w-5 h-5 bg-gray-900 text-gray-300" />
-        </Button>
-        <h1 className="text-2xl text-gray-300 font-bold">Map</h1>
-      </div>
+       <motion.div
+         drag
+         dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+         dragElastic={0.2}
+         whileHover={{
+           scale: [null, 1.01, null],
+           transition: {
+             duration: 0.3,
+             times: [0, 0.6, 1],
+             ease: ["easeInOut", "easeOut"],
+           },
+         }}
+         whileTap={{ scale: 0.98 }}
+         transition={{
+           duration: 0.2,
+           ease: "easeOut",
+         }}
+       >
+         <div className="grid grid-cols-1 items-center select-none">
+           <Card className="border border-8">
+             <Button
+               onClick={onBack}
+               variant="none"
+               size="sm"
+               className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
+             >
+               <ArrowLeft className="w-5 h-5 text-gray-200" />
+             <span className="ml-4 text-2xl text-gray-200 font-bold">Map</span>
+             </Button>
+           </Card>
+         </div>
+       </motion.div>
 
       {/* Instructions */}
       <Card className="p-4 bg-gray-800">
@@ -157,19 +178,32 @@ export function LoveMap({ onBack }: LoveMapProps) {
           </div>
 
           {/* Location Pins */}
-          {loveLocations.map((location) => (
+          {loveLocations.map((location, idx) => (
             <motion.div
+              key={location.id}
               drag
-              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} // keeps it constrained
-              dragElastic={0.2} // controls how far it can be pulled beyond constraints
+              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+              dragElastic={0.2}
               className="absolute"
               style={{
                 left: `${location.coordinates.x}%`,
                 top: `${location.coordinates.y}%`,
               }}
+              whileTap={{
+                zIndex: 50,
+                scale: 1.15,
+              }}
+              animate={{
+                y: [0, -2, 0, 2, 0], // float up and down
+                x: [0, -2, 0, 2, 0], // float right and left
+              }}
+              transition={{
+                duration: 3 + (idx % 3) * 0.5, // slight variation per pin
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
               <button
-                key={location.id}
                 onClick={() => setSelectedLocation(location.id)}
                 className={`absolute transform -translate-x-1/2 -translate-y-1/2 ${location.color} text-white rounded-full p-2 shadow-lg hover:scale-110 transition-transform z-10`}
                 style={{
@@ -182,10 +216,10 @@ export function LoveMap({ onBack }: LoveMapProps) {
             </motion.div>
           ))}
         </div>
-      </Card >
-      \
+      </Card>
+
       {/* Location List */}
-      < div className="space-y-3" >
+      <div className="space-y-3">
         <h2 className="text-gray-300 font-bold">Our Love Journey Locations</h2>
         {
           loveLocations.map((location) => (
