@@ -303,7 +303,7 @@ function BlogPostExpanded({
   return (
     <motion.div
       layoutId={`blogpost-${title}`}
-      className="border fixed inset-0 shadow-lg z-100 flex justify-center"
+      className="fixed inset-0 shadow-lg z-100 flex justify-center"
       style={{
         pointerEvents: "auto",
         background: "#0A0A0A",
@@ -328,15 +328,15 @@ function BlogPostExpanded({
         }}
       >
         {/* Title always visible */}
-        <div className="p-2">
-          <div>
+        <div className="mt-2">
+          <div className="">
               {/* Close button */}
               <button
                 className="w-full mb-4"
                 onClick={onClose}
                 aria-label="Close"
               >
-                <div className="flex items-center text-gray-200 bg-gray-900 rounded-2xl p-2">
+                <div className="flex items-center text-gray-200 bg-gray-900 rounded-2xl">
                   <div className="ml-2 mr-3">
                     <Icon className="w-6 h-4" />
                   </div>
@@ -347,7 +347,7 @@ function BlogPostExpanded({
                   <X className="mr-1 w-6 h-4" />
                 </div>
               </button>
-            </div>
+          </div>
           {/* Images */}
           {!hasNoImage && (
             <div
