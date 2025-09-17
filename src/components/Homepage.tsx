@@ -310,7 +310,9 @@ export function Homepage({ onNavigate }: HomepageProps) {
               ease: "easeOut",
             }}
           >
-            <Card key={feature.id}>
+            <Card key={feature.id}
+              className={`rounded-2xl`}
+            >
               <Button
                 onClick={() => onNavigate(feature.id)}
                 className="w-full flex items-left justify-start space-x-2 p-6 select-none text-gray-300 cursor-pointer"

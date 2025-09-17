@@ -279,7 +279,7 @@ export function User({ onBack }: { onBack: () => void }) {
 
   return (
     <div
-      className="p-6 space-y-6"
+      className="mb-12 p-6 space-y-6"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >

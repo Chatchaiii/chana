@@ -11,9 +11,34 @@ import { LoveMap } from './components/LoveMap';
 import { User } from './components/User';
 import { motion, scale, styleEffect } from 'framer-motion';
 import { Card } from './components/ui/card';
-import { ArrowLeft } from 'lucide-react';
+import { 
+ArrowLeft,
+House,
+Clock4,
+Camera,
+Brain,
+Heart,
+Mail,
+Map,
+Users,
+Lock,
+Gift,
+} from 'lucide-react';
 
 export type FeatureType = 'home' | 'timeline' | 'scrapbook' | 'quiz' | 'countup' | 'note' | 'password' | 'gifts' | 'map' | 'user';
+
+const featureIconMap: Record<FeatureType, React.ElementType> = {
+  home: House,
+  timeline: Clock4,
+  scrapbook: Camera,
+  quiz: Brain,
+  countup: Heart,
+  note: Mail,
+  password: Lock,
+  gifts: Gift,
+  map: Map,
+  user: Users,
+};
 
 export default function App() {
   const [currentFeature, setCurrentFeature] = useState<FeatureType>('password');
@@ -21,21 +46,22 @@ export default function App() {
   // Handler for floating back button
   const onBack = () => setCurrentFeature('home');
 
-  // Helper to display current feature name
+  const FeatureIcon = featureIconMap[currentFeature];
+
   const featureDisplayName = (() => {
-    switch (currentFeature) {
-      case "home": return "Home";
-      case "timeline": return "Timeline";
-      case "scrapbook": return "Scrapbook";
-      case "quiz": return "Quiz";
-      case "countup": return "Count Up";
-      case "note": return "Hidden Notes";
-      case "password": return "Password";
-      case "gifts": return "Gifts";
-      case "map": return "Love Map";
-      case "user": return "User";
-      default: return "";
-    }
+  switch (currentFeature) {
+    case "home": return "Home";
+    case "timeline": return "Timeline";
+    case "scrapbook": return "Scrapbook";
+    case "quiz": return "Quiz";
+    case "countup": return "Count-Up";
+    case "note": return "Hidden Notes";
+    case "password": return "Password";
+    case "gifts": return "Gifts";
+    case "map": return "Map";
+    case "user": return "User";
+    default: return "";
+  }
   })();
 
   return (
@@ -93,8 +119,21 @@ export default function App() {
 
         <div style={{ 
           display: currentFeature !== 'password' && currentFeature !== 'home' ? 'block' : 'none'
-          }}
-          >
+        }}>
+          {/* Dimming overlay for bottom of screen */}
+          <div
+            className="pointer-events-none fixed left-0 right-0 bottom-0 z-[40]"
+            style={{
+              height: "100px",
+              // Gradient for color dimming
+              background: "linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(10, 10, 10, 1) 100%)",
+              // Gradient for blur using mask-image (Webkit for Chrome/Safari, mask for Firefox)
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+              maskImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+              backdropFilter: "blur(5px)",
+              transition: "background 0.3s",
+            }}
+          />
           <div className="fixed flex-col-2 select-none">
             <motion.div
               drag
@@ -173,13 +212,12 @@ export default function App() {
                 justifyContent: "center",
               }}
             >
-              <Card className="w-full border border-transparent bg-transparent shadow-none">
+              <Card className="w-full border border-transparent bg-transparent shadow-none flex items-center">
                 <h2 
-                  className="flex item-center justify-center p-4 w-full cursor-pointer font-bold text-lg"
-                  style={{ 
-                    width: "200px", 
-                  }}
+                  className="flex items-center justify-center p-4 w-full cursor-pointer font-bold text-lg"
+                  style={{ width: "200px" }}
                 >
+                  {FeatureIcon && <FeatureIcon className="w-5 h-5 mr-5" />}
                   {featureDisplayName}
                 </h2>
               </Card>
