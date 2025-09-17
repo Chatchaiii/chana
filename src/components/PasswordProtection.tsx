@@ -3,10 +3,10 @@ import { CircleArrowRight, Heart } from "lucide-react";
 import { motion } from "motion/react"
 
 interface PasswordProtectionProps {
-  onBack: () => void;
+  onNavigate: () => void;
 }
 
-export function PasswordProtection({ onBack }: PasswordProtectionProps) {
+export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const correctPassword = "zendegim";
@@ -49,7 +49,7 @@ export function PasswordProtection({ onBack }: PasswordProtectionProps) {
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               if (password === correctPassword) {
-                onBack(); // <-- this will set feature to 'home'
+                onNavigate(); // <-- this will set feature to 'home'
                 setError("");
               } else {
                 setError("no possible");
@@ -62,7 +62,7 @@ export function PasswordProtection({ onBack }: PasswordProtectionProps) {
           className="bg-transparent text-gray-300 px-4 py-1 rounded-full font-bold"
           onClick={() => {
             if (password === correctPassword) {
-              onBack(); // <-- this will set feature to 'home'
+              onNavigate(); // <-- this will set feature to 'home'
               setError("");
             } else {
               setError("no possible");

@@ -103,7 +103,7 @@ export function CountUp({ onBack }: CountUpProps) {
 
   return (
     <div
-      className="mt-12 mb-14 p-6 space-y-6"
+      className="mt-16 mb-14 p-6 space-y-6"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >

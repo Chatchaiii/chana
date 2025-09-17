@@ -533,7 +533,7 @@ export function Timeline({ onBack }: TimelineProps) {
   }, [pendingIdx, imagesLoaded]);
 
   return (
-    <div className="relative mt-14 mb-15 min-h-screen flex flex-col p-4 bg-gray-900">
+    <div className="relative mt-16 mb-15 min-h-screen flex flex-col p-4 bg-gray-900">
       {/* Blog Posts List */}
       <div className="space-y-6 flex-1 relative z-0">
         {blogPosts.map((post, idx) => (

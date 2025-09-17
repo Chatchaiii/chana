@@ -101,7 +101,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
 
   if (showResult) {
     return (
-      <div className="mt-12 p-6 space-y-6" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+      <div className="mt-16 p-6 space-y-6" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         {/* Results */}
         <Card className="p-6 text-center space-y-6">
           <div className="space-y-4">
@@ -133,7 +133,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="mt-12 flex items-center justify-between">
+      <div className="mt-16 flex items-center justify-between">
         <div className="text-sm text-gray-500">
           {currentQuestion + 1}/{questions.length}
         </div>

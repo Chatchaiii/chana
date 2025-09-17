@@ -115,7 +115,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
 
   return (
     <div
-      className="mt-11 mb-16 p-6 space-y-6"
+      className="mt-16 mb-16 p-6 space-y-6"
       onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
       onTouchEnd={(e) => {
         if (touchStartX !== null) {

@@ -69,7 +69,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
 
   return (
     <div
-      className="mt-12 p-6 space-y-6"
+      className="mt-16 p-6 space-y-6"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
