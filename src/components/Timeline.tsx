@@ -279,6 +279,7 @@ function BlogPostCollapsed({
         pointerEvents: isLoading ? "none" : "auto",
         background: "#0A0A0A",
         boxSizing: "border-box",
+        zIndex: 100,
         opacity: isLoading ? 0.5 : 1,
       }}
     >
@@ -351,6 +352,7 @@ function BlogPostExpanded({
         pointerEvents: "auto",
         background: "#0A0A0A",
         boxSizing: "border-box",
+        zIndex: 100,
       }}
       transition={{
         type: "spring",
@@ -360,7 +362,7 @@ function BlogPostExpanded({
     >
       <motion.div
         className="bg-gray-900 rounded-2xl p-4 mx-auto overflow-y-auto"
-        style={{ minHeight: 400 }}
+        style={{ minHeight: 400, zIndex: 100 }}
         initial={{ borderRadius: 24 }}
         animate={{ borderRadius: 24 }}
         exit={{ borderRadius: 24 }}
@@ -531,9 +533,9 @@ export function Timeline({ onBack }: TimelineProps) {
   }, [pendingIdx, imagesLoaded]);
 
   return (
-    <div className="relative space-y-6 min-h-screen flex flex-col p-4 bg-gray-900 mt-2">
+    <div className="relative min-h-screen flex flex-col p-4 bg-gray-900 mt-2">
       {/* Header */}
-      <motion.div
+      {/* <motion.div
         drag
         dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
         dragElastic={0.2}
@@ -564,7 +566,7 @@ export function Timeline({ onBack }: TimelineProps) {
             </Button>
           </Card>
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Blog Posts List */}
       <div className="space-y-6 flex-1 relative z-0">
@@ -590,6 +592,97 @@ export function Timeline({ onBack }: TimelineProps) {
           />
         )}
       </AnimatePresence>
+
+      <div className="fixed flex-col-2 select-none">
+        <motion.div
+          drag
+          dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+          dragElastic={0.2}
+          className="fixed left-auto right-3 z-[50]"
+          whileHover={{
+            scale: [null, 1.01, null],
+            transition: {
+              duration: 0.3,
+              times: [0, 0.6, 1],
+              ease: ["easeInOut", "easeOut"],
+            },
+          }}
+          whileTap={{ scale: 0.98 }}
+          transition={{
+            duration: 0.2,
+            ease: "easeOut",
+          }}
+          style={{
+            bottom: "20px",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            pointerEvents: "auto",
+            backdropFilter: "blur(5px)",
+            background: "rgba(217,217,217,0.3)",
+            borderTopLeftRadius: "3.4rem",
+            borderTopRightRadius: "3.4rem",
+            borderBottomLeftRadius: "3.4rem",
+            borderBottomRightRadius: "3.4rem",
+            height: "50px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+            <Card className="w-full border border-transparent bg-transparent shadow-none">
+              <div
+                onClick={onBack}
+                className="p-4 w-full cursor-pointer"
+              >
+                <ArrowLeft className="ml-2 mr-2 w-5 h-5 text-gray-200" />
+              </div>
+            </Card>
+        </motion.div>
+        <motion.div
+          drag
+          dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+          dragElastic={0.2}
+          className="fixed left-3 right-auto z-[50]"
+          whileHover={{
+            scale: [null, 1.01, null],
+            transition: {
+              duration: 0.3,
+              times: [0, 0.6, 1],
+              ease: ["easeInOut", "easeOut"],
+            },
+          }}
+          whileTap={{ scale: 0.98 }}
+          transition={{
+            duration: 0.2,
+            ease: "easeOut",
+          }}
+          style={{
+            bottom: "20px",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            pointerEvents: "auto",
+            backdropFilter: "blur(5px)",
+            background: "rgba(24,24,27,0.3)",
+            borderTopLeftRadius: "3.4rem",
+            borderTopRightRadius: "3.4rem",
+            borderBottomLeftRadius: "3.4rem",
+            borderBottomRightRadius: "3.4rem",
+            height: "50px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+            <Card className="w-full border border-transparent bg-transparent shadow-none">
+              <h2 
+                className="flex item-center justify-center p-4 w-full cursor-pointer font-bold text-lg"
+                style={{ 
+                  width: "200px", 
+                }}
+              >
+                Timeline
+              </h2>
+            </Card>
+        </motion.div>
+      </div>
     </div>
   );
 }

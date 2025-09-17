@@ -189,7 +189,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
                   }}
                   onClick={() => setSelectedId(item.id)}
                 >
-                  <Card className="p-2 cursor-pointer hover:shadow-lg transition-shadow">
+                  <Card className="p-2 cursor-pointer">
                     <div className="flex items-center">
                       <div className="w-16 aspect-square rounded-lg overflow-hidden">
                         {item.type === "video" ? (
@@ -227,11 +227,10 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
         {selectedItem && (
           <motion.div
             layoutId={`scrapbook-media-${selectedItem.id}`}
-            className="fixed inset-0 z-50 flex items-center justify-center"
+            className="fixed inset-0 z-100 flex justify-center"
             style={{
               background: "rgba(10,10,10,0.98)",
               pointerEvents: "auto",
-              padding: "24px",
               boxSizing: "border-box",
             }}
             transition={{
@@ -242,7 +241,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
             onClick={() => setSelectedId(null)}
           >
             <motion.div
-              className="bg-gray-900 rounded-2xl p-4 mx-auto overflow-y-auto w-full max-w-2xl max-h-[90vh]"
+              className="bg-gray-900 rounded-2xl p-4 mx-auto w-full"
               style={{ minHeight: 300 }}
               initial={{ borderRadius: 24 }}
               animate={{ borderRadius: 24 }}
@@ -293,6 +292,97 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="fixed flex-col-2 select-none">
+              <motion.div
+                drag
+                dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+                dragElastic={0.2}
+                className="fixed left-auto right-3 z-[50]"
+                whileHover={{
+                  scale: [null, 1.01, null],
+                  transition: {
+                    duration: 0.3,
+                    times: [0, 0.6, 1],
+                    ease: ["easeInOut", "easeOut"],
+                  },
+                }}
+                whileTap={{ scale: 0.98 }}
+                transition={{
+                  duration: 0.2,
+                  ease: "easeOut",
+                }}
+                style={{
+                  bottom: "20px",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  pointerEvents: "auto",
+                  backdropFilter: "blur(5px)",
+                  background: "rgba(217,217,217,0.3)",
+                  borderTopLeftRadius: "3.4rem",
+                  borderTopRightRadius: "3.4rem",
+                  borderBottomLeftRadius: "3.4rem",
+                  borderBottomRightRadius: "3.4rem",
+                  height: "50px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                  <Card className="w-full border border-transparent bg-transparent shadow-none">
+                    <div
+                      onClick={onBack}
+                      className="p-4 w-full cursor-pointer"
+                    >
+                      <ArrowLeft className="ml-2 mr-2 w-5 h-5 text-gray-200" />
+                    </div>
+                  </Card>
+              </motion.div>
+              <motion.div
+                drag
+                dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+                dragElastic={0.2}
+                className="fixed left-3 right-auto z-[50]"
+                whileHover={{
+                  scale: [null, 1.01, null],
+                  transition: {
+                    duration: 0.3,
+                    times: [0, 0.6, 1],
+                    ease: ["easeInOut", "easeOut"],
+                  },
+                }}
+                whileTap={{ scale: 0.98 }}
+                transition={{
+                  duration: 0.2,
+                  ease: "easeOut",
+                }}
+                style={{
+                  bottom: "20px",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  pointerEvents: "auto",
+                  backdropFilter: "blur(5px)",
+                  background: "rgba(24,24,27,0.3)",
+                  borderTopLeftRadius: "3.4rem",
+                  borderTopRightRadius: "3.4rem",
+                  borderBottomLeftRadius: "3.4rem",
+                  borderBottomRightRadius: "3.4rem",
+                  height: "50px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                  <Card className="w-full border border-transparent bg-transparent shadow-none">
+                    <h2 
+                      className="flex item-center justify-center p-4 w-full cursor-pointer font-bold text-lg"
+                      style={{ 
+                        width: "200px", 
+                      }}
+                    >
+                      Scrapbook
+                    </h2>
+                  </Card>
+              </motion.div>
+            </div>
     </div>
   );
 }
