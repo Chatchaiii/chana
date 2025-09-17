@@ -103,7 +103,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
     return (
       <div className="p-6 space-y-6" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         {/* Header */}
-        <motion.div
+        {/* <motion.div
           drag
           dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
           dragElastic={0.2}
@@ -134,7 +134,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
               </Button>
             </Card>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Results */}
         <Card className="p-6 text-center space-y-6">
@@ -169,7 +169,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
     >
       {/* Header */}
       <div className="flex items-center justify-between">
-        <motion.div
+        {/* <motion.div
           drag
           dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
           dragElastic={0.2}
@@ -200,7 +200,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
               </Button>
             </Card>
           </div>
-        </motion.div>
+        </motion.div> */}
         <div className="text-sm text-gray-500">
           {currentQuestion + 1}/{questions.length}
         </div>

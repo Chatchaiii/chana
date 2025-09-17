@@ -74,7 +74,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
       onTouchEnd={handleTouchEnd}
     >
       {/* Header */}
-      <motion.div
+      {/* <motion.div
         drag
         dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
         dragElastic={0.2}
@@ -105,7 +105,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
             </Button>
           </Card>
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Instructions */}
       <Card className="p-4 bg-gray-800">
@@ -184,7 +184,7 @@ export function LoveNote({ onBack }: LoveNoteProps) {
       </div>
 
       {/* Progress */}
-      <Card className="p-4 bg-pink-600">
+      <Card className="mb-16 p-4 bg-pink-600">
         <div className="text-center space-y-2">
           <p className="text-gray-200 font-bold">
             Notes Unlocked: {unlockedNotes.length}/{loveNotes.length}

@@ -128,7 +128,7 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
       }}
     >
       {/* Header */}
-      <motion.div
+      {/* <motion.div
         drag
         dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
         dragElastic={0.2}
@@ -159,10 +159,10 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
             </Button>
           </Card>
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Grouped Sections */}
-      <div className="space-y-6 select-none">
+      <div className="mb-16 space-y-6 select-none">
         {Object.entries(groupedItems).map(([date, itemsForDate]) => (
           <div key={date}>
             <h2 className="text-lg font-bold font-mono text-gray-300 mb-2">

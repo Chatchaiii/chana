@@ -120,7 +120,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
       onTouchEnd={handleTouchEnd}
     >
       {/* Header */}
-       <motion.div
+       {/* <motion.div
          drag
          dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
          dragElastic={0.2}
@@ -151,7 +151,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
              </Button>
            </Card>
          </div>
-       </motion.div>
+       </motion.div> */}
 
       {/* Instructions */}
       <Card className="p-4 bg-gray-800">
@@ -219,7 +219,7 @@ export function LoveMap({ onBack }: LoveMapProps) {
       </Card>
 
       {/* Location List */}
-      <div className="space-y-3">
+      <div className="mb-16 space-y-3">
         <h2 className="text-gray-300 font-bold">Our Love Journey Locations</h2>
         {
           loveLocations.map((location) => (

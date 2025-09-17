@@ -107,7 +107,8 @@ export function CountUp({ onBack }: CountUpProps) {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <motion.div
+      {/* Header */}
+      {/* <motion.div
         drag
         dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
         dragElastic={0.2}
@@ -138,7 +139,7 @@ export function CountUp({ onBack }: CountUpProps) {
             </Button>
           </Card>
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Main Counter */}
       <Card className="p-6 bg-gray-800">
@@ -231,7 +232,7 @@ export function CountUp({ onBack }: CountUpProps) {
       </Card>
 
       {/* Anniversary Date */}
-      <Card className="p-4 text-center border border-transparent">
+      <Card className="-mt-7 p-4 bg-transparent text-center border border-transparent">
         <div className="space-y-2">
           <p className="-mb-1 text-gray-400 font-bold">
             Our relationship started on:

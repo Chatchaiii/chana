@@ -9,7 +9,7 @@ import { PasswordProtection } from './components/PasswordProtection';
 import { GiftBox } from './components/GiftBox';
 import { LoveMap } from './components/LoveMap';
 import { User } from './components/User';
-import { motion } from 'framer-motion';
+import { motion, scale, styleEffect } from 'framer-motion';
 import { Card } from './components/ui/card';
 import { ArrowLeft } from 'lucide-react';
 
@@ -39,8 +39,16 @@ export default function App() {
   })();
 
   return (
-    <div className="dark min-h-screen bg-gray-900">
-      <div className="mx-auto min-h-screen bg-background shadow-xl">
+    <div className="dark min-h-screen"
+      style={{
+        background: "#0A0A0A",
+      }}
+        >
+      <div className="mx-auto min-h-screen"
+        style={{
+        background: "#0A0A0A",
+        }}
+        >
 
         {/* Pre-mount everything */}
         <div style={{ display: currentFeature === 'home' ? 'block' : 'none' }}>
@@ -83,95 +91,100 @@ export default function App() {
           <User onBack={() => setCurrentFeature('home')} />
         </div>
 
-        <div className="fixed flex-col-2 select-none">
-          <motion.div
-            drag
-            dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
-            dragElastic={0.2}
-            className="fixed left-auto right-3 z-[50]"
-            whileHover={{
-              scale: [null, 1.01, null],
-              transition: {
-                duration: 0.3,
-                times: [0, 0.6, 1],
-                ease: ["easeInOut", "easeOut"],
-              },
-            }}
-            whileTap={{ scale: 0.98 }}
-            transition={{
-              duration: 0.2,
-              ease: "easeOut",
-            }}
-            style={{
-              bottom: "20px",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              pointerEvents: "auto",
-              backdropFilter: "blur(5px)",
-              background: "rgba(217,217,217,0.3)",
-              borderTopLeftRadius: "3.4rem",
-              borderTopRightRadius: "3.4rem",
-              borderBottomLeftRadius: "3.4rem",
-              borderBottomRightRadius: "3.4rem",
-              height: "50px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+        <div style={{ 
+          display: currentFeature !== 'password' && currentFeature !== 'home' ? 'block' : 'none'
+          }}
           >
-            <Card className="w-full border border-transparent bg-transparent shadow-none">
-              <div
-                onClick={onBack}
-                className="p-4 w-full cursor-pointer"
-              >
-                <ArrowLeft className="ml-2 mr-2 w-5 h-5 text-gray-200" />
-              </div>
-            </Card>
-          </motion.div>
-          <motion.div
-            drag
-            dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
-            dragElastic={0.2}
-            className="fixed left-3 right-auto z-[50]"
-            whileHover={{
-              scale: [null, 1.01, null],
-              transition: {
-                duration: 0.3,
-                times: [0, 0.6, 1],
-                ease: ["easeInOut", "easeOut"],
-              },
-            }}
-            whileTap={{ scale: 0.98 }}
-            transition={{
-              duration: 0.2,
-              ease: "easeOut",
-            }}
-            style={{
-              bottom: "20px",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              pointerEvents: "auto",
-              backdropFilter: "blur(5px)",
-              background: "rgba(24,24,27,0.3)",
-              borderTopLeftRadius: "3.4rem",
-              borderTopRightRadius: "3.4rem",
-              borderBottomLeftRadius: "3.4rem",
-              borderBottomRightRadius: "3.4rem",
-              height: "50px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Card className="w-full border border-transparent bg-transparent shadow-none">
-              <h2 
-                className="flex item-center justify-center p-4 w-full cursor-pointer font-bold text-lg"
-                style={{ 
-                  width: "200px", 
-                }}
-              >
-                {featureDisplayName}
-              </h2>
-            </Card>
-          </motion.div>
+          <div className="fixed flex-col-2 select-none">
+            <motion.div
+              drag
+              dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+              dragElastic={0.2}
+              className="fixed left-auto right-3 z-[50]"
+              whileHover={{
+                scale: [null, 1.01, null],
+                transition: {
+                  duration: 0.3,
+                  times: [0, 0.6, 1],
+                  ease: ["easeInOut", "easeOut"],
+                },
+              }}
+              whileTap={{ scale: 0.90 }}
+              transition={{
+                duration: 0.2,
+                ease: "easeOut",
+              }}
+              style={{
+                bottom: "20px",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                pointerEvents: "auto",
+                backdropFilter: "blur(5px)",
+                background: "rgba(217,217,217,0.3)",
+                borderTopLeftRadius: "3.4rem",
+                borderTopRightRadius: "3.4rem",
+                borderBottomLeftRadius: "3.4rem",
+                borderBottomRightRadius: "3.4rem",
+                height: "50px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Card className="w-full border border-transparent bg-transparent shadow-none">
+                <div
+                  onClick={onBack}
+                  className="p-4 w-full cursor-pointer"
+                >
+                  <ArrowLeft className="ml-2 mr-2 w-5 h-5 text-gray-200" />
+                </div>
+              </Card>
+            </motion.div>
+            <motion.div
+              drag
+              dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+              dragElastic={0.2}
+              className="fixed left-3 right-auto z-[50]"
+              whileHover={{
+                scale: [null, 1.01, null],
+                transition: {
+                  duration: 0.3,
+                  times: [0, 0.6, 1],
+                  ease: ["easeInOut", "easeOut"],
+                },
+              }}
+              whileTap={{ scale: 0.90 }}
+              transition={{
+                duration: 0.2,
+                ease: "easeOut",
+              }}
+              style={{
+                bottom: "20px",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                pointerEvents: "auto",
+                backdropFilter: "blur(5px)",
+                background: "rgba(24,24,27,0.3)",
+                borderTopLeftRadius: "3.4rem",
+                borderTopRightRadius: "3.4rem",
+                borderBottomLeftRadius: "3.4rem",
+                borderBottomRightRadius: "3.4rem",
+                height: "50px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Card className="w-full border border-transparent bg-transparent shadow-none">
+                <h2 
+                  className="flex item-center justify-center p-4 w-full cursor-pointer font-bold text-lg"
+                  style={{ 
+                    width: "200px", 
+                  }}
+                >
+                  {featureDisplayName}
+                </h2>
+              </Card>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
