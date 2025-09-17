@@ -38,7 +38,8 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { ArrowLeft } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 interface ScrapbookProps {
   onBack: () => void;
@@ -154,14 +155,14 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
               className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
             >
               <ArrowLeft className="w-5 h-5 text-gray-200" />
-            <span className="ml-4 text-2xl text-gray-200 font-bold">Scrapbook</span>
+              <span className="ml-4 text-2xl text-gray-200 font-bold">Scrapbook</span>
             </Button>
           </Card>
         </div>
       </motion.div>
 
       {/* Grouped Sections */}
-      <div className="space-y-6">
+      <div className="space-y-6 select-none">
         {Object.entries(groupedItems).map(([date, itemsForDate]) => (
           <div key={date}>
             <h2 className="text-lg font-bold font-mono text-gray-300 mb-2">
@@ -169,54 +170,92 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
             </h2>
             <div className="grid grid-cols-1 gap-3">
               {itemsForDate.map((item) => (
-                <Card
+                <motion.div
                   key={item.id}
-                  className="p-2 cursor-pointer hover:shadow-lg transition-shadow"
+                  layoutId={`scrapbook-media-${item.id}`}
+                  whileHover={{
+                    scale: [null, 1.01, null],
+                    transition: {
+                      duration: 0.3,
+                      times: [0, 0.6, 1],
+                      ease: ["easeInOut", "easeOut"],
+                    },
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 700,
+                    damping: 60,
+                  }}
                   onClick={() => setSelectedId(item.id)}
                 >
-                  <div className="flex items-center">
-                    <div className="w-16 aspect-square rounded-lg overflow-hidden">
-                      {item.type === "video" ? (
-                        <video
-                          src={item.src}
-                          className="w-full h-full object-cover"
-                          muted
-                          autoPlay
-                          loop
-                          playsInline
-                          preload="metadata"
-                        />
-                      ) : (
-                        <ImageWithFallback
-                          src={item.src}
-                          alt={item.caption}
-                          className="w-full h-full object-cover"
-                        />
-                      )}
+                  <Card className="p-2 cursor-pointer hover:shadow-lg transition-shadow">
+                    <div className="flex items-center">
+                      <div className="w-16 aspect-square rounded-lg overflow-hidden">
+                        {item.type === "video" ? (
+                          <video
+                            src={item.src}
+                            className="w-full h-full object-cover"
+                            muted
+                            autoPlay
+                            loop
+                            playsInline
+                            preload="metadata"
+                          />
+                        ) : (
+                          <ImageWithFallback
+                            src={item.src}
+                            alt={item.caption}
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+                      </div>
+                      <div className="ml-4">
+                        <p className="font-bold text-sm text-gray-400">{item.caption}</p>
+                      </div>
                     </div>
-                    <div className="ml-4">
-                      <p className="font-bold text-sm text-gray-400">{item.caption}</p>
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Modal */}
-      {selectedItem && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedId(null)}
-        >
-          <Card
-            className="w-full p-4"
-            onClick={(e) => e.stopPropagation()}
+      {/* Modal with Timeline-style animation */}
+      <AnimatePresence>
+        {selectedItem && (
+          <motion.div
+            layoutId={`scrapbook-media-${selectedItem.id}`}
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            style={{
+              background: "rgba(10,10,10,0.98)",
+              pointerEvents: "auto",
+              padding: "24px",
+              boxSizing: "border-box",
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 800,
+              damping: 60,
+            }}
+            onClick={() => setSelectedId(null)}
           >
-            <div className="space-y-3">
-              <div className="frounded-lg overflow-hidden">
+            <motion.div
+              className="bg-gray-900 rounded-2xl p-4 mx-auto overflow-y-auto w-full max-w-2xl max-h-[90vh]"
+              style={{ minHeight: 300 }}
+              initial={{ borderRadius: 24 }}
+              animate={{ borderRadius: 24 }}
+              exit={{ borderRadius: 24 }}
+              transition={{
+                type: "spring",
+                stiffness: 800,
+                damping: 60,
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button and caption */}
+              <div className="rounded-lg mb-4">
                 {selectedItem.type === "video" ? (
                   <video
                     src={selectedItem.src}
@@ -235,14 +274,25 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
                   />
                 )}
               </div>
-              <div className="flex w-full items-center justify-between text-center font-bold">
+              <div className="flex w-full items-center justify-between text-left font-bold">
                 <p className="ml-2 text-gray-300">{selectedItem.caption}</p>
                 <p className="mr-2 text-sm text-gray-500">{selectedItem.date}</p>
               </div>
-            </div>
-          </Card>
-        </div>
-      )}
+              <div className="flex items-center mb-4 mt-10">
+                <button
+                  className="flex items-center bg-gray-200 rounded-lg w-full text-gray-400 z-50 p-2"
+                  onClick={() => setSelectedId(null)}
+                  aria-label="Close"
+                >
+                  <div className="mx-auto text-gray-700">
+                    <X className="w-5 h-5" />
+                  </div>
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

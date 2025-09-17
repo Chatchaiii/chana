@@ -1,28 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowLeft,
-  Star,
-  Waves,
-  VenetianMask,
-  Camera,
-  Plane,
-  Sparkle,
-  Calendar,
-  Users,
-  Cake,
-  MapPinned,
-  Undo2,
-  Gem,
-  Infinity as InfinityIcon,
-  X,
-  EyeOff,
-} from "lucide-react";
-
-// --- BlogPost Data ---
+// md
 import T_the_start from "../assets/text/timeline/the_start.md?raw";
 import T_the_lake from "../assets/text/timeline/the_lake.md?raw";
 import T_theatre from "../assets/text/timeline/theatre.md?raw";
@@ -39,6 +15,7 @@ import T_return from "../assets/text/timeline/return.md?raw";
 import T_eternal from "../assets/text/timeline/eternal.md?raw";
 import T_infinite from "../assets/text/timeline/infinite.md?raw";
 
+// hidden notes
 import H_the_start from "../assets/text/timeline/hidden/h_the_start.md?raw";
 import H_the_lake from "../assets/text/timeline/hidden/h_the_lake.md?raw";
 import H_the_day from "../assets/text/timeline/hidden/h_the_day.md?raw";
@@ -47,6 +24,7 @@ import H_birthday from "../assets/text/timeline/hidden/h_birthday.md?raw";
 import H_birthday_2 from "../assets/text/timeline/hidden/h_birthday_2.md?raw";
 import H_infinite from "../assets/text/timeline/hidden/h_infinite.md?raw";
 
+// jpeg
 import P_the_start from "../assets/images/timeline/the_start.jpeg";
 import P_the_lake1 from "../assets/images/timeline/the_lake_1.jpeg";
 import P_the_lake2 from "../assets/images/timeline/the_lake_2.jpeg";
@@ -79,7 +57,31 @@ import P_infinite_2 from "../assets/images/timeline/infinite_2.jpeg";
 import P_infinite_3 from "../assets/images/timeline/infinite_3.jpeg";
 import P_infinite_4 from "../assets/images/timeline/infinite_4.jpeg";
 
-// --- Types ---
+// config
+import React, { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import { Button } from "./ui/button";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowLeft,
+  Star,
+  Waves,
+  VenetianMask,
+  Camera,
+  Plane,
+  Sparkle,
+  Calendar,
+  Users,
+  Cake,
+  MapPinned,
+  Undo2,
+  Gem,
+  Infinity as InfinityIcon,
+  X,
+  EyeOff,
+} from "lucide-react";
+import { Card } from "./ui/card";
+
 interface TimelineProps {
   onBack: () => void;
 }
@@ -93,7 +95,6 @@ interface BlogPostBlockProps {
   noteText?: string;
 }
 
-// --- Blog Posts Array ---
 const blogPosts: BlogPostBlockProps[] = [
   {
     title: "The Start",
@@ -209,63 +210,29 @@ const blogPosts: BlogPostBlockProps[] = [
   },
 ];
 
-// --- Preload Images Hook ---
-function usePreloadImages(urls: string[], trigger: boolean) {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!trigger) return;
-    if (!urls || urls.length === 0) {
-      setLoaded(true);
-      return;
-    }
-    let isMounted = true;
-    let loadedCount = 0;
-    urls.forEach((url) => {
-      const img = new window.Image();
-      img.src = url;
-      img.onload = img.onerror = () => {
-        loadedCount += 1;
-        if (isMounted && loadedCount === urls.length) {
-          setLoaded(true);
-        }
-      };
-    });
-    return () => {
-      isMounted = false;
-    };
-  }, [urls, trigger]);
-
-  return loaded;
-}
-
-// --- BlogPostCollapsed ---
+// BlogPostBlock
 function BlogPostCollapsed({
   title,
   date,
   icon: Icon,
   onExpand,
-  imageUrls,
-  isLoading,
 }: {
   title: string;
   date: string;
   icon: React.ElementType;
   onExpand: () => void;
-  imageUrls: string[];
-  isLoading?: boolean;
 }) {
   return (
     <motion.div
       layoutId={`blogpost-${title}`}
       whileHover={{
-        scale: [null, 1.03, null],
-        transition: {
-          duration: 0.3,
-          times: [0, 0.6, 1],
-          ease: ["easeInOut", "easeInOut"],
-        },
-      }}
+                  scale: [null, 1.03, null],
+                  transition: {
+                    duration: 0.3,
+                    times: [0, 0.6, 1],
+                    ease: ["easeInOut", "easeInOut"],
+                  },
+                }}
       whileTap={{ scale: 0.98 }}
       transition={{
         type: "spring",
@@ -273,14 +240,13 @@ function BlogPostCollapsed({
         damping: 60,
       }}
       className="bg-gray-900 border rounded-2xl shadow-lg px-6 py-4 flex items-center space-x-6 cursor-pointer mb-3"
-      onClick={isLoading ? undefined : onExpand}
-      style={{
+      onClick={onExpand}
+      style={{ 
         overflow: "hidden",
-        pointerEvents: isLoading ? "none" : "auto",
+        pointerEvents: "auto",
         background: "#0A0A0A",
         boxSizing: "border-box",
-        opacity: isLoading ? 0.5 : 1,
-      }}
+       }}
     >
       <div className="px-2 py-2 rounded-full text-gray-300">
         <Icon className="w-4 h-4" />
@@ -289,14 +255,10 @@ function BlogPostCollapsed({
         <h2 className="text-xl font-bold text-gray-300">{title}</h2>
         <span className="ml-auto text-sm text-gray-400">{date}</span>
       </div>
-      {isLoading && (
-        <span className="ml-4 text-xs text-gray-400 animate-pulse">Loading…</span>
-      )}
     </motion.div>
   );
 }
 
-// --- BlogPostExpanded ---
 function BlogPostExpanded({
   title,
   date,
@@ -372,23 +334,24 @@ function BlogPostExpanded({
       >
         {/* Title always visible */}
         <div className="mt-2">
-          <div>
-            <button
-              className="w-full mb-4"
-              onClick={onClose}
-              aria-label="Close"
-            >
-              <div className="flex items-center text-gray-200 bg-gray-900 rounded-2xl">
-                <div className="ml-2 mr-3">
-                  <Icon className="w-6 h-4" />
+          <div className="">
+              {/* Close button */}
+              <button
+                className="w-full mb-4"
+                onClick={onClose}
+                aria-label="Close"
+              >
+                <div className="flex items-center text-gray-200 bg-gray-900 rounded-2xl">
+                  <div className="ml-2 mr-3">
+                    <Icon className="w-6 h-4" />
+                  </div>
+                  <div className="flex items-center w-full">
+                    <h2 className="text-2xl font-bold text-gray-200 mb-1">{title}</h2>
+                    <span className="relative right-4 ml-auto text-xs text-gray-500 font-bold">{date}</span>
+                  </div>
+                  <X className="mr-1 w-6 h-4" />
                 </div>
-                <div className="flex items-center w-full">
-                  <h2 className="text-2xl font-bold text-gray-200 mb-1">{title}</h2>
-                  <span className="relative right-4 ml-auto text-xs text-gray-500 font-bold">{date}</span>
-                </div>
-                <X className="mr-1 w-6 h-4" />
-              </div>
-            </button>
+              </button>
           </div>
           {/* Images */}
           {!hasNoImage && (
@@ -398,23 +361,25 @@ function BlogPostExpanded({
               onTouchEnd={handleTouchEnd}
             >
               {hasMultipleImages ? (
-                <div
-                  className="flex transition-transform duration-700 ease-in-out h-64"
-                  style={{
-                    width: `${imageUrls.length * 100}%`,
-                    transform: `translateX(-${current * (100 / imageUrls.length)}%)`,
-                  }}
-                >
-                  {imageUrls.map((url, idx) => (
-                    <img
-                      key={idx}
-                      src={url}
-                      alt={`${title} ${idx + 1}`}
-                      className="w-full h-64 object-cover flex-shrink-0"
-                      style={{ width: `${100 / imageUrls.length}%` }}
-                    />
-                  ))}
-                </div>
+                <>
+                  <div
+                    className="flex transition-transform duration-700 ease-in-out h-64"
+                    style={{
+                      width: `${imageUrls.length * 100}%`,
+                      transform: `translateX(-${current * (100 / imageUrls.length)}%)`,
+                    }}
+                  >
+                    {imageUrls.map((url, idx) => (
+                      <img
+                        key={idx}
+                        src={url}
+                        alt={`${title} ${idx + 1}`}
+                        className="w-full h-64 object-cover flex-shrink-0"
+                        style={{ width: `${100 / imageUrls.length}%` }}
+                      />
+                    ))}
+                  </div>
+                </>
               ) : (
                 <img
                   src={imageUrls[0]}
@@ -463,16 +428,18 @@ function BlogPostExpanded({
   );
 }
 
-// --- Timeline Main ---
+// Timeline
 export function Timeline({ onBack }: TimelineProps) {
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
-  const [pendingIdx, setPendingIdx] = useState<number | null>(null);
   const scrollYRef = useRef<number>(0);
 
   // Prevent background scroll and preserve scroll position when expanded,
+  // but keep the expanded post at its original position (expand in place)
   useEffect(() => {
     if (expandedIdx !== null) {
+      // Save scroll position
       scrollYRef.current = window.scrollY;
+      // Prevent background scroll
       const originalOverflow = document.body.style.overflow;
       const originalPosition = document.body.style.position;
       const originalTop = document.body.style.top;
@@ -512,24 +479,6 @@ export function Timeline({ onBack }: TimelineProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [expandedIdx, onBack]);
 
-  // Preload images for the pending (about to expand) post
-  const handleExpand = (idx: number) => {
-    setPendingIdx(idx);
-  };
-
-  // Only expand after images are loaded
-  const imagesLoaded = usePreloadImages(
-    pendingIdx !== null ? blogPosts[pendingIdx].imageUrls : [],
-    pendingIdx !== null
-  );
-
-  useEffect(() => {
-    if (pendingIdx !== null && imagesLoaded) {
-      setExpandedIdx(pendingIdx);
-      setPendingIdx(null);
-    }
-  }, [pendingIdx, imagesLoaded]);
-
   return (
     <div className="relative space-y-6 min-h-screen flex flex-col p-4 bg-gray-900 mt-2">
       {/* Header */}
@@ -560,13 +509,13 @@ export function Timeline({ onBack }: TimelineProps) {
               className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
             >
               <ArrowLeft className="w-5 h-5 text-gray-200" />
-              <span className="ml-4 text-2xl text-gray-200 font-bold">Timeline</span>
+            <span className="ml-4 text-2xl text-gray-200 font-bold">Timeline</span>
             </Button>
           </Card>
         </div>
       </motion.div>
 
-      {/* Blog Posts List */}
+      {/* Blog Posts List (always rendered) */}
       <div className="space-y-6 flex-1 relative z-0">
         {blogPosts.map((post, idx) => (
           <BlogPostCollapsed
@@ -574,14 +523,12 @@ export function Timeline({ onBack }: TimelineProps) {
             title={post.title}
             date={post.date}
             icon={post.icon}
-            imageUrls={post.imageUrls}
-            onExpand={() => handleExpand(idx)}
-            isLoading={pendingIdx === idx && !imagesLoaded}
+            onExpand={() => setExpandedIdx(idx)}
           />
         ))}
       </div>
 
-      {/* Expanded Post Overlay */}
+      {/* Expanded Post Overlay (only overlays, does not unmount list) */}
       <AnimatePresence>
         {expandedIdx !== null && (
           <BlogPostExpanded
