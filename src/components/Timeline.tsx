@@ -303,7 +303,7 @@ function BlogPostExpanded({
   return (
     <motion.div
       layoutId={`blogpost-${title}`}
-      className="fixed inset-0 shadow-lg z-100 flex justify-center"
+      className="border fixed inset-0 shadow-lg z-100 flex justify-center"
       style={{
         pointerEvents: "auto",
         background: "#0A0A0A",
@@ -328,92 +328,96 @@ function BlogPostExpanded({
         }}
       >
         {/* Title always visible */}
-        <div className="p-2 flex items-center bg-gray-800 rounded-lg mt-1 mb-6 space-x-3 w-full">
-            <div className="p-2 rounded-full text-white">
-              <Icon className="w-6 h-4" />
-            </div>
-            <div className="flex items-center w-full">
-              <h2 className="text-2xl font-bold text-gray-200">{title}</h2>
-              <span className="ml-auto text-sm text-gray-200">{date}</span>
-            </div>
-            {/* Close button */}
-            <button
-              className="text-gray-200 text-3xl z-50 hover:text-white"
-              onClick={onClose}
-              aria-label="Close"
-            >
-              <X className="w-6 h-4" />
-            </button>
-          </div>
-        {/* Images */}
-        {!hasNoImage && (
-          <div
-            className="relative w-full h-64 mb-6 rounded-lg overflow-hidden"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-          >
-            {hasMultipleImages ? (
-              <>
-                <div
-                  className="flex transition-transform duration-700 ease-in-out h-64"
-                  style={{
-                    width: `${imageUrls.length * 100}%`,
-                    transform: `translateX(-${current * (100 / imageUrls.length)}%)`,
-                  }}
-                >
-                  {imageUrls.map((url, idx) => (
-                    <img
-                      key={idx}
-                      src={url}
-                      alt={`${title} ${idx + 1}`}
-                      className="w-full h-64 object-cover flex-shrink-0"
-                      style={{ width: `${100 / imageUrls.length}%` }}
-                    />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <img
-                src={imageUrls[0]}
-                alt={title}
-                className="w-full h-64 object-cover flex-shrink-0"
-                style={{ width: `${100 / imageUrls.length}%` }}
-              />
-            )}
-          </div>
-        )}
-
-        <div className="bg-gray-800 rounded-lg p-4 text-gray-200 w-full mb-6">
-          <ReactMarkdown>{text}</ReactMarkdown>
-        </div>
-
-        {noteText && noteText.trim().length > 0 && (
-          <>
-            <Button
-              className="bg-gray-300 mb-1 text-gray-800 w-full font-bold"
-              onClick={() => setShowNote(true)}
-            >
-              <EyeOff className="w-4 h-4" />
-              <div>Hidden-Note</div>
-            </Button>
-            {showNote && (
-              <div className="p-4 fixed inset-0 z-50 flex items-center justify-center bg-black" style={{ backgroundColor: "#0A0A0A" }}>
-                <div className="bg-gray-800 rounded-2xl p-6 w-full">
-                  <div className="text-gray-300 -mt-2">
-                    <ReactMarkdown>{noteText}</ReactMarkdown>
+        <div className="p-2">
+          <div>
+              {/* Close button */}
+              <button
+                className="w-full mb-4"
+                onClick={onClose}
+                aria-label="Close"
+              >
+                <div className="flex items-center text-gray-200 bg-gray-900 rounded-2xl p-2">
+                  <div className="ml-2 mr-3">
+                    <Icon className="w-6 h-4" />
                   </div>
-                  <button
-                    className="mt-4 flex items-center justify-center rounded-lg py-2 bg-gray-300 text-gray-700 text-2xl w-full cursor-pointer"
-                    onClick={() => setShowNote(false)}
-                    aria-label="Close"
-                  >
-                    <X className="w-6 h-4" />
-                  </button>
+                  <div className="flex items-center w-full">
+                    <h2 className="text-2xl font-bold text-gray-200 mb-1">{title}</h2>
+                    <span className="relative right-4 ml-auto text-xs text-gray-500 font-bold">{date}</span>
+                  </div>
+                  <X className="mr-1 w-6 h-4" />
                 </div>
-              </div>
-            )}
-          </>
-        )}
+              </button>
+            </div>
+          {/* Images */}
+          {!hasNoImage && (
+            <div
+              className="relative w-full h-64 mb-6 rounded-lg overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              {hasMultipleImages ? (
+                <>
+                  <div
+                    className="flex transition-transform duration-700 ease-in-out h-64"
+                    style={{
+                      width: `${imageUrls.length * 100}%`,
+                      transform: `translateX(-${current * (100 / imageUrls.length)}%)`,
+                    }}
+                  >
+                    {imageUrls.map((url, idx) => (
+                      <img
+                        key={idx}
+                        src={url}
+                        alt={`${title} ${idx + 1}`}
+                        className="w-full h-64 object-cover flex-shrink-0"
+                        style={{ width: `${100 / imageUrls.length}%` }}
+                      />
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <img
+                  src={imageUrls[0]}
+                  alt={title}
+                  className="w-full h-64 object-cover flex-shrink-0"
+                  style={{ width: `${100 / imageUrls.length}%` }}
+                />
+              )}
+            </div>
+          )}
+
+          <div className="text-gray-300 w-full mb-6">
+            <ReactMarkdown>{text}</ReactMarkdown>
+          </div>
+
+          {noteText && noteText.trim().length > 0 && (
+            <>
+              <Button
+                className="bg-gray-300 mb-1 text-gray-800 w-full font-bold"
+                onClick={() => setShowNote(true)}
+              >
+                <EyeOff className="w-4 h-4" />
+                <div>Hidden-Note</div>
+              </Button>
+              {showNote && (
+                <div className="p-4 fixed inset-0 z-50 flex items-center justify-center bg-black" style={{ backgroundColor: "#0A0A0A" }}>
+                  <div className="bg-gray-800 rounded-2xl p-6 w-full">
+                    <div className="text-gray-300 -mt-2">
+                      <ReactMarkdown>{noteText}</ReactMarkdown>
+                    </div>
+                    <button
+                      className="mt-4 flex items-center justify-center rounded-lg py-2 bg-gray-300 text-gray-700 text-2xl w-full cursor-pointer"
+                      onClick={() => setShowNote(false)}
+                      aria-label="Close"
+                    >
+                      <X className="w-6 h-4" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </motion.div>
     </motion.div>
   );

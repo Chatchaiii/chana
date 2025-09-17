@@ -212,15 +212,15 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
           onClick={() => setSelectedId(null)}
         >
           <Card
-            className="max-w-sm w-full p-4"
+            className="w-full p-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="space-y-4">
-              <div className="rounded-lg overflow-hidden">
+            <div className="space-y-3">
+              <div className="frounded-lg overflow-hidden">
                 {selectedItem.type === "video" ? (
                   <video
                     src={selectedItem.src}
-                    className="w-full h-full"
+                    className="rounded-lg w-full h-full"
                     muted
                     autoPlay
                     loop
@@ -231,13 +231,13 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
                   <ImageWithFallback
                     src={selectedItem.src}
                     alt={selectedItem.caption}
-                    className="w-full h-full"
+                    className="rounded-lg w-full h-full"
                   />
                 )}
               </div>
-              <div className="text-center">
-                <p className="text-gray-300">{selectedItem.caption}</p>
-                <p className="text-sm text-gray-400">{selectedItem.date}</p>
+              <div className="flex w-full items-center justify-between text-center font-bold">
+                <p className="ml-2 text-gray-300">{selectedItem.caption}</p>
+                <p className="mr-2 text-sm text-gray-500">{selectedItem.date}</p>
               </div>
             </div>
           </Card>
