@@ -533,41 +533,7 @@ export function Timeline({ onBack }: TimelineProps) {
   }, [pendingIdx, imagesLoaded]);
 
   return (
-    <div className="relative mt-1 mb-15 min-h-screen flex flex-col p-4 bg-gray-900">
-      {/* Header */}
-      {/* <motion.div
-        drag
-        dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
-        dragElastic={0.2}
-        whileHover={{
-          scale: [null, 1.01, null],
-          transition: {
-            duration: 0.3,
-            times: [0, 0.6, 1],
-            ease: ["easeInOut", "easeOut"],
-          },
-        }}
-        whileTap={{ scale: 0.98 }}
-        transition={{
-          duration: 0.2,
-          ease: "easeOut",
-        }}
-      >
-        <div className="grid grid-cols-1 items-center select-none">
-          <Card className="border border-8">
-            <Button
-              onClick={onBack}
-              variant="none"
-              size="sm"
-              className="flex items-center justify-start w-full p-6 rounded-lg cursor-pointer"
-            >
-              <ArrowLeft className="w-5 h-5 text-gray-200" />
-              <span className="ml-4 text-2xl text-gray-200 font-bold">Timeline</span>
-            </Button>
-          </Card>
-        </div>
-      </motion.div> */}
-
+    <div className="relative mt-14 mb-15 min-h-screen flex flex-col p-4 bg-gray-900">
       {/* Blog Posts List */}
       <div className="space-y-6 flex-1 relative z-0">
         {blogPosts.map((post, idx) => (

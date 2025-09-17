@@ -9,6 +9,7 @@ import { PasswordProtection } from './components/PasswordProtection';
 import { GiftBox } from './components/GiftBox';
 import { LoveMap } from './components/LoveMap';
 import { User } from './components/User';
+import { Top } from './components/Top';
 import { motion, scale, styleEffect } from 'framer-motion';
 import { Card } from './components/ui/card';
 import { 
@@ -115,6 +116,12 @@ export default function App() {
 
         <div style={{ display: currentFeature === 'user' ? 'block' : 'none' }}>
           <User onBack={() => setCurrentFeature('home')} />
+        </div>
+
+        <div style={{ 
+          display: currentFeature !== 'password' ? 'block' : 'none'
+        }}>
+          <Top onNavigate={setCurrentFeature} />
         </div>
 
         <div style={{ 

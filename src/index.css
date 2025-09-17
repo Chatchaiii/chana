@@ -715,6 +715,26 @@
     top: calc(var(--spacing) * 4);
   }
 
+  .top-5 {
+    top: calc(var(--spacing) * 5);
+  }
+
+  .top-6 {
+    top: calc(var(--spacing) * 6);
+  }
+
+  .top-7 {
+    top: calc(var(--spacing) * 7);
+  }
+
+  .top-8 {
+    top: calc(var(--spacing) * 8);
+  }
+
+  .top-9 {
+    top: calc(var(--spacing) * 9);
+  }
+
   .top-10 {
     top: calc(var(--spacing) * 10);
   }
@@ -1029,6 +1049,46 @@
 
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
+  }
+
+  .mt-11 {
+    margin-top: calc(var(--spacing) * 11);
+  }
+
+  .mt-12 {
+    margin-top: calc(var(--spacing) * 12);
+  }
+
+  .mt-13 {
+    margin-top: calc(var(--spacing) * 13);
+  }
+
+  .mt-14 {
+    margin-top: calc(var(--spacing) * 14);
+  }
+
+  .mt-15 {
+    margin-top: calc(var(--spacing) * 15);
+  }
+
+  .mt-16 {
+    margin-top: calc(var(--spacing) * 16);
+  }
+
+  .mt-17 {
+    margin-top: calc(var(--spacing) * 17);
+  }
+
+  .mt-18 {
+    margin-top: calc(var(--spacing) * 18);
+  }
+
+  .mt-19 {
+    margin-top: calc(var(--spacing) * 19);
+  }
+
+  .mt-20 {
+    margin-top: calc(var(--spacing) * 20);
   }
 
   .mt-auto {

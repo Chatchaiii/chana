@@ -24,7 +24,6 @@ import {
   Users,
 } from "lucide-react";
 import { FeatureType } from "../App";
-import Markdown from "react-markdown";
 import { motion } from "motion/react"
 
 interface HomepageProps {
@@ -153,104 +152,16 @@ export function Homepage({ onNavigate }: HomepageProps) {
   );
 
   return (
-    <div className="p-4 space-y-6 overflow-x-auto scrollbar-none">
-      {/* Header */}
+    <div className="mt-16 p-4 space-y-6 overflow-x-auto scrollbar-none">
       <div className="flex flex-col items-left space-y-6">
-        <div className="flex w-full mb-4 justify-center relative">
-          {/* Button on the left */}
-          <div className="relative left-0">
-            <Card className="border-transparent">
-              <motion.div
-                whileHover={{
-                  scale: [null, 1.1, null],
-                  transition: {
-                    duration: 0.3,
-                    times: [0, 0.6, 1],
-                    ease: ["easeInOut", "easeOut"],
-                  },
-                }}
-                whileTap={{ scale: 0.98 }}
-                transition={{
-                  duration: 0.2,
-                  ease: "easeOut",
-                }}
-              >
-                <Button
-                  onClick={() => onNavigate("password")}
-                  className="flexitems-center bg-transparent font-bold text-gray-300 select-none rounded-full cursor-pointer"
-                  variant="none"
-                >
-                  <Lock className="text-gray-300" />
-                </Button>
-              </motion.div>
-            </Card>
-          </div>
-          {/* Centered CHANA */}
-          <h1 className="text-3xl font-bold text-white flex items-center select-none mx-auto">
-            CH
-            <motion.div
-              drag
-              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} // keeps it constrained
-              dragElastic={0.2} // controls how far it can be pulled beyond constraints
-              animate={{
-                scale: [1, 1.5, 1.5, 1, 1],
-                rotate: [0, 0, 0, 0, 0],
-                borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-              }}
-              transition={{
-                duration: 2,
-                ease: "easeInOut",
-                times: [0, 0.2, 0.5, 0.8, 1],
-                repeat: Infinity,
-                repeatDelay: 1,
-              }}
-              className="relative z-100"
-            >
-              <Heart
-                className="w-8 h-7 text-pink-600 mx-1 cursor-pointer"
-                fill="currentcolor"
-                stroke="currentcolor"
-              />
-            </motion.div>
-            NA
-          </h1>
-          {/* Button on the right */}
-          <div className="relative right-0">
-            <Card className="border-transparent">
-              <motion.div
-                whileHover={{
-                  scale: [null, 1.03, null],
-                  transition: {
-                    duration: 0.3,
-                    times: [0, 0.6, 1],
-                    ease: ["easeInOut", "easeOut"],
-                  },
-                }}
-                whileTap={{ scale: 0.98 }}
-                transition={{
-                  duration: 0.2,
-                  ease: "easeOut",
-                }}
-              >
-                <Button
-                  onClick={() => onNavigate("user")}
-                  className="flexitems-center bg-gray-800 font-bold text-gray-300 select-none rounded-full cursor-pointer"
-                  variant="none"
-                >
-                  <Users className="text-pink-600" />
-                </Button>
-              </motion.div>
-            </Card>
-          </div>
-        </div>
         {/* Carousel */}
         <h1 className="font-bold items-center flex text-2xl text-gray-300 gap-2 select-none">
           <Image className="w-7 h-7 text-pink-500" />
           Slideshow
         </h1>
-        <div className="relative w-full max-w-xl mx-auto">
+        <div className="w-full max-w-xl mx-auto">
           <div
-            className="relative w-full h-60 rounded-2xl overflow-hidden"
+            className="border relative w-full h-60 rounded-2xl overflow-hidden"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -279,11 +190,11 @@ export function Homepage({ onNavigate }: HomepageProps) {
         </div>
       </div>
       {/* Text Body */}
-      <p className="relative font-bold flex gap-9 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
+      {/* <p className="relative font-bold flex gap-9 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
         <Quote className="relative left-2 w-10 h-10 text-gray-500" />
         "In all the world, there is no heart for me like yours. In all the
         world, there is no love for you like mine."
-      </p>
+      </p> */}
 
       {/* Features Grid */}
       <h1 className="font-bold items-center flex text-2xl text-gray-300 gap-2 select-none">
