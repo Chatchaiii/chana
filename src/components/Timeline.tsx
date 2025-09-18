@@ -436,7 +436,7 @@ function BlogPostExpanded({
                   <Icon className="w-6 h-4" />
                 </div>
                 <div className="flex items-center w-full">
-                  <h2 className="text-2xl font-bold text-gray-200 mb-1">
+                  <h2 className="text-2xl font-bold text-left text-gray-200 mb-1">
                     {title}
                   </h2>
                   <span className="relative right-4 ml-auto text-xs text-gray-500 font-bold">
@@ -621,4 +621,3 @@ export function Timeline({ onBack }: TimelineProps) {
     </div>
   );
 }
-

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { ArrowRight, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -17,7 +17,7 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
     setPassword(e.target.value);
     if (error) {
       setError("");
-      setErrorKey(prev => prev + 1); // Change key to force AnimatePresence exit
+      setErrorKey((prev) => prev + 1); // Change key to force AnimatePresence exit
     }
   };
 
@@ -27,19 +27,24 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
       setError("");
     } else {
       setError("no possible");
-      setErrorKey(prev => prev + 1); // Change key to restart animation
+      setErrorKey((prev) => prev + 1); // Change key to restart animation
     }
   };
 
   return (
-    <div 
-      className="flex flex-col items-center justify-center min-h-screen"
-    >
-      <div 
-        className="bg-gray-800 p-8 rounded-2xl shadow-lg flex flex-col items-center justify-center"
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div
+        className="max-w-sm border border-2 p-8 rounded-2xl shadow-lg flex flex-col items-center justify-center"
         style={{
           width: "90%",
           height: "200px",
+          background:
+            "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(10, 10, 10, 1) 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+          maskImage:
+            "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+          backdropFilter: "blur(5px)",
         }}
       >
         <h1 className="text-3xl font-bold text-white flex items-center justify-center select-none mx-auto mb-2">
@@ -69,10 +74,19 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
           </motion.div>
           NA
         </h1>
-        <div
-          className="flex flex-col items-center justify-center"
-        >
-          <div className="flex flex-col-2 items-center justify-between bg-gray-700 rounded-full px-4 z-[1]">
+        <div className="flex flex-col items-center justify-center">
+          <div
+            className="border border-2 flex flex-col-2 items-center justify-between bg-gray-700 rounded-full px-4 z-[1]"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(10, 10, 10, 1) 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+              maskImage:
+                "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+              backdropFilter: "blur(5px)",
+            }}
+          >
             <motion.input
               type="password"
               className="p-2 text-gray-200 outline-none"
@@ -84,7 +98,7 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
                 }
               }}
               placeholder=""
-              style={{ 
+              style={{
                 textAlign: "left",
               }}
             />
@@ -92,29 +106,27 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
               className="bg-transparent text-gray-300 px-4 py-1 rounded-full font-bold"
               onClick={handleSubmit}
             >
-              <ArrowRight className="text-gray-400" />
+              <ArrowRight className="text-pink-500" />
             </button>
           </div>
-          <div
-            className="mt-2 text-red-300 select-none"
-          >
+          <div className="mt-2 text-red-300 select-none">
             <AnimatePresence>
               {error && (
                 <motion.div
                   key={errorKey}
-                  initial={{ 
-                    opacity: 1, 
+                  initial={{
+                    opacity: 1,
                     y: -15,
                     zIndex: 20,
                   }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0 
+                  animate={{
+                    opacity: 1,
+                    y: 0,
                   }}
-                  exit={{ 
-                    opacity: 1, 
-                    y: -30, 
-                    zIndex: 0 
+                  exit={{
+                    opacity: 1,
+                    y: -30,
+                    zIndex: 0,
                   }}
                   transition={{
                     type: "spring",
@@ -132,3 +144,4 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
     </div>
   );
 }
+
