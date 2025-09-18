@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { CircleArrowRight, Heart } from "lucide-react";
-import { motion } from "motion/react"
+import { ArrowRight, Heart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface PasswordProtectionProps {
   onNavigate: () => void;
@@ -9,17 +9,48 @@ interface PasswordProtectionProps {
 export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [errorKey, setErrorKey] = useState(0);
   const correctPassword = "zendegim";
 
+  // Reset error when user types
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    if (error) {
+      setError("");
+      setErrorKey(prev => prev + 1); // Change key to force AnimatePresence exit
+    }
+  };
+
+  const handleSubmit = () => {
+    if (password === correctPassword) {
+      onNavigate();
+      setError("");
+    } else {
+      setError("no possible");
+      setErrorKey(prev => prev + 1); // Change key to restart animation
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
-      <div className="bg-gray-800 p-8 rounded-2xl shadow-lg flex flex-col items-center">
-        <h1 className="text-3xl font-bold text-white flex items-center select-none mx-auto mb-2">
+    <div 
+      className="flex flex-col items-center justify-center min-h-screen"
+      style={{ 
+        background: "rgba(24, 24, 24, 1)",
+      }}
+    >
+      <div 
+        className="bg-gray-800 p-8 rounded-2xl shadow-lg flex flex-col items-center justify-center"
+        style={{
+          width: "90%",
+          height: "200px",
+        }}
+      >
+        <h1 className="text-3xl font-bold text-white flex items-center justify-center select-none mx-auto mb-2">
           CH
           <motion.div
             drag
-            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }} // keeps it constrained
-            dragElastic={0.2} // controls how far it can be pulled beyond constraints
+            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+            dragElastic={0.2}
             animate={{
               scale: [1, 1.5, 1.5, 1, 1],
               rotate: [0, 0, 0, 0, 0],
@@ -41,40 +72,66 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
           </motion.div>
           NA
         </h1>
-        <input
-          type="password"
-          className="p-2 rounded bg-gray-800 text-gray-200 mb-2 outline-none"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              if (password === correctPassword) {
-                onNavigate(); // <-- this will set feature to 'home'
-                setError("");
-              } else {
-                setError("no possible");
-              }
-            }
-          }}
-          placeholder="password"
-        />
-        <button
-          className="bg-transparent text-gray-300 px-4 py-1 rounded-full font-bold"
-          onClick={() => {
-            if (password === correctPassword) {
-              onNavigate(); // <-- this will set feature to 'home'
-              setError("");
-            } else {
-              setError("no possible");
-            }
-          }}
+        <div
+          className="flex flex-col items-center justify-center"
         >
-          <CircleArrowRight
-            className="text-gray-400"
-          />
-        </button>
-        {error && <div className="text-red-300 mt-2">{error}</div>}
+          <div className="flex flex-col-2 items-center justify-between bg-gray-700 rounded-full px-4 z-[1]">
+            <motion.input
+              type="password"
+              className="p-2 text-gray-200 outline-none"
+              value={password}
+              onChange={handleInputChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
+              placeholder=""
+              style={{ 
+                textAlign: "left",
+              }}
+            />
+            <button
+              className="bg-transparent text-gray-300 px-4 py-1 rounded-full font-bold"
+              onClick={handleSubmit}
+            >
+              <ArrowRight className="text-gray-400" />
+            </button>
+          </div>
+          <div
+            className="mt-2 text-red-300 select-none"
+          >
+            <AnimatePresence>
+              {error && (
+                <motion.div
+                  key={errorKey}
+                  initial={{ 
+                    opacity: 1, 
+                    y: -15,
+                    zIndex: 20,
+                  }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0 
+                  }}
+                  exit={{ 
+                    opacity: 1, 
+                    y: -30, 
+                    zIndex: 0 
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 700,
+                    damping: 60,
+                  }}
+                >
+                  {error}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
-    </div >
+    </div>
   );
 }

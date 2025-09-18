@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { Button } from "./ui/button";
+import { Card } from "./ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  ArrowLeft,
   Star,
   Waves,
   VenetianMask,
@@ -270,13 +272,13 @@ function BlogPostCollapsed({
         stiffness: 700,
         damping: 60,
       }}
-      className="border rounded-2xl shadow-lg px-6 py-4 flex items-center space-x-6 cursor-pointer mb-3"
+      className="bg-gray-900 border rounded-2xl shadow-lg px-6 py-4 flex items-center space-x-6 cursor-pointer mb-3"
       onClick={isLoading ? undefined : onExpand}
       style={{
         overflow: "hidden",
         pointerEvents: isLoading ? "none" : "auto",
-        backdropFilter: "blur(15px)",
-        background: "rgba(8,8,8,0.1)",
+        background: "#0A0A0A",
+        boxSizing: "border-box",
         zIndex: 100,
         opacity: isLoading ? 0.5 : 1,
       }}
@@ -348,8 +350,7 @@ function BlogPostExpanded({
       className="fixed inset-0 shadow-lg z-100 flex justify-center"
       style={{
         pointerEvents: "auto",
-        backdropFilter: "blur(15px)",
-        background: "rgba(8, 8, 8, 0.1)",
+        background: "#0A0A0A",
         boxSizing: "border-box",
         zIndex: 100,
       }}
@@ -360,13 +361,8 @@ function BlogPostExpanded({
       }}
     >
       <motion.div
-        className="rounded-2xl p-4 mx-auto overflow-auto"
-        style={{ 
-          minHeight: 400, 
-          zIndex: 100,
-          backdropFilter: "blur(15px)",
-          background: "rgba(8,8,8,0.1)",
-        }}
+        className="bg-gray-900 rounded-2xl p-4 mx-auto overflow-y-auto"
+        style={{ minHeight: 400, zIndex: 100 }}
         initial={{ borderRadius: 24 }}
         animate={{ borderRadius: 24 }}
         exit={{ borderRadius: 24 }}
@@ -440,20 +436,14 @@ function BlogPostExpanded({
             <>
               <Button
                 className="bg-gray-300 mb-1 text-gray-800 w-full font-bold"
-                onClick={() => { setShowNote(true); }}
+                onClick={() => setShowNote(true)}
               >
                 <EyeOff className="w-4 h-4" />
                 <div>Hidden-Note</div>
               </Button>
               {showNote && (
-                <div
-                  className="fixed inset-0 z-[50] flex items-center justify-center w-full h-full p-4"
-                  style={{
-                    background: "rgba(0, 0, 0, 0.95)",
-                    backdropFilter: "blur(25px)",
-                  }}
-                >
-                  <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-lg mx-4">
+                <div className="p-4 fixed inset-0 z-50 flex items-center justify-center bg-black" style={{ backgroundColor: "#0A0A0A" }}>
+                  <div className="bg-gray-800 rounded-2xl p-6 w-full">
                     <div className="text-gray-300 -mt-2">
                       <ReactMarkdown>{noteText}</ReactMarkdown>
                     </div>
