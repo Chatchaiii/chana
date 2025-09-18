@@ -2,16 +2,13 @@ import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import {
-  ArrowLeft,
   MapPin,
   Heart,
-  Calendar,
   Camera,
   Coffee,
   Star
 } from 'lucide-react';
 import { motion } from 'motion/react';
-import { isAbsolute } from 'path';
 
 interface LoveMapProps {
   onBack: () => void;

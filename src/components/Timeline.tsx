@@ -1,10 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { Button } from "./ui/button";
-import { Card } from "./ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowLeft,
   Star,
   Waves,
   VenetianMask,
@@ -442,20 +440,20 @@ function BlogPostExpanded({
             <>
               <Button
                 className="bg-gray-300 mb-1 text-gray-800 w-full font-bold"
-                onClick={() => setShowNote(true)}
+                onClick={() => { setShowNote(true); }}
               >
                 <EyeOff className="w-4 h-4" />
                 <div>Hidden-Note</div>
               </Button>
               {showNote && (
-                <div 
-                  className="p-4 fixed inset-0 z-50 flex items-center justify-center"
-                  style={{ 
+                <div
+                  className="fixed inset-0 z-[50] flex items-center justify-center w-full h-full p-4"
+                  style={{
                     background: "rgba(0, 0, 0, 0.95)",
                     backdropFilter: "blur(25px)",
                   }}
                 >
-                  <div className="bg-gray-800 rounded-2xl p-6 w-full">
+                  <div className="bg-gray-800 rounded-2xl p-6 w-full max-w-lg mx-4">
                     <div className="text-gray-300 -mt-2">
                       <ReactMarkdown>{noteText}</ReactMarkdown>
                     </div>

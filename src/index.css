@@ -346,7 +346,6 @@
   iframe,
   embed,
   object {
-    vertical-align: middle;
     display: block;
   }
 
@@ -951,6 +950,10 @@
     margin-inline: auto;
   }
 
+  .my-auto {
+    margin-block: auto;
+  }
+
   .my-0\.5 {
     margin-block: calc(var(--spacing) * 0.5);
   }
@@ -1282,6 +1285,7 @@
 
   .line-clamp-1 {
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     overflow: hidden;
@@ -1519,6 +1523,21 @@
 
   .min-h-16 {
     min-height: calc(var(--spacing) * 16);
+  }
+
+  .fullscreen-note-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(25px);
+    overscroll-behavior: contain;
+    touch-action: none;
   }
 
   .min-h-screen {
@@ -4686,6 +4705,7 @@
 
   :is(.\*\:data-\[slot\=select-value\]\:line-clamp-1 > *)[data-slot="select-value"] {
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     overflow: hidden;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { ArrowLeft, Heart, Lock, Unlock, Eye } from 'lucide-react';
+import { Heart, Lock, Unlock, Eye } from 'lucide-react';
 
 // text imports (same as yours)
 import guelues from '../assets/text/notes/guelues.md?raw';
@@ -16,7 +16,6 @@ import ask from '../assets/text/notes/ask.md?raw';
 import her_zaman from '../assets/text/notes/her_zaman.md?raw';
 import kal_boeyle from '../assets/text/notes/kal_boeyle.md?raw';
 import oezel from '../assets/text/notes/oezel.md?raw';
-import { motion } from 'framer-motion';
 
 interface LoveNoteProps {
   onBack: () => void;
