@@ -272,13 +272,13 @@ function BlogPostCollapsed({
         stiffness: 700,
         damping: 60,
       }}
-      className="bg-gray-900 border rounded-2xl shadow-lg px-6 py-4 flex items-center space-x-6 cursor-pointer mb-3"
+      className="border rounded-2xl shadow-lg px-6 py-4 flex items-center space-x-6 cursor-pointer mb-3"
       onClick={isLoading ? undefined : onExpand}
       style={{
         overflow: "hidden",
         pointerEvents: isLoading ? "none" : "auto",
-        background: "#0A0A0A",
-        boxSizing: "border-box",
+        backdropFilter: "blur(15px)",
+        background: "rgba(8,8,8,0.1)",
         zIndex: 100,
         opacity: isLoading ? 0.5 : 1,
       }}
@@ -350,7 +350,8 @@ function BlogPostExpanded({
       className="fixed inset-0 shadow-lg z-100 flex justify-center"
       style={{
         pointerEvents: "auto",
-        background: "#0A0A0A",
+        backdropFilter: "blur(15px)",
+        background: "rgba(8, 8, 8, 0.1)",
         boxSizing: "border-box",
         zIndex: 100,
       }}
@@ -361,8 +362,13 @@ function BlogPostExpanded({
       }}
     >
       <motion.div
-        className="bg-gray-900 rounded-2xl p-4 mx-auto overflow-y-auto"
-        style={{ minHeight: 400, zIndex: 100 }}
+        className="rounded-2xl p-4 mx-auto overflow-auto"
+        style={{ 
+          minHeight: 400, 
+          zIndex: 100,
+          backdropFilter: "blur(15px)",
+          background: "rgba(8,8,8,0.1)",
+        }}
         initial={{ borderRadius: 24 }}
         animate={{ borderRadius: 24 }}
         exit={{ borderRadius: 24 }}
@@ -442,7 +448,13 @@ function BlogPostExpanded({
                 <div>Hidden-Note</div>
               </Button>
               {showNote && (
-                <div className="p-4 fixed inset-0 z-50 flex items-center justify-center bg-black" style={{ backgroundColor: "#0A0A0A" }}>
+                <div 
+                  className="p-4 fixed inset-0 z-50 flex items-center justify-center"
+                  style={{ 
+                    background: "rgba(0, 0, 0, 0.95)",
+                    backdropFilter: "blur(25px)",
+                  }}
+                >
                   <div className="bg-gray-800 rounded-2xl p-6 w-full">
                     <div className="text-gray-300 -mt-2">
                       <ReactMarkdown>{noteText}</ReactMarkdown>

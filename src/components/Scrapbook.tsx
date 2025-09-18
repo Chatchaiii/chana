@@ -195,7 +195,8 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
             layoutId={`scrapbook-media-${selectedItem.id}`}
             className="fixed inset-0 z-100 flex justify-center overflow-auto"
             style={{
-              background: "rgba(10,10,10,0.98)",
+              backdropFilter: "blur(25px)",
+              background: "rgba(24,24,27,0.3)",
               pointerEvents: "auto",
               boxSizing: "border-box",
             }}
