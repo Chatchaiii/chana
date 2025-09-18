@@ -34,9 +34,6 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
   return (
     <div 
       className="flex flex-col items-center justify-center min-h-screen"
-      style={{ 
-        background: "rgba(24, 24, 24, 1)",
-      }}
     >
       <div 
         className="bg-gray-800 p-8 rounded-2xl shadow-lg flex flex-col items-center justify-center"
