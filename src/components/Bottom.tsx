@@ -15,7 +15,7 @@ export function Bottom({ onNavigate, featureDisplayName, FeatureIcon }: BottomPr
     <>
       {/* Dimming overlay for bottom of screen */}
       <div
-        className="pointer-events-none fixed left-0 right-0 bottom-0 z-[40]"
+        className="pointer-events-none fixed left-0 right-0 bottom-0 z-[40] overflow-auto mt-auto"
         style={{
           height: "100px",
           // Gradient for color dimming
@@ -30,12 +30,12 @@ export function Bottom({ onNavigate, featureDisplayName, FeatureIcon }: BottomPr
           transition: "background 0.3s",
         }}
       />
-      <div className="fixed flex-col-2 select-none">
+      <div className="fixed flex-col-2 select-none overflow-auto mt-auto">
         <motion.div
           drag
           dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
           dragElastic={0.2}
-          className="fixed left-auto right-3 z-[50]"
+          className="fixed left-auto right-3 z-[50] mt-auto"
           whileHover={{
             scale: [null, 1.01, null],
             transition: {
@@ -75,7 +75,7 @@ export function Bottom({ onNavigate, featureDisplayName, FeatureIcon }: BottomPr
           drag
           dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
           dragElastic={0.2}
-          className="fixed left-3 right-auto z-[50]"
+          className="fixed left-3 right-auto z-[50] mt-auto"
           whileHover={{
             scale: [null, 1.01, null],
             transition: {
