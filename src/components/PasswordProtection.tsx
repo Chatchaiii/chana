@@ -39,11 +39,11 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
           width: "90%",
           height: "200px",
           background:
-            "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(10, 10, 10, 1) 100%)",
+            "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(10, 10, 10, 1) 100%)",
           WebkitMaskImage:
-            "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+            "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%)",
           maskImage:
-            "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+            "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%)",
           backdropFilter: "blur(5px)",
         }}
       >
@@ -79,11 +79,11 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
             className="border border-2 flex flex-col-2 items-center justify-between bg-gray-700 rounded-full px-4 z-[1]"
             style={{
               background:
-                "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(10, 10, 10, 1) 100%)",
+                "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(10, 10, 10, 1) 100%)",
               WebkitMaskImage:
-                "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+                "linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%)",
               maskImage:
-                "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
+                "linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%)",
               backdropFilter: "blur(5px)",
             }}
           >
@@ -144,4 +144,3 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
     </div>
   );
 }
-
