@@ -20,6 +20,9 @@ import {
   Infinity as InfinityIcon,
   X,
   EyeOff,
+  BrainCog,
+  CloudMoon,
+  PaintBucket,
 } from "lucide-react";
 
 // --- BlogPost Data ---
@@ -38,6 +41,9 @@ import T_ldr from "../assets/text/timeline/ldr.md?raw";
 import T_return from "../assets/text/timeline/return.md?raw";
 import T_eternal from "../assets/text/timeline/eternal.md?raw";
 import T_infinite from "../assets/text/timeline/infinite.md?raw";
+import T_open_mindeu from "../assets/text/timeline/open_mindeu.md?raw";
+import T_sitn from "../assets/text/timeline/sitn.md?raw";
+import T_blue from "../assets/text/timeline/blue.md?raw";
 
 import H_the_start from "../assets/text/timeline/hidden/h_the_start.md?raw";
 import H_the_lake from "../assets/text/timeline/hidden/h_the_lake.md?raw";
@@ -46,6 +52,8 @@ import H_flight from "../assets/text/timeline/hidden/h_flight.md?raw";
 import H_birthday from "../assets/text/timeline/hidden/h_birthday.md?raw";
 import H_birthday_2 from "../assets/text/timeline/hidden/h_birthday_2.md?raw";
 import H_infinite from "../assets/text/timeline/hidden/h_infinite.md?raw";
+import H_open_mindeu from "../assets/text/timeline/hidden/h_open_mindeu.md?raw";
+import H_blue from "../assets/text/timeline/hidden/h_blue.md?raw";
 
 import P_the_start from "../assets/images/timeline/the_start.jpeg";
 import P_the_lake1 from "../assets/images/timeline/the_lake_1.jpeg";
@@ -78,6 +86,16 @@ import P_infinite_1 from "../assets/images/timeline/infinite_1.jpeg";
 import P_infinite_2 from "../assets/images/timeline/infinite_2.jpeg";
 import P_infinite_3 from "../assets/images/timeline/infinite_3.jpeg";
 import P_infinite_4 from "../assets/images/timeline/infinite_4.jpeg";
+import P_open_mindeu_1 from "../assets/images/timeline/open_mindeu_1.jpeg";
+import P_open_mindeu_2 from "../assets/images/timeline/open_mindeu_2.jpeg";
+import P_open_mindeu_3 from "../assets/images/timeline/open_mindeu_3.jpeg";
+import P_sitn_1 from "../assets/images/timeline/sitn_1.jpeg";
+import P_sitn_2 from "../assets/images/timeline/sitn_2.jpeg";
+import P_blue_1 from "../assets/images/timeline/blue_1.jpeg";
+import P_blue_2 from "../assets/images/timeline/blue_2.jpeg";
+import P_blue_3 from "../assets/images/timeline/blue_3.jpeg";
+import P_blue_4 from "../assets/images/timeline/blue_4.jpeg";
+import P_blue_5 from "../assets/images/timeline/blue_5.jpeg";
 
 // --- Types ---
 interface TimelineProps {
@@ -166,7 +184,15 @@ const blogPosts: BlogPostBlockProps[] = [
     title: "Birthday",
     date: "20.07.2025",
     text: T_birthday,
-    imageUrls: [P_birthday_1, P_birthday_2, P_birthday_3, P_birthday_4, P_birthday_5, P_birthday_6, P_birthday_7],
+    imageUrls: [
+      P_birthday_1,
+      P_birthday_2,
+      P_birthday_3,
+      P_birthday_4,
+      P_birthday_5,
+      P_birthday_6,
+      P_birthday_7,
+    ],
     icon: Cake,
     noteText: H_birthday,
   },
@@ -206,6 +232,29 @@ const blogPosts: BlogPostBlockProps[] = [
     imageUrls: [P_infinite_1, P_infinite_2, P_infinite_3, P_infinite_4],
     icon: InfinityIcon,
     noteText: H_infinite,
+  },
+  {
+    title: "Open Mindeu",
+    date: "23.08.2025",
+    text: T_open_mindeu,
+    imageUrls: [P_open_mindeu_1, P_open_mindeu_2, P_open_mindeu_3],
+    icon: BrainCog,
+    noteText: H_open_mindeu,
+  },
+  {
+    title: "Strangers in the night",
+    date: "26.08.2025",
+    text: T_sitn,
+    imageUrls: [P_sitn_1, P_sitn_2],
+    icon: CloudMoon,
+  },
+  {
+    title: "Blue",
+    date: "04.09.2025",
+    text: T_blue,
+    imageUrls: [P_blue_1, P_blue_2, P_blue_3, P_blue_4, P_blue_5],
+    icon: PaintBucket,
+    noteText: H_blue,
   },
 ];
 
@@ -291,7 +340,9 @@ function BlogPostCollapsed({
         <span className="ml-auto text-sm text-gray-400">{date}</span>
       </div>
       {isLoading && (
-        <span className="ml-4 text-xs text-gray-400 animate-pulse">Loading…</span>
+        <span className="ml-4 text-xs text-gray-400 animate-pulse">
+          Loading…
+        </span>
       )}
     </motion.div>
   );
@@ -385,8 +436,12 @@ function BlogPostExpanded({
                   <Icon className="w-6 h-4" />
                 </div>
                 <div className="flex items-center w-full">
-                  <h2 className="text-2xl font-bold text-gray-200 mb-1">{title}</h2>
-                  <span className="relative right-4 ml-auto text-xs text-gray-500 font-bold">{date}</span>
+                  <h2 className="text-2xl font-bold text-gray-200 mb-1">
+                    {title}
+                  </h2>
+                  <span className="relative right-4 ml-auto text-xs text-gray-500 font-bold">
+                    {date}
+                  </span>
                 </div>
                 <X className="mr-1 w-6 h-4" />
               </div>
@@ -442,7 +497,10 @@ function BlogPostExpanded({
                 <div>Hidden-Note</div>
               </Button>
               {showNote && (
-                <div className="p-4 fixed inset-0 z-50 flex items-center justify-center bg-black" style={{ backgroundColor: "#0A0A0A" }}>
+                <div
+                  className="p-4 fixed inset-0 z-50 flex items-center justify-center bg-black"
+                  style={{ backgroundColor: "#0A0A0A" }}
+                >
                   <div className="bg-gray-800 rounded-2xl p-6 w-full">
                     <div className="text-gray-300 -mt-2">
                       <ReactMarkdown>{noteText}</ReactMarkdown>
@@ -487,7 +545,9 @@ export function Timeline({ onBack }: TimelineProps) {
 
       // Prevent touchmove on mobile
       const preventTouch = (e: TouchEvent) => e.preventDefault();
-      document.body.addEventListener("touchmove", preventTouch, { passive: true });
+      document.body.addEventListener("touchmove", preventTouch, {
+        passive: true,
+      });
 
       return () => {
         document.body.style.overflow = originalOverflow;
@@ -522,7 +582,7 @@ export function Timeline({ onBack }: TimelineProps) {
   // Only expand after images are loaded
   const imagesLoaded = usePreloadImages(
     pendingIdx !== null ? blogPosts[pendingIdx].imageUrls : [],
-    pendingIdx !== null
+    pendingIdx !== null,
   );
 
   useEffect(() => {
@@ -561,3 +621,4 @@ export function Timeline({ onBack }: TimelineProps) {
     </div>
   );
 }
+
