@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover" />
   <title>Chana</title>
 
   <!-- PWA Manifest -->
@@ -25,7 +25,13 @@
   <meta name="format-detection" content="telephone=no" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <style>
+    html, body, #root {
+      min-height: 100vh;
+      height: 100%;
+      background-color: #0A0A0A;
+    }
     body {
+      min-height: 100dvh; /* Modern browsers: dynamic viewport height */
       background-color: #0A0A0A;
     }
   </style>

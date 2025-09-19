@@ -13,7 +13,7 @@ export function Top({ onNavigate }: TopProps) {
     <>
       {/* Dimming overlay for top of screen */}
       <div
-        className="pointer-events-none fixed z-[40] overflow-auto mb-auto"
+        className="pointer-events-none fixed left-0 right-0 top-0 z-[40] overflow-auto mb-auto"
         style={{
           height: "100px",
           background:
@@ -24,26 +24,14 @@ export function Top({ onNavigate }: TopProps) {
             "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
           backdropFilter: "blur(5px)",
           transition: "background 0.3s",
-          top: "0px",
-          left: "0px",
-          right: "0px",
         }}
       />
-      <div 
-        className="fixed select-none overflow-auto mb-auto"
-        style={{
-          top: "10px",
-          left: "10px",
-          right: "10px",
-          height: "100px",
-        }}
-      >
-        {/* Top draggable navigation bar */}
+      <div className="fixed select-none overflow-auto mb-auto">
         <motion.div
           drag
           dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
           dragElastic={0.2}
-          className="z-[50] mb-auto"
+          className="fixed top-3 right-3 left-3 z-[50] mb-auto"
           whileHover={{
             scale: [null, 1.01, null],
             transition: {
@@ -58,6 +46,7 @@ export function Top({ onNavigate }: TopProps) {
             ease: "easeOut",
           }}
           style={{
+            bottom: "20px",
             border: "1px solid rgba(255, 255, 255, 0.1)",
             pointerEvents: "auto",
             backdropFilter: "blur(5px)",
@@ -66,6 +55,8 @@ export function Top({ onNavigate }: TopProps) {
             borderTopRightRadius: "3.4rem",
             borderBottomLeftRadius: "3.4rem",
             borderBottomRightRadius: "3.4rem",
+            height: "50px",
+            display: "flex",
             alignItems: "center",
             justifyContent: "center",
             minWidth: 0,

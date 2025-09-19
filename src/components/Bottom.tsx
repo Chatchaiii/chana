@@ -28,20 +28,9 @@ export function Bottom({ onNavigate, featureDisplayName, FeatureIcon }: BottomPr
             "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,1) 100%)",
           backdropFilter: "blur(5px)",
           transition: "background 0.3s",
-          bottom: "0px",
-          left: "0px",
-          right: "0px",
         }}
       />
-      <div
-        className="fixed select-none overflow-auto mt-auto"
-        style={{
-          bottom: "-25px",
-          height: "100px",
-          left: "0px",
-          right: "0px",
-        }}
-      >
+      <div className="fixed flex-col-2 select-none overflow-auto mt-auto">
         <motion.div
           drag
           dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
@@ -61,6 +50,7 @@ export function Bottom({ onNavigate, featureDisplayName, FeatureIcon }: BottomPr
             ease: "easeOut",
           }}
           style={{
+            bottom: "20px",
             border: "1px solid rgba(255, 255, 255, 0.1)",
             pointerEvents: "auto",
             backdropFilter: "blur(3px)",
@@ -69,14 +59,15 @@ export function Bottom({ onNavigate, featureDisplayName, FeatureIcon }: BottomPr
             borderTopRightRadius: "3.4rem",
             borderBottomLeftRadius: "3.4rem",
             borderBottomRightRadius: "3.4rem",
+            height: "50px",
+            display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            height: "64px",
           }}
         >
           <Card className="w-full border border-transparent bg-transparent shadow-none">
             <div onClick={() => onNavigate('home')} className="p-4 w-full cursor-pointer">
-              <ArrowLeft className="mt-1 ml-2 mr-2 w-5 h-5 text-gray-200" style={{ width: "30px"}}/>
+              <ArrowLeft className="ml-2 mr-2 w-5 h-5 text-gray-200" />
             </div>
           </Card>
         </motion.div>
@@ -99,6 +90,7 @@ export function Bottom({ onNavigate, featureDisplayName, FeatureIcon }: BottomPr
             ease: "easeOut",
           }}
           style={{
+            bottom: "20px",
             border: "1px solid rgba(255, 255, 255, 0.1)",
             pointerEvents: "auto",
             backdropFilter: "blur(5px)",
@@ -107,9 +99,10 @@ export function Bottom({ onNavigate, featureDisplayName, FeatureIcon }: BottomPr
             borderTopRightRadius: "3.4rem",
             borderBottomLeftRadius: "3.4rem",
             borderBottomRightRadius: "3.4rem",
+            height: "50px",
+            display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            height: "64px",
           }}
         >
           <Card className="w-full border border-transparent bg-transparent shadow-none flex items-center">
