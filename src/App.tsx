@@ -6,7 +6,7 @@ import { LoveQuiz } from './components/LoveQuiz';
 import { CountUp } from './components/CountUp';
 import { LoveNote } from './components/LoveNote';
 import { PasswordProtection } from './components/PasswordProtection';
-import { Collection } from './components/Collection';
+import Parallax from './components/Collection';
 import { LoveMap } from './components/LoveMap';
 import { User } from './components/User';
 import { Top } from './components/Top';
@@ -82,7 +82,7 @@ export default function App() {
       case 'password':
         return <PasswordProtection onNavigate={() => setCurrentFeature('home')} />;
       case 'collection':
-        return <Collection onBack={() => setCurrentFeature('home')} />;
+        return <Parallax />;
       case 'map':
         return <LoveMap onBack={() => setCurrentFeature('home')} />;
       case 'user':
