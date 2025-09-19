@@ -242,6 +242,7 @@ export function Homepage({ onNavigate }: HomepageProps) {
             style={{ 
                 backdropFilter: "blur(5px)",
                 background: "rgba(24,24,27,0.3)",
+                borderRadius: "1rem",
             }}
           >
             <Card key={feature.id}
