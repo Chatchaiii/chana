@@ -13,7 +13,7 @@ export function Top({ onNavigate }: TopProps) {
     <>
       {/* Dimming overlay for top of screen */}
       <div
-        className="pointer-events-none fixed left-0 right-0 top-0 z-[40] overflow-auto mb-auto"
+        className="pointer-events-none absolute left-0 right-0 top-0 z-[40] overflow-auto mb-auto"
         style={{
           height: "100px",
           background:
@@ -26,12 +26,12 @@ export function Top({ onNavigate }: TopProps) {
           transition: "background 0.3s",
         }}
       />
-      <div className="fixed select-none overflow-auto mb-auto">
+      <div className="absolute select-none overflow-auto mb-auto">
         <motion.div
           drag
           dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
           dragElastic={0.2}
-          className="fixed top-3 right-3 left-3 z-[50] mb-auto"
+          className="absolute top-3 right-3 left-3 z-[50] mb-auto"
           whileHover={{
             scale: [null, 1.01, null],
             transition: {
