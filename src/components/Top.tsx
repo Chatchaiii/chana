@@ -59,6 +59,7 @@ export function Top({ onNavigate }: TopProps) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            minWidth: 0,
           }}
         >
           <Card className="flex w-full border-transparent bg-transparent">
