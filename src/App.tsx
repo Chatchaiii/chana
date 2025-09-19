@@ -6,7 +6,7 @@ import { LoveQuiz } from './components/LoveQuiz';
 import { CountUp } from './components/CountUp';
 import { LoveNote } from './components/LoveNote';
 import { PasswordProtection } from './components/PasswordProtection';
-import { GiftBox } from './components/GiftBox';
+import { Collection } from './components/Collection';
 import { LoveMap } from './components/LoveMap';
 import { User } from './components/User';
 import { Top } from './components/Top';
@@ -21,10 +21,10 @@ Mail,
 Map,
 Users,
 Lock,
-Gift,
+Library,
 } from 'lucide-react';
 
-export type FeatureType = 'home' | 'timeline' | 'scrapbook' | 'quiz' | 'countup' | 'note' | 'password' | 'gifts' | 'map' | 'user';
+export type FeatureType = 'home' | 'timeline' | 'scrapbook' | 'quiz' | 'countup' | 'note' | 'password' | 'collection' | 'map' | 'user';
 
 const featureIconMap: Record<FeatureType, React.ElementType> = {
   home: House,
@@ -34,7 +34,7 @@ const featureIconMap: Record<FeatureType, React.ElementType> = {
   countup: Heart,
   note: Mail,
   password: Lock,
-  gifts: Gift,
+  collection: Library,
   map: Map,
   user: Users,
 };
@@ -61,7 +61,7 @@ export default function App() {
     case "countup": return "Count-Up";
     case "note": return "Hidden Notes";
     case "password": return "Password";
-    case "gifts": return "Gifts";
+    case "collection": return "Collection";
     case "map": return "Map";
     case "user": return "User";
     default: return "";
@@ -81,8 +81,8 @@ export default function App() {
         return <CountUp onBack={() => setCurrentFeature('home')} />;
       case 'password':
         return <PasswordProtection onNavigate={() => setCurrentFeature('home')} />;
-      case 'gifts':
-        return <GiftBox onBack={() => setCurrentFeature('home')} />;
+      case 'collection':
+        return <Collection onBack={() => setCurrentFeature('home')} />;
       case 'map':
         return <LoveMap onBack={() => setCurrentFeature('home')} />;
       case 'user':

@@ -14,14 +14,11 @@ import {
   Camera,
   Brain,
   Mail,
-  Map,
+  Quote,
   Calendar,
   Star,
-  Quote,
   Image,
-  User,
-  Lock,
-  Users,
+  Library,
 } from "lucide-react";
 import { FeatureType } from "../App";
 import { motion } from "motion/react"
@@ -78,9 +75,9 @@ export function Homepage({ onNavigate }: HomepageProps) {
       color: "bg-gray-000",
     },
     {
-      id: "map" as FeatureType,
-      name: "Map",
-      icon: Map,
+      id: "collection" as FeatureType,
+      name: "Collection",
+      icon: Library,
       color: "bg-gray-000",
     },
   ];
@@ -190,11 +187,33 @@ export function Homepage({ onNavigate }: HomepageProps) {
         </div>
       </div>
       {/* Text Body */}
-      {/* <p className="relative font-bold flex gap-9 items-center text-left text-xs text-gray-400 p-6 select-none bg-gray-800 rounded-2xl">
+      <motion.div 
+        className="border relative font-bold flex gap-9 items-center text-left text-xs text-gray-400 p-6 select-none rounded-2xl"
+        drag
+        dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+        dragElastic={0.2}
+        whileHover={{
+          scale: [null, 1.01, null],
+          transition: {
+            duration: 0.3,
+            times: [0, 0.6, 1],
+            ease: ["easeInOut", "easeOut"],
+          },
+        }}
+        whileTap={{ scale: 0.9 }}
+        transition={{
+          duration: 0.2,
+          ease: "easeOut",
+        }}
+        style={{ 
+            backdropFilter: "blur(5px)",
+            background: "rgba(24,24,27,0.3)",
+        }}
+      >
         <Quote className="relative left-2 w-10 h-10 text-gray-500" />
         "In all the world, there is no heart for me like yours. In all the
         world, there is no love for you like mine."
-      </p> */}
+      </motion.div>
 
       {/* Features Grid */}
       <h1 className="font-bold items-center flex text-2xl text-gray-300 gap-2 select-none">
@@ -215,14 +234,18 @@ export function Homepage({ onNavigate }: HomepageProps) {
                 ease: ["easeInOut", "easeOut"],
               },
             }}
-            whileTap={{ scale: 0.98 }}
+            whileTap={{ scale: 0.9 }}
             transition={{
               duration: 0.2,
               ease: "easeOut",
             }}
+            style={{ 
+                backdropFilter: "blur(5px)",
+                background: "rgba(24,24,27,0.3)",
+            }}
           >
             <Card key={feature.id}
-              className={`rounded-2xl`}
+              className={`rounded-2xl bg-transparent`}
             >
               <Button
                 onClick={() => onNavigate(feature.id)}

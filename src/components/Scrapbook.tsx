@@ -27,6 +27,20 @@ import P_birthday_2_2 from "../assets/images/timeline/birthday_2_2.jpeg";
 import P_ldr from "../assets/images/timeline/ldr.jpeg";
 import P_return from "../assets/images/timeline/return.jpeg";
 import P_eternal from "../assets/images/timeline/eternal.jpeg";
+import P_infinite_1 from "../assets/images/timeline/infinite_1.jpeg";
+import P_infinite_2 from "../assets/images/timeline/infinite_2.jpeg";
+import P_infinite_3 from "../assets/images/timeline/infinite_3.jpeg";
+import P_infinite_4 from "../assets/images/timeline/infinite_4.jpeg";
+import P_open_mindeu_1 from "../assets/images/timeline/open_mindeu_1.jpeg";
+import P_open_mindeu_2 from "../assets/images/timeline/open_mindeu_2.jpeg";
+import P_open_mindeu_3 from "../assets/images/timeline/open_mindeu_3.jpeg";
+import P_sitn_1 from "../assets/images/timeline/sitn_1.jpeg";
+import P_sitn_2 from "../assets/images/timeline/sitn_2.jpeg";
+import P_blue_1 from "../assets/images/timeline/blue_1.jpeg";
+import P_blue_2 from "../assets/images/timeline/blue_2.jpeg";
+import P_blue_3 from "../assets/images/timeline/blue_3.jpeg";
+import P_blue_4 from "../assets/images/timeline/blue_4.jpeg";
+import P_blue_5 from "../assets/images/timeline/blue_5.jpeg";
 
 // video
 import V_photo_booth from "../assets/video/photo_booth.mov";
@@ -101,6 +115,20 @@ export function Scrapbook({ onBack }: ScrapbookProps) {
     { id: 28, src: V_ldr, caption: "Mwahhh", date: "01.08.2025", type: "video" },
     { id: 29, src: P_return, caption: "Return", date: "05.08.2025", type: "image" },
     { id: 30, src: P_eternal, caption: "Eternal forever", date: "08.08.2025", type: "image" },
+    { id: 31, src: P_infinite_1, caption: "Bottled up", date: "15.08.2025", type: "image" },
+    { id: 32, src: P_infinite_2, caption: "", date: "15.08.2025", type: "image" },
+    { id: 33, src: P_infinite_3, caption: "", date: "15.08.2025", type: "image" },
+    { id: 34, src: P_infinite_4, caption: "", date: "15.08.2025", type: "image" },
+    { id: 35, src: P_open_mindeu_1, caption: "Stopping time", date: "23.08.2025", type: "image" },
+    { id: 36, src: P_open_mindeu_2, caption: "", date: "23.08.2025", type: "image" },
+    { id: 37, src: P_open_mindeu_3, caption: "", date: "23.08.2025", type: "image" },
+    { id: 38, src: P_sitn_1, caption: "Strangers in the night", date: "26.08.2025", type: "image" },
+    { id: 39, src: P_sitn_2, caption: "Look of love", date: "26.08.2025", type: "image" },
+    { id: 40, src: P_blue_1, caption: "My home", date: "04.09.2025", type: "image" },
+    { id: 41, src: P_blue_2, caption: "Your home", date: "04.09.2025", type: "image" },
+    { id: 42, src: P_blue_3, caption: "Blue", date: "04.09.2025", type: "image" },
+    { id: 43, src: P_blue_4, caption: "My Rest", date: "04.09.2025", type: "image" },
+    { id: 44, src: P_blue_5, caption: "Your Rest", date: "04.09.2025", type: "image" },
   ];
 
   // Group items by date

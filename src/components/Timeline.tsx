@@ -3,6 +3,8 @@ import ReactMarkdown from "react-markdown";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { motion, AnimatePresence } from "framer-motion";
+
+// --- Icons ---
 import {
   ArrowLeft,
   Star,

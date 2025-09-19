@@ -21,31 +21,49 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
       question: "What's my favorite color?",
       options: ["Blue", "Grey", "Green", "Purple"],
       correct: 1,
-      explanation: "You always notice how much I love grey."
+      explanation: "What a surprise >_>"
     },
     {
       question: "What's our favorite place to go together?",
-      options: ["Coffee shop", "Park", "Beach", "Movies"],
+      options: ["Café", "Park", "Beach", "Movies"],
       correct: 0,
-      explanation: "Our coffee dates are the best."
+      explanation: "I love every single one as long as it's with you"
     },
     {
-      question: "What's my biggest dream?",
-      options: ["Travel the world", "Start a business", "Write a book", "Learn to paint"],
-      correct: 0,
-      explanation: "You remember I want to explore every corner of the world with you."
+      question: "Who's my favorite person?",
+      options: ["You", "YOU", "TOTALLY YOU", "ABSOLUTELY YOU"],
+      correct: 3,
+      explanation: "It's definitely you, my loveeeeeee"
     },
     {
       question: "What makes me laugh the most?",
-      options: ["Your jokes", "Funny movies", "Our German jokes", "Our inside jokes"],
+      options: ["30 centimeter cock", "Cola", "Bin ich ein Hurensohn?", "Wer ist Christoph?"],
       correct: 2,
-      explanation: "You always get me with those silly German jokes."
+      explanation: "Dein 30 centimeter cock ist kein witz. Sobald der einmal in mir drin ist bin ich tot. Trotzdem bin ich ein hurensohn T-T"
     },
     {
-      question: "What's my love language?",
-      options: ["Words of affirmation", "Quality time", "Physical touch", "Acts of service"],
+      question: "When is my birthday?",
+      options: ["13.01.2007", "13.10.2007", "31.01.2007", "I wasn't born yet"],
+      correct: 0,
+      explanation: "Mir fallen keine Fragen mehr ein"
+    },
+    {
+      question: "Which perfume did I wear at first meeting?",
+      options: ["Bleu noir (Naricisso)", "Boss Bottled", "I don't remember", "Titanium (Gisada)"],
+      correct: 3,
+      explanation: "Es war zu 100% Titanium"
+    },
+    {
+      question: "Who does love more?",
+      options: ["You love me most", "I love you most", "You love you most", "You love Christop most"],
       correct: 1,
-      explanation: "Spending quality time together means everything to me."
+      explanation: "Khafe sho va khodet khafe sho"
+    },
+    {
+      question: "Ahlelele ahlelas",
+      options: ["Ah lele le ahlelas", "Ahlelele ahleleas", "Ahle lele ahlelas ", "Ahlele le ahlelas"],
+      correct: 1,
+      explanation: "Ahlelele ahleleas"
     }
   ];
 
@@ -78,10 +96,10 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
 
   const getScoreMessage = () => {
     const percentage = (score / questions.length) * 100;
-    if (percentage === 100) return "Perfect! You know me so well!";
-    if (percentage >= 80) return "Amazing! We're so connected!";
-    if (percentage >= 60) return "Pretty good! We're learning about each other!";
-    return "We have so much more to discover about each other!";
+    if (percentage === 100) return "You're my soulmate";
+    if (percentage >= 80) return "Baaabbyyyyyyyy";
+    if (percentage >= 60) return "Mano";
+    return "Arschloch";
   };
 
   // --- Swipe handling ---
@@ -92,7 +110,7 @@ export function LoveQuiz({ onBack }: LoveQuizProps) {
     if (touchStartX === null) return;
     const diffX = e.changedTouches[0].clientX - touchStartX;
     if (diffX > 100) {
-      // onBack(); // swipe right → back
+      // handleNext(); // swipe right → back
     } else if (diffX < -100 && answered) {
       // handleNext(); // swipe left → next if answered
     }
