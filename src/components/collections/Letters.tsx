@@ -9,20 +9,20 @@ import {
 import { useRef } from "react";
 import { ChevronLeft } from "lucide-react";
 
-import letter_1 from "../../assets/images/letters/letter_1.jpg";
-import letter_2 from "../../assets/images/letters/letter_2.jpg";
-import letter_3 from "../../assets/images/letters/letter_3.jpg";
-import letter_4 from "../../assets/images/letters/letter_4.jpg";
-import letter_5 from "../../assets/images/letters/letter_5.jpg";
-import letter_6 from "../../assets/images/letters/letter_6.jpg";
-import letter_7 from "../../assets/images/letters/letter_7.jpg";
-import letter_8 from "../../assets/images/letters/letter_8.jpg";
-import letter_9 from "../../assets/images/letters/letter_9.jpg";
-import letter_10 from "../../assets/images/letters/letter_10.jpg";
-import letter_11 from "../../assets/images/letters/letter_11.jpg";
-import letter_12 from "../../assets/images/letters/letter_12.jpg";
-import letter_13 from "../../assets/images/letters/letter_13.jpg";
-import letter_14 from "../../assets/images/letters/letter_14.jpg";
+import letter_1 from "../../assets/images/letters/letter_1.jpeg";
+import letter_2 from "../../assets/images/letters/letter_2.jpeg";
+import letter_3 from "../../assets/images/letters/letter_3.jpeg";
+import letter_4 from "../../assets/images/letters/letter_4.jpeg";
+import letter_5 from "../../assets/images/letters/letter_5.jpeg";
+import letter_6 from "../../assets/images/letters/letter_6.jpeg";
+import letter_7 from "../../assets/images/letters/letter_7.jpeg";
+import letter_8 from "../../assets/images/letters/letter_8.jpeg";
+import letter_9 from "../../assets/images/letters/letter_9.jpeg";
+import letter_10 from "../../assets/images/letters/letter_10.jpeg";
+import letter_11 from "../../assets/images/letters/letter_11.jpeg";
+import letter_12 from "../../assets/images/letters/letter_12.jpeg";
+import letter_13 from "../../assets/images/letters/letter_13.jpeg";
+import letter_14 from "../../assets/images/letters/letter_14.jpeg";
 
 export function useLetters(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 1], [-distance, distance]);
