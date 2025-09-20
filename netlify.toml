@@ -1,0 +1,9 @@
+# netlify.toml
+
+[[headers]]
+for = "/*"
+[headers.values]
+Basic-Auth = ":BASIC_AUTH_USER::BASIC_AUTH_PASS"
+
+[[plugins]]
+package = "netlify-plugin-inline-functions-env"
