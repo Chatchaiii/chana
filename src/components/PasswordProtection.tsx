@@ -124,7 +124,7 @@ export function PasswordProtection({ onNavigate }: PasswordProtectionProps) {
                     y: 0,
                   }}
                   exit={{
-                    opacity: 1,
+                    opacity: 0,
                     y: -30,
                     zIndex: 0,
                   }}
