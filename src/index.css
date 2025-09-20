@@ -1128,7 +1128,7 @@
   }
 
   .-mb-2 {
-    margin-bottom: calc(var(--spacing) * -2 );
+    margin-bottom: calc(var(--spacing) * -2);
   }
 
   .-mb-3 {
@@ -1165,6 +1165,10 @@
 
   .-mb-15 {
     margin-bottom: calc(var(--spacing) * -15);
+  }
+
+  .-mb-16 {
+    margin-bottom: calc(var(--spacing) * -16);
   }
 
   .mb-auto {
