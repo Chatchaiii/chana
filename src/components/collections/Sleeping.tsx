@@ -9,8 +9,15 @@ import {
 import { useRef } from "react";
 import { ChevronLeft } from "lucide-react";
 
-import sleeping_1 from "../../assets/images/timeline/blue_4.jpeg";
-import sleeping_2 from "../../assets/images/timeline/blue_5.jpeg";
+import sleeping_1 from "../../assets/images/collections/sleeping/sleeping_1.jpeg";
+import sleeping_2 from "../../assets/images/collections/sleeping/sleeping_2.jpeg";
+import sleeping_3 from "../../assets/images/collections/sleeping/sleeping_3.jpeg";
+import sleeping_4 from "../../assets/images/collections/sleeping/sleeping_4.jpeg";
+import sleeping_5 from "../../assets/images/timeline/blue_4.jpeg";
+import sleeping_6 from "../../assets/images/timeline/blue_5.jpeg";
+import sleeping_7 from "../../assets/images/collections/sleeping/sleeping_5.jpeg";
+import sleeping_8 from "../../assets/images/collections/sleeping/sleeping_6.jpeg";
+
 
 export function useSleeping(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 1], [-distance, distance]);
@@ -25,6 +32,12 @@ export function Sleeping_id({ id }: { id: number }) {
   const images: { [key: number]: string } = {
     1: sleeping_1,
     2: sleeping_2,
+    3: sleeping_3,
+    4: sleeping_4,
+    5: sleeping_5,
+    6: sleeping_6,
+    7: sleeping_7,
+    8: sleeping_8,
   };
 
   return (
@@ -100,7 +113,7 @@ export default function Sleeping({ onBack }: { onBack?: () => void }) {
         <ChevronLeft />
         <p className="font-bold">Back</p>
       </motion.div>
-      {[1, 2].map((image) => (
+      {[1, 2, 3, 4, 5, 6, 7, 8].map((image) => (
         <Sleeping_id key={image} id={image} />
       ))}
       <motion.div

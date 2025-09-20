@@ -9,20 +9,21 @@ import {
 import { useRef } from "react";
 import { ChevronLeft } from "lucide-react";
 
-import letter_1 from "../../assets/images/letters/letter_1.jpeg";
-import letter_2 from "../../assets/images/letters/letter_2.jpeg";
-import letter_3 from "../../assets/images/letters/letter_3.jpeg";
-import letter_4 from "../../assets/images/letters/letter_4.jpeg";
-import letter_5 from "../../assets/images/letters/letter_5.jpeg";
-import letter_6 from "../../assets/images/letters/letter_6.jpeg";
-import letter_7 from "../../assets/images/letters/letter_7.jpeg";
-import letter_8 from "../../assets/images/letters/letter_8.jpeg";
-import letter_9 from "../../assets/images/letters/letter_9.jpeg";
-import letter_10 from "../../assets/images/letters/letter_10.jpeg";
-import letter_11 from "../../assets/images/letters/letter_11.jpeg";
-import letter_12 from "../../assets/images/letters/letter_12.jpeg";
-import letter_13 from "../../assets/images/letters/letter_13.jpeg";
-import letter_14 from "../../assets/images/letters/letter_14.jpeg";
+import letter_1 from "../../assets/images/collections/letters/letter_1.jpeg";
+import letter_2 from "../../assets/images/collections/letters/letter_2.jpeg";
+import letter_3 from "../../assets/images/collections/letters/letter_3.jpeg";
+import letter_4 from "../../assets/images/collections/letters/letter_4.jpeg";
+import letter_5 from "../../assets/images/collections/letters/letter_5.jpeg";
+import letter_6 from "../../assets/images/collections/letters/letter_6.jpeg";
+import letter_7 from "../../assets/images/collections/letters/letter_7.jpeg";
+import letter_8 from "../../assets/images/collections/letters/letter_8.jpeg";
+import letter_9 from "../../assets/images/collections/letters/letter_9.jpeg";
+import letter_10 from "../../assets/images/collections/letters/letter_10.jpeg";
+import letter_11 from "../../assets/images/collections/letters/letter_11.jpeg";
+import letter_12 from "../../assets/images/collections/letters/letter_12.jpeg";
+import letter_13 from "../../assets/images/collections/letters/letter_13.jpeg";
+import letter_14 from "../../assets/images/collections/letters/letter_14.jpeg";
+import letter_15 from "../../assets/images/collections/letters/letter_15.jpeg";
 
 export function useLetters(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 1], [-distance, distance]);
@@ -49,6 +50,7 @@ export function Letters_id({ id }: { id: number }) {
     12: letter_12,
     13: letter_13,
     14: letter_14,
+    15: letter_15,
   };
 
   return (
@@ -124,7 +126,7 @@ export default function Letters({ onBack }: { onBack?: () => void }) {
         <ChevronLeft />
         <p className="font-bold">Back</p>
       </motion.div>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((image) => (
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((image) => (
         <Letters_id key={image} id={image} />
       ))}
       <motion.div
