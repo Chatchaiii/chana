@@ -3,72 +3,147 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Login</title>
+    <link rel="stylesheet" href="/src/index.css">
     <style>
         body {
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: sans-serif;
-            background: #f5f5f5;
+            justify-content: center;
+            background: #0A0A0A;
         }
 
         .login-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
+            width: 90%;
+            max-width: 90%;
+            box-sizing: border-box;
+            border: 2px solid #27272a;
+            border-radius: 1.5rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(27, 27, 27, 0.3);
+            backdrop-filter: blur(5px);
+            height: 200px;
         }
 
-        input {
-            display: block;
-            margin: 1rem 0;
+        .login-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .lucide-heart {
+            margin: 0 0.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            scale: 1.4;
+        }
+
+        .input-row {
+            border: 2px solid #27272a;
+            display: flex;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.3);
+            border-radius: 9999px;
+            padding: 0 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-input {
+            background: transparent;
+            border: none;
+            color: #e5e7eb;
             padding: 0.5rem;
-            width: 100%;
+            outline: none;
+            width: 8rem;
+            font-size: 1rem;
         }
 
-        button {
-            padding: 0.5rem 1rem;
+        .login-btn {
+            background: transparent;
+            color: #d1d5db;
+            border: none;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .arrow {
+            color: #ec4899;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .error-msg {
+            margin-top: 0.5rem;
+            color: #fca5a5;
+            min-height: 1.5rem;
+            user-select: none;
+            text-align: center;
+            font-size: 1rem;
         }
     </style>
 </head>
 
 <body>
     <div class="login-box">
-        <h2>Enter Password</h2>
-        <input id="password" type="password" placeholder="Password" />
-        <button onclick="checkPassword()">Enter</button>
-        <p id="error" style="color:red;"></p>
+        <div class="login-title">
+            CH
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ec4899"
+                stroke="#ec4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-heart-icon lucide-heart">
+                <path
+                    d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
+            </svg>
+            NA
+        </div>
+        <div class="input-row">
+            <input id="password" type="password" class="login-input" placeholder="" autocomplete="current-password"
+                onkeydown="if(event.key==='Enter'){checkPassword()}" />
+            <button class="login-btn" onclick="checkPassword()">
+                <svg class="arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+        <div id="error" class="error-msg"></div>
     </div>
 
     <script>
         async function checkPassword() {
             const input = document.getElementById('password').value;
-
-            // SHA-256 hash the input
             const msgUint8 = new TextEncoder().encode(input);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-            // Precomputed hash of your password
-            const correctHash = "5d3b5f7c19f8b8c4e9b4a2d2d1b3eecf9f6f9a5b5c8f4f8d6e7a1c2d3e4f5g6h";
-
+            // SHA-256 for "zendegim"
+            const correctHash = "0c1f2b158df1b4c0d0616488af4bacccd319c4e343b5f0dac20b5ccdf803d1c8";
             if (hashHex === correctHash) {
                 localStorage.setItem("auth", "true");
                 window.location.href = "/";
             } else {
-                document.getElementById('error').textContent = "Wrong password!";
+                document.getElementById('error').textContent = "no possible";
             }
         }
-
-        // Skip login if already authorized
         if (localStorage.getItem("auth") === "true") {
             window.location.href = "/";
         }
     </script>
-
 </body>
 
 </html>

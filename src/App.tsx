@@ -5,26 +5,25 @@ import { Scrapbook } from './components/Scrapbook';
 import { LoveQuiz } from './components/LoveQuiz';
 import { CountUp } from './components/CountUp';
 import { LoveNote } from './components/LoveNote';
-import { PasswordProtection } from './components/PasswordProtection';
 import Parallax from './components/Collection';
 import { LoveMap } from './components/LoveMap';
 import { User } from './components/User';
 import { Top } from './components/Top';
 import { Bottom } from './components/Bottom';
-import { 
-House,
-Clock4,
-Camera,
-Brain,
-Heart,
-Mail,
-Map,
-Users,
-Lock,
-Library,
+import {
+  House,
+  Clock4,
+  Camera,
+  Brain,
+  Heart,
+  Mail,
+  Map,
+  Users,
+  Lock,
+  Library,
 } from 'lucide-react';
 
-export type FeatureType = 'home' | 'timeline' | 'scrapbook' | 'quiz' | 'countup' | 'note' | 'password' | 'collection' | 'map' | 'user';
+export type FeatureType = 'home' | 'timeline' | 'scrapbook' | 'quiz' | 'countup' | 'note' | 'collection' | 'map' | 'user';
 
 const featureIconMap: Record<FeatureType, React.ElementType> = {
   home: House,
@@ -33,14 +32,13 @@ const featureIconMap: Record<FeatureType, React.ElementType> = {
   quiz: Brain,
   countup: Heart,
   note: Mail,
-  password: Lock,
   collection: Library,
   map: Map,
   user: Users,
 };
 
 export default function App() {
-  const [currentFeature, setCurrentFeature] = useState<FeatureType>('password');
+  const [currentFeature, setCurrentFeature] = useState<FeatureType>('home');
 
   // Scroll to top on feature change
   useEffect(() => {
@@ -53,19 +51,18 @@ export default function App() {
   const FeatureIcon = featureIconMap[currentFeature];
 
   const featureDisplayName = (() => {
-  switch (currentFeature) {
-    case "home": return "Home";
-    case "timeline": return "Timeline";
-    case "scrapbook": return "Scrapbook";
-    case "quiz": return "Quiz";
-    case "countup": return "Count-Up";
-    case "note": return "Hidden Notes";
-    case "password": return "Password";
-    case "collection": return "Collection";
-    case "map": return "Map";
-    case "user": return "User";
-    default: return "";
-  }
+    switch (currentFeature) {
+      case "home": return "Home";
+      case "timeline": return "Timeline";
+      case "scrapbook": return "Scrapbook";
+      case "quiz": return "Quiz";
+      case "countup": return "Count-Up";
+      case "note": return "Hidden Notes";
+      case "collection": return "Collection";
+      case "map": return "Map";
+      case "user": return "User";
+      default: return "";
+    }
   })();
 
   // Function to render the current feature component
@@ -79,8 +76,6 @@ export default function App() {
         return <Scrapbook onBack={() => setCurrentFeature('home')} />;
       case 'countup':
         return <CountUp onBack={() => setCurrentFeature('home')} />;
-      case 'password':
-        return <PasswordProtection onNavigate={() => setCurrentFeature('home')} />;
       case 'collection':
         return <Parallax />;
       case 'map':
@@ -97,12 +92,12 @@ export default function App() {
       style={{
         background: "#0A0A0A",
       }}
-        >
+    >
       <div className="mx-auto min-h-screen"
         style={{
-        background: "#0A0A0A",
+          background: "#0A0A0A",
         }}
-        >
+      >
         {renderFeature()}
 
         {/* Keep rendered */}
@@ -115,12 +110,12 @@ export default function App() {
         </div>
 
         {/* Top-Bar when screen != password */}
-        <div style={{ display: currentFeature !== 'password' ? 'block' : 'none' }}>
+        <div>
           <Top onNavigate={setCurrentFeature} />
         </div>
 
         {/* Bottom-Bar when screen != password && != home*/}
-        <div style={{ display: currentFeature !== 'password' && currentFeature !== 'home' ? 'block' : 'none' }}>
+        <div style={{ display: currentFeature !== 'home' ? 'block' : 'none' }}>
           <Bottom
             onNavigate={setCurrentFeature}
             featureDisplayName={featureDisplayName}

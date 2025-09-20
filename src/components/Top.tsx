@@ -64,31 +64,34 @@ export function Top({ onNavigate }: TopProps) {
           <Card className="flex w-full border-transparent bg-transparent">
             <div className="flex w-full justify-between relative p-2">
               {/* Button on the left */}
-                <Card className="border-transparent bg-transparent">
-                  <motion.div
-                    whileHover={{
-                      scale: [null, 1.1, null],
-                      transition: {
-                        duration: 0.3,
-                        times: [0, 0.6, 1],
-                        ease: ["easeInOut", "easeOut"],
-                      },
+              <Card className="border-transparent bg-transparent">
+                <motion.div
+                  whileHover={{
+                    scale: [null, 1.1, null],
+                    transition: {
+                      duration: 0.3,
+                      times: [0, 0.6, 1],
+                      ease: ["easeInOut", "easeOut"],
+                    },
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{
+                    duration: 0.2,
+                    ease: "easeOut",
+                  }}
+                >
+                  <Button
+                    onClick={() => {
+                      localStorage.setItem("auth", "false");
+                      window.location.href = "/login.html";
                     }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{
-                      duration: 0.2,
-                      ease: "easeOut",
-                    }}
+                    className="flex items-center bg-transparent font-bold text-gray-300 select-none rounded-full cursor-pointer"
+                    variant="none"
                   >
-                    <Button
-                      onClick={() => onNavigate("password")}
-                      className="flex items-center bg-transparent font-bold text-gray-300 select-none rounded-full cursor-pointer"
-                      variant="none"
-                    >
-                      <Lock className="text-gray-300" />
-                    </Button>
-                  </motion.div>
-                </Card>
+                    <Lock className="text-gray-300" />
+                  </Button>
+                </motion.div>
+              </Card>
               {/* Centered CHANA */}
               <h1
                 className="text-3xl font-bold text-white flex items-center select-none mx-auto"
@@ -122,31 +125,31 @@ export function Top({ onNavigate }: TopProps) {
                 NA
               </h1>
               {/* Button on the right */}
-                <Card className="border-transparent bg-transparent">
-                  <motion.div
-                    whileHover={{
-                      scale: [null, 1.1, null],
-                      transition: {
-                        duration: 0.3,
-                        times: [0, 0.6, 1],
-                        ease: ["easeInOut", "easeOut"],
-                      },
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{
-                      duration: 0.2,
-                      ease: "easeOut",
-                    }}
+              <Card className="border-transparent bg-transparent">
+                <motion.div
+                  whileHover={{
+                    scale: [null, 1.1, null],
+                    transition: {
+                      duration: 0.3,
+                      times: [0, 0.6, 1],
+                      ease: ["easeInOut", "easeOut"],
+                    },
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{
+                    duration: 0.2,
+                    ease: "easeOut",
+                  }}
+                >
+                  <Button
+                    onClick={() => onNavigate("user")}
+                    className="flex items-center font-bold text-gray-300 select-none rounded-full cursor-pointer"
+                    variant="none"
                   >
-                    <Button
-                      onClick={() => onNavigate("user")}
-                      className="flex items-center font-bold text-gray-300 select-none rounded-full cursor-pointer"
-                      variant="none"
-                    >
-                      <Users className="text-pink-600" />
-                    </Button>
-                  </motion.div>
-                </Card>
+                    <Users className="text-pink-600" />
+                  </Button>
+                </motion.div>
+              </Card>
             </div>
           </Card>
         </motion.div>
