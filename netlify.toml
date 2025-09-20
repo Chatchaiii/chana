@@ -1,9 +1,13 @@
 # netlify.toml
 
-[[headers]]
-for = "/*"
-[headers.values]
-Basic-Auth = ":BASIC_AUTH_USER::BASIC_AUTH_PASS"
+[[redirects]]
+from = "/*"
+to = "/login.html"
+status = 200
+force = true
+conditions = { Role = ["*"] }
 
-[[plugins]]
-package = "netlify-plugin-inline-functions-env"
+[[redirects]]
+from = "/login.html"
+to = "/login.html"
+status = 200
